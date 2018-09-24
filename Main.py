@@ -1,8 +1,6 @@
 import pygame
 import os
 
-print("some useless information")
-
 windowwidth = 1920
 windowheight = 1080
 warscreenwidth = 1440
@@ -147,7 +145,6 @@ class Game:
         self.activebuttons2 = [launchrect, abortrect]
 
         self.resetscreen()
-        inforect = pygame.Rect(1515, 550, 320, 260)
         shippartdrag = False
         while running:
             for event in pygame.event.get():
@@ -216,9 +213,8 @@ class Game:
                                         image = GameplayConstants.shippartimages[self.menunumber - 1][self.shippartdisplayed]
                                         Tools.displayshippart(self.menunumber, self.shippartdisplayed, image, 1427, 730)
 
-                                        pygame.draw.rect(screen, lightgray, inforect)
-                                        text = GameplayConstants.shippartinfo(self.menunumber, self.shippartdisplayed,
-                                                                              0)
+                                        pygame.draw.rect(screen, lightgray, pygame.Rect(1515, 550, 320, 260))
+                                        text = GameplayConstants.shippartinfo(self.menunumber, self.shippartdisplayed,0)
                                         for line in range(len(text)):
                                             Tools.draw_text(screen, text[line], 15, 1525, 563 + 20 * line, "Xolonium")
 
@@ -234,7 +230,7 @@ class Game:
                             elif backrect.collidepoint(mousepos) and self.menunumber != 0:
                                 Sounds.sounds.soundcancel.play()
                                 self.menunumber = 0
-                                self.shippartdisplayed = -1
+                                self.shippartselected = -1
                                 self.activenames = [GameplayConstants.shippartslist[self.menunumber][x][0] for x in range(len(GameplayConstants.shippartslist[self.menunumber]))]
                                 self.activebuttons2.pop(2)
                                 self.create_menu()
@@ -252,7 +248,7 @@ class Game:
                                     shippartdrag = True
                                 else:
                                     Sounds.sounds.soundfail.play()
-            pygame.display.update()
+            pygame.display.flip()
             clock.tick(GameplayConstants.fps)
 
     def placeshippart(self, mousepos, mouseimage):
@@ -317,6 +313,11 @@ class Game:
         pygame.draw.rect(screen, black, self.shippartmenurect)
         self.create_menu()
         self.shipoverview()
+        if self.menunumber > 0 and self.shippartdisplayed >= 0:
+            pygame.draw.rect(screen, lightgray, pygame.Rect(1515, 550, 320, 260))
+            text = GameplayConstants.shippartinfo(self.menunumber, self.shippartdisplayed, 0)
+            for line in range(len(text)):
+                Tools.draw_text(screen, text[line], 15, 1525, 563 + 20 * line, "Xolonium")
 
     def shipinfo(self):
         weaponuse = 0

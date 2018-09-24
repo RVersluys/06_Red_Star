@@ -106,7 +106,7 @@ class Hero(pygame.sprite.Sprite):
 
     def getdamage(self, amount, source):
         if amount > self.shield:
-            self.shield == 0
+            self.shield = 0
             self.armor -= amount - self.shield
             #Sounds.explosions[0].play()
             if self.armor <= 0:
