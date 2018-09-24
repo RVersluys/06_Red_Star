@@ -1,6 +1,8 @@
 import pygame
 import os
 
+print("some useless information")
+
 windowwidth = 1920
 windowheight = 1080
 warscreenwidth = 1440
