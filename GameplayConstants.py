@@ -1,9 +1,22 @@
 import pygame
 import os
-import Sprites
+import Gamedata
+
 
 game_folder = os.path.dirname(__file__)
 
+black = (0, 0, 0)
+white = (255,255,255)
+blackgray = (10, 10, 10)
+darkgray = (30, 30, 30)
+lightgray = (150, 150, 150)
+bluegray = (81, 103, 124)
+darkgreen = (0, 155, 0)
+darkred = (155, 0, 0)
+colorenergy = (255, 245, 104)
+colorshield = (0, 191, 243)
+colorarmor = (242, 101, 34)
+colorbars = [colorenergy, colorshield, colorarmor]
 
 windowwidth = 1920
 windowheight = 1080
@@ -12,8 +25,6 @@ fps = 60
 musicvolume = 100
 effectsvolume = 100
 extendedscreen = pygame.Rect(-10,-10,windowwidth+20,windowheight+20)
-
-
 
 # de vorm van elk shippart: tuples zijn verticale lijnen. 1 is dat er iets zit.
 kinetic_weapon = [(1), (1), (1)]
@@ -91,14 +102,14 @@ def shippartinfo(list, index, upgrade):
 
 def heroshipinfo(maxuse):
     text = []
-    text.append("Max speed: " + str(Sprites.hero.speed) + " AUh")
-    text.append("Armor: " + str(Sprites.hero.maxarmor))
-    text.append("Shields: " + str(Sprites.hero.maxshield))
+    text.append("Max speed: " + str(Gamedata.player.speed) + " AUh")
+    text.append("Armor: " + str(Gamedata.player.maxarmor))
+    text.append("Shields: " + str(Gamedata.player.maxshield))
     text.append("")
     text.append("Energy:")
-    text.append("Storage: " + str(Sprites.hero.maxenergy) + " MWh")
-    text.append("Base gain: " + str(Sprites.hero.energyregen) + " MW")
-    text.append("Base use: " + str(Sprites.hero.energyuse) + " MW")
+    text.append("Storage: " + str(Gamedata.player.maxenergy) + " MWh")
+    text.append("Base gain: " + str(Gamedata.player.energyregen) + " MW")
+    text.append("Base use: " + str(Gamedata.player.energyuse) + " MW")
     text.append("Max use: " + str(maxuse) + " MW")
     return text
 

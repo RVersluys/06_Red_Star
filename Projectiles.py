@@ -2,7 +2,7 @@ import os
 import pygame
 import random
 
-import Sprites
+import Gamedata
 import GameplayConstants
 import Explosions
 import Sounds
@@ -65,8 +65,8 @@ class FlakCannon(pygame.sprite.Sprite):
         self.damage = damage
         self.image = Explosions.explosions[14][0]
         self.rect = self.image.get_rect()
-        self.rect.centerx = Sprites.hero.rect.centerx + adjustment
-        self.rect.y = Sprites.hero.rect.y - 50
+        self.rect.centerx = Gamedata.hero.rect.centerx + adjustment
+        self.rect.y = Gamedata.hero.rect.y - 50
         self.type = 1
 
     def update(self):
@@ -112,8 +112,8 @@ class Laser(pygame.sprite.Sprite):
         self.ticks = 0
         self.image = pygame.Surface((3,20))
         self.rect = self.image.get_rect()
-        self.rect.bottom = Sprites.hero.rect.top
-        self.rect.left = Sprites.hero.rect.centerx + adjustment
+        self.rect.bottom = Gamedata.hero.rect.top
+        self.rect.left = Gamedata.hero.rect.centerx + adjustment
         self.type = 2
 
     def update(self):
@@ -122,8 +122,8 @@ class Laser(pygame.sprite.Sprite):
             self.kill()
         else:
             self.ticks += 1
-        self.rect = pygame.Rect(Sprites.hero.rect.centerx + self.adjustment, 20, 2, Sprites.hero.rect.top)
-        hits = pygame.sprite.spritecollide(self, Sprites.mobs, False)
+        self.rect = pygame.Rect(Gamedata.hero.rect.centerx + self.adjustment, 20, 2, Gamedata.hero.rect.top)
+        hits = pygame.sprite.spritecollide(self, Gamedata.mobs, False)
         y = 0
         enemy = False
         for mob in hits:  # collision player-mobs
@@ -131,11 +131,11 @@ class Laser(pygame.sprite.Sprite):
                 enemy = mob
                 y = mob.rect.centery
         if enemy:
-            height = Sprites.hero.rect.top - y
+            height = Gamedata.hero.rect.top - y
             if self.ticks % 3 == 1:
-                Sprites.hero.score += enemy.getdamage(self.damage / 4)
+                Gamedata.player.score += enemy.getdamage(self.damage / 4)
         else:
-            height = Sprites.hero.rect.top
+            height = Gamedata.hero.rect.top
         self.image = pygame.Surface((3, max(1,height)))
         self.rect.top = y
         rgcoloring = min(max(0,self.damage * 14 - 5*self.ticks-255),255)

@@ -5,9 +5,9 @@ import math
 black = (0, 0, 0)
 lightgray = (150,150,150)
 
-def draw_text(surface, text, size, x, y, font_name):
-    font = pygame.font.Font(pygame.font.match_font(font_name, bold = True), size)
-    text_surface = font.render(text, True, black)
+def draw_text(surface, text, size, x, y, font_name, color = GameplayConstants.black, bold = True):
+    font = pygame.font.Font(pygame.font.match_font(font_name, bold = bold), size)
+    text_surface = font.render(text, True, color)
     text_rect = text_surface.get_rect()
     text_rect.midleft = (x, y)
     surface.blit(text_surface, text_rect)
