@@ -35,6 +35,27 @@ class Mobbullet(pygame.sprite.Sprite):
         if not GameplayConstants.extendedscreen.contains(self.rect):
             self.kill()
 
+class Flamethrower(pygame.sprite.Sprite):
+    def __init__(self, x, y, movex, movey):
+        pygame.sprite.Sprite.__init__(self)
+        self.ticks = 0
+        self.image = Explosions.explosions[13][0]
+        self.rect = self.image.get_rect()
+        self.rect.centerx = x
+        self.rect.centery = y
+        self.movex = movex
+        self.movey = movey
+        self.damage = 1
+
+    def update(self):
+        self.ticks += 1
+        if self.ticks % 3 == 0:
+            self.image = Explosions.explosions[13][int(self.ticks/3)]
+        self.rect.x += self.movex
+        self.rect.y -= self.movey
+        if not GameplayConstants.extendedscreen.contains(self.rect) or self.ticks == 47:
+            self.kill()
+
 class Kineticbullet(pygame.sprite.Sprite):
     def __init__(self, x, y, movex, movey, damage):
         pygame.sprite.Sprite.__init__(self)

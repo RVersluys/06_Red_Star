@@ -207,6 +207,13 @@ class Mob(pygame.sprite.Sprite):
                         bullet = Projectiles.Mobbullet(self.rect.centerx, self.rect.centery, movex, movey, (angle + 180) % 360, program[2])
                         Gamedata.mobbullets.add(bullet)
                         Gamedata.all_sprites.add(bullet)
+            elif program[1] == 5: #flame thrower
+                if self.ticks % program[0] == 0:
+                    speed = 20
+                    move = Tools.getmovement(self.rect, Gamedata.hero.rect, speed)
+                    bullet = Projectiles.Flamethrower(self.rect.centerx, self.rect.centery, move[0], move[1])
+                    Gamedata.mobbullets.add(bullet)
+                    Gamedata.all_sprites.add(bullet)
 
 
 
