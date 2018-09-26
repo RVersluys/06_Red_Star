@@ -1,17 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="149df1cf-4d66-47e1-95a5-d4235befa1e6" name="Default" comment="fixed mob damage bug and bug that made part info disappear on selection of said part.">
-      <change afterPath="$PROJECT_DIR$/Player.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameplayConstants.py" beforeDir="false" afterPath="$PROJECT_DIR$/GameplayConstants.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Hero.py" beforeDir="false" afterPath="$PROJECT_DIR$/Hero.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Level.py" beforeDir="false" afterPath="$PROJECT_DIR$/Level.py" afterDir="false" />
+    <list default="true" id="149df1cf-4d66-47e1-95a5-d4235befa1e6" name="Default" comment="te veel om op te noemen">
       <change beforePath="$PROJECT_DIR$/Main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mobs.py" beforeDir="false" afterPath="$PROJECT_DIR$/Mobs.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projectiles.py" beforeDir="false" afterPath="$PROJECT_DIR$/Projectiles.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sprites.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tools.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tools.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -69,14 +60,14 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="18980" />
-          <entry key="txt" value="134" />
+          <entry key="py" value="19198" />
+          <entry key="txt" value="159" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="PLAIN_TEXT" value="134" />
-          <entry key="Python" value="18980" />
+          <entry key="PLAIN_TEXT" value="159" />
+          <entry key="Python" value="19198" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -96,15 +87,15 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="287">
-              <caret line="401" column="38" lean-forward="true" selection-start-line="395" selection-start-column="40" selection-end-line="395" selection-end-column="45" />
+            <state relative-caret-position="253">
+              <caret line="146" column="37" lean-forward="true" selection-start-line="146" selection-start-column="37" selection-end-line="146" selection-end-column="37" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
-                <marker date="1537890644810" expanded="true" signature="5219:5658" ph="..." />
-                <marker date="1537890644810" expanded="true" signature="6287:6292" ph="..." />
-                <marker date="1537890644810" expanded="true" signature="7960:7966" ph="..." />
-                <marker date="1537890644810" expanded="true" signature="17405:19477" ph="..." />
-                <marker date="1537890644810" expanded="true" signature="22414:22419" ph="..." />
+                <marker date="1537899483721" expanded="true" signature="5235:5674" ph="..." />
+                <marker date="1537899483721" expanded="true" signature="6303:6308" ph="..." />
+                <marker date="1537899483721" expanded="true" signature="8537:8543" ph="..." />
+                <marker date="1537899483721" expanded="true" signature="17982:20058" ph="..." />
+                <marker date="1537899483721" expanded="true" signature="22995:23000" ph="..." />
               </folding>
             </state>
           </provider>
@@ -137,8 +128,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Tools.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="15" column="4" selection-start-line="15" selection-start-column="4" selection-end-line="15" selection-end-column="52" />
+            <state relative-caret-position="221">
+              <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
                 <marker date="1537880853298" expanded="true" signature="1527:1532" ph="..." />
@@ -192,8 +183,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Gameloop.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1419">
-              <caret line="85" column="27" lean-forward="true" selection-start-line="85" selection-start-column="27" selection-end-line="85" selection-end-column="27" />
+            <state relative-caret-position="212">
+              <caret line="14" column="12" lean-forward="true" selection-start-line="14" selection-start-column="12" selection-end-line="14" selection-end-column="12" />
               <folding>
                 <marker date="1537877752780" expanded="true" signature="408:417" ph="..." />
               </folding>
@@ -231,8 +222,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>shippart</find>
-      <find>Game</find>
       <find>Gamedata</find>
       <find>player.gold</find>
       <find>Gamedata.player.gold</find>
@@ -246,7 +235,6 @@
       <find>gold</find>
       <find>abortrect</find>
       <find>EMPTY</find>
-      <find>Sprites.</find>
       <find>create_menu</find>
       <find>saverect</find>
       <find>clock.tick</find>
@@ -261,6 +249,9 @@
       <find>activebuttons</find>
       <find>activebuttons2</find>
       <find>.play</find>
+      <find>Sprites.</find>
+      <find>datetime</find>
+      <find>os.</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -534,7 +525,21 @@
       <option name="project" value="LOCAL" />
       <updated>1537814601357</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="te veel om op te noemen">
+      <created>1537890751104</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1537890751104</updated>
+    </task>
+    <task id="LOCAL-00004" summary="te veel om op te noemen">
+      <created>1537890844702</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1537890844702</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TodoView" selected-index="2">
@@ -594,7 +599,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added some useless information (test)" />
     <MESSAGE value="fixed mob damage bug and bug that made part info disappear on selection of said part." />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed mob damage bug and bug that made part info disappear on selection of said part." />
+    <MESSAGE value="te veel om op te noemen" />
+    <option name="LAST_COMMIT_MESSAGE" value="te veel om op te noemen" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -707,9 +713,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Gamedata.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/Level.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="317">
@@ -743,29 +746,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Tools.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="4" selection-start-line="15" selection-start-column="4" selection-end-line="15" selection-end-column="52" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-            <marker date="1537880853298" expanded="true" signature="1527:1532" ph="..." />
-            <marker date="1537880853298" expanded="true" signature="2544:2545" ph="..." />
-            <marker date="1537880853298" expanded="true" signature="2874:2875" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Gameloop.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1419">
-          <caret line="85" column="27" lean-forward="true" selection-start-line="85" selection-start-column="27" selection-end-line="85" selection-end-column="27" />
-          <folding>
-            <marker date="1537877752780" expanded="true" signature="408:417" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Hero.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -779,17 +759,43 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Main.py">
+    <entry file="file://$PROJECT_DIR$/Gamedata.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Gameloop.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="287">
-          <caret line="401" column="38" lean-forward="true" selection-start-line="395" selection-start-column="40" selection-end-line="395" selection-end-column="45" />
+        <state relative-caret-position="212">
+          <caret line="14" column="12" lean-forward="true" selection-start-line="14" selection-start-column="12" selection-end-line="14" selection-end-column="12" />
+          <folding>
+            <marker date="1537877752780" expanded="true" signature="408:417" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tools.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
-            <marker date="1537890644810" expanded="true" signature="5219:5658" ph="..." />
-            <marker date="1537890644810" expanded="true" signature="6287:6292" ph="..." />
-            <marker date="1537890644810" expanded="true" signature="7960:7966" ph="..." />
-            <marker date="1537890644810" expanded="true" signature="17405:19477" ph="..." />
-            <marker date="1537890644810" expanded="true" signature="22414:22419" ph="..." />
+            <marker date="1537880853298" expanded="true" signature="1527:1532" ph="..." />
+            <marker date="1537880853298" expanded="true" signature="2544:2545" ph="..." />
+            <marker date="1537880853298" expanded="true" signature="2874:2875" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="146" column="37" lean-forward="true" selection-start-line="146" selection-start-column="37" selection-end-line="146" selection-end-column="37" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+            <marker date="1537899483721" expanded="true" signature="5235:5674" ph="..." />
+            <marker date="1537899483721" expanded="true" signature="6303:6308" ph="..." />
+            <marker date="1537899483721" expanded="true" signature="8537:8543" ph="..." />
+            <marker date="1537899483721" expanded="true" signature="17982:20058" ph="..." />
+            <marker date="1537899483721" expanded="true" signature="22995:23000" ph="..." />
           </folding>
         </state>
       </provider>

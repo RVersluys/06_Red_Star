@@ -1,6 +1,7 @@
 import pygame
 import os
 import pickle
+import datetime
 
 windowwidth = 1920
 windowheight = 1080
@@ -147,7 +148,9 @@ class Game:
             self.submenubuttonrects.append(pygame.Rect(windowwidth / 2 - 275, windowheight / 2 - 30 * buttons + 60 * button, 550, 50))
             pygame.draw.rect(screen, GameplayConstants.black, self.submenubuttonrects[button])
         if choice == 3:
+
             for button in range(buttons):
+
                 if selection == button:
                     bold = True
                     pygame.draw.rect(screen, GameplayConstants.white, self.submenubuttonrects[button])
@@ -156,7 +159,12 @@ class Game:
                 else:
                     bold = False
                 if button != buttons - 1:
-                    Tools.draw_text(screen, list[button][0], 16, self.submenubuttonrects[button].x + 15, self.submenubuttonrects[button].y + self.submenubuttonrects[button].height / 2, "Xolonium", GameplayConstants.white, bold)
+                    if list[button][1] != 0:
+                        path = os.path.join(game_folder, "savegames", str(list[button][0] + list[button][1]))
+                        date = datetime.datetime.fromtimestamp(os.path.getmtime(path)).strftime('%d-%m-%Y %H:%M:%S')
+                        Tools.draw_text(screen, list[button][0] + " - (" + str(date) + ")", 16, self.submenubuttonrects[button].x + 15, self.submenubuttonrects[button].y + self.submenubuttonrects[button].height / 2, "Xolonium",GameplayConstants.white, bold)
+                    else:
+                        Tools.draw_text(screen, list[button][0], 16, self.submenubuttonrects[button].x + 15, self.submenubuttonrects[button].y + self.submenubuttonrects[button].height / 2, "Xolonium",GameplayConstants.white, bold)
             mousepos = pygame.mouse.get_pos()
             Tools.refresh_menubutton(self.submenubuttonrects[buttons-1], mousepos, list[buttons-1], True)
 
