@@ -4,6 +4,8 @@ import Mobs
 import Gamedata
 import Backgroundprops
 
+print("More useless information")
+
 windowheight = 1080
 warscreenwidth = 1440
 
