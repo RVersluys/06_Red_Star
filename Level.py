@@ -144,7 +144,7 @@ class Level:
             self.spawnlist.append([4510, 9, 50, 0, 0, 4, [(0, 0)], [(60, 3, 0)], 200])
             self.spawnlist.append([4510, 9, 1100, 0, 0, 4, [(0, 0)], [(60, 3, 0)], 200])
 
-            # 4700 ticks: elfe aanval fighters (move, shoot, strafe)
+            # 4700 ticks: elfde aanval fighters (move, shoot, strafe)
             self.spawnlist.append([4700, 9, 300, 0, 0, 9, [(0, 0), (40, 2)], [(60, 1, 0)], 0])
             self.spawnlist.append([4800, 9, 100, 0, 0, 9, [(0, 0), (40, 2)], [(60, 1, 0)], 0])
             self.spawnlist.append([4900, 9, 700, 0, 0, 9, [(0, 0), (40, 2)], [(60, 1, 0)], 0])

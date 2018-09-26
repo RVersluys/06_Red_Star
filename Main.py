@@ -248,6 +248,7 @@ class Game:
                                 if not isinstance(Gamedata.player.shipfill[y][x], int):
                                     Sounds.sounds.soundclick.play()
                                     Gamedata.player.shipfill[y][x].itemmenu()
+                                    self.shippartselected = False
                                     self.resetscreen()
 
                             # er wordt geklikt op het onderdelenmenu
