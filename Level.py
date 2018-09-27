@@ -57,8 +57,8 @@ class Level:
                     #2 = machinegun
                     #3 = forward shot
                     #4 = cluster shot
-                    #5 = flame thrower bijv: [4(cooldown), 5(programma), 0(gericht schieten), 1(schade)]
-                    #                        [4(cooldown), 5(programma), 1(naar voren schieten), 2(schade)]
+                    #5 = flame thrower bijv: [4(cooldown), 5(programma), -1(gericht schieten)]
+                    #                        [4(cooldown), 5(programma), 0 (angle in graden (0-360), 0 graden is naar beneden)]
                 #3 = wapentype
                 #4 = bulletcount (only used in cluster shot)
                 #5 = angle between bullets (only used in cluster shot)
@@ -66,7 +66,7 @@ class Level:
 
             # 0 ticks: aankondiging level text
 
-            self.spawnlist.append([50, 10, 400, 0, 0, 4, [(0, 0)], [(4, 5, 0, 1)], 200])
+            self.spawnlist.append([50, 10, 400, 0, 0, 4, [(0, 0)], [(4, 5, 360)], 200])
 
             # 300 ticks: eerste aanval fighters (verticaal, aimed)
             self.spawnlist.append([300, 9, 400, 0, 0, 4, [(0,0)], [(60,1,0)],200])

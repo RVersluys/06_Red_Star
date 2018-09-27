@@ -16,6 +16,7 @@ class Imageloading:
         #speed, damage, plaatje
         self.projectiles.append([15, 6, pygame.image.load(os.path.join(imgfolder, 'projectiles', 'beam.png')).convert_alpha()])
         self.projectiles.append([11, 18, pygame.image.load(os.path.join(imgfolder, 'projectiles', 'shockblast.png')).convert_alpha()])
+        self.projectiles.append([15, 1])
 
 class Mobbullet(pygame.sprite.Sprite):
     def __init__(self, x, y, movex, movey, angle, type):
