@@ -15,7 +15,6 @@ import Gamedata
 import Level
 import Sounds
 import Hero
-import Player
 
 screen = GameplayConstants.screen
 
@@ -59,17 +58,18 @@ class Gameloop:
             Gamedata.all_sprites.update()
             # Collisioncheck
             hits = pygame.sprite.groupcollide(Gamedata.mobs, Gamedata.herobullets, False, False)
-            for mob in hits:  # collision herobullets-mobs
+            for mob in hits:  # collision herobullets - mobs
                 for bullet in hits[mob]:
                     Gamedata.player.score += mob.getdamage(bullet.damage)
                     bullet.hit()
             if Gamedata.hero.alive == True:
-                hits = pygame.sprite.spritecollide(Gamedata.hero, Gamedata.mobbullets, True, pygame.sprite.collide_circle)
+                hits = pygame.sprite.spritecollide(Gamedata.hero, Gamedata.mobbullets, False, pygame.sprite.collide_circle)
                 for bullet in hits:  # collision player - mobbullets
                     if Gamedata.hero.getdamage(bullet.damage, bullet):
                         self.level.abort = True
+                    bullet.hit()
                 hits = pygame.sprite.spritecollide(Gamedata.hero, Gamedata.mobs, False, pygame.sprite.collide_circle)
-                for mob in hits:  # collision player-mobs
+                for mob in hits:  # collision player - mobs
                     if Gamedata.hero.getdamage(4, mob):
                         self.level.abort = True
 
@@ -114,15 +114,12 @@ class Gameloop:
         barwidth = 413
         spacing = 80
         fills = []
-        fills.append(pygame.Rect(self.barrects[0].left + 3, self.barrects[0].top + 3,
-                                 Gamedata.hero.energy / Gamedata.player.maxenergy * 413, 36))
+        fills.append(pygame.Rect(self.barrects[0].left + 3, self.barrects[0].top + 3,Gamedata.hero.energy / Gamedata.player.maxenergy * 413, 36))
         if Gamedata.player.maxshield:
-            fills.append(pygame.Rect(self.barrects[1].left + 3, self.barrects[1].top + 3,
-                                     Gamedata.hero.shield / Gamedata.player.maxshield * 413, 36))
+            fills.append(pygame.Rect(self.barrects[1].left + 3, self.barrects[1].top + 3,Gamedata.hero.shield / Gamedata.player.maxshield * 413, 36))
         else:
             fills.append(pygame.Rect(0, 0, 0, 0))
-        fills.append(pygame.Rect(self.barrects[2].left + 3, self.barrects[2].top + 3,
-                                 Gamedata.hero.armor / Gamedata.player.maxarmor * 413, 36))
+        fills.append(pygame.Rect(self.barrects[2].left + 3, self.barrects[2].top + 3,Gamedata.hero.armor / Gamedata.player.maxarmor * 413, 36))
         for barnr in range(3):
             fill = pygame.Rect(startx + 3, starty + 3 + barnr * spacing, (barwidth - 6) / 100 * barfill[barnr], barheight - 6)
             pygame.draw.rect(screen, GameplayConstants.black, self.barrects[barnr])

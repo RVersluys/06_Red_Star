@@ -38,12 +38,8 @@ class Hero(pygame.sprite.Sprite):
         self.armor = Gamedata.player.maxarmor
         self.shield = Gamedata.player.maxshield
         self.energy = Gamedata.player.maxenergy
-
-    # def refuel(self):
-    #     self.energy = self.maxenergy
-    #     self.shield = self.maxshield
-    #     self.armor = self.maxarmor
-    #     self.alive = True
+        self.shieldrefresh = 200
+        self.lastshieldhit = 0
 
     def movement(self, event):
         muisafstand = (event.rel[0]**2 + event.rel[1]**2)**0.5
@@ -102,7 +98,8 @@ class Hero(pygame.sprite.Sprite):
                 explosion = Explosions.Explosion(self.rect.centerx, self.rect.centery,12)
                 Gamedata.all_sprites.add(explosion)
                 return True
-        else:
+        elif pygame.time.get_ticks() - self.lastshieldhit > self.shieldrefresh:
+            self.lastshieldhit = pygame.time.get_ticks()
             angle = Tools.getangle(self.rect,source.rect)
             angle += 90
             angle %= 360
