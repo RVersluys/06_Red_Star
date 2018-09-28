@@ -37,9 +37,9 @@ class Game:
         running = True
         self.menutext = ["Continue", "New Game", "Settings", "Load game", "Hall of fame", "Quit"]
         self.submenus = {2: []}
-        self.menurects = [pygame.Rect(100, 150 + x * 70, 400, 50) for x in range(6)]
+        self.menurects = [pygame.Rect(54, 141 + x * 70, 234, 54) for x in range(6)]
         self.submenurect = pygame.Rect(0, 0, 0, 0)
-        self.dirtyrects = [pygame.Rect(100, 150 + x * 70, 400, 50) for x in range(6)]
+        self.dirtyrects = [pygame.Rect(54, 141 + x * 70, 234, 54) for x in range(6)]
         self.choice = -1
         self.submenubuttonrects = []
 

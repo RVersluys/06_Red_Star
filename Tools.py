@@ -23,7 +23,7 @@ def refresh_menubutton(rect, mousepos, text, stroke):
         color = (150, 150, 150)
     pygame.draw.rect(GameplayConstants.screen, color, rect)
 
-    draw_text(GameplayConstants.screen, text, 38, rect.left+5, rect.centery, "Xolonium")
+    draw_text(GameplayConstants.screen, text, 25, rect.left+5, rect.centery, "Xolonium")
 
 def create_dragbar(rect, text, options, chosenoption):
     pygame.draw.rect(GameplayConstants.screen, lightgray,rect)
