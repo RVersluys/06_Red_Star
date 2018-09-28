@@ -3,8 +3,7 @@ import random
 import Mobs
 import Gamedata
 import Backgroundprops
-
-print("More useless information")
+import Gametext
 
 windowheight = 1080
 warscreenwidth = 1440
@@ -18,6 +17,8 @@ class Level:
             self.abort = False
             self.ticks = 0
             self.spawnlist = []
+            self.propslist = []
+            self.textlist = []
             self.startscore = Gamedata.player.score
             self.startgold = Gamedata.player.gold
             for enemy in range(300):
@@ -63,10 +64,35 @@ class Level:
                 #4 = bulletcount (only used in cluster shot)
                 #5 = angle between bullets (only used in cluster shot)
 
+            #BACKGROUNDPROPS:
+            #1 na hoeveel ticks
+            #2 plaatjenummer
+            #3 x coordinaat van de linkerkant van het plaatje. Meest linker punt van het plaatje.
+            #4 snelheid naar beneden
+            #5 resize tot dit formaat in tuple: (nummer,nummer)
+
+            #TEXT
+            #1 ticks
+            #2 text
+            #3 fontsize
+            #4 RGB color code
+            #5 (ticks fully visable, ticks fadeout)
+            #6 centeredposition (x,y)
+            #7 grote van het plaatje (hoe meer en hoe groter de text, hoe groter het plaatje moet zijn. Anders wordt de text afgeknipt.
+
+            #hier laad je de achtergrondplaatjes. Het nummer correspondeerd met het bestandsnummeer. Er kunnen dus ook nieuwe plaatjes worden toegevoegd.
+            Gamedata.bgimages = Backgroundprops.Images([0, 1, 2, 3])
 
             # 0 ticks: aankondiging level text
+            self.textlist.append([0, "My reccomendation is to shoot enemies", 30, (0,150,0), (160,40), (warscreenwidth/2,100), (800,50)])
+            self.textlist.append([220, "And don't get killed", 30, (0, 150, 0), (100, 40), (warscreenwidth / 2, 100), (500, 50)])
+            self.textlist.append([380, "Now com'an, chop chop...", 30, (0, 150, 0), (100, 40), (warscreenwidth / 2, 100), (500, 50)])
+            self.textlist.append([540, "KILL THEM ALL", 30, (200, 0, 0), (100, 40), (warscreenwidth / 2, 100), (500, 50)])
 
-            self.spawnlist.append([50, 10, 400, 0, 0, 4, [(0, 0)], [(4, 5, 360)], 200])
+            self.propslist.append([100, 0, 100, 1, (950,950)])
+            self.propslist.append([1400, 1, 300, 1, (400, 400)])
+            self.propslist.append([3200, 2, 700, 1, (600, 600)])
+            self.propslist.append([3900, 3, 200, 1, (700, 700)])
 
             # 300 ticks: eerste aanval fighters (verticaal, aimed)
             self.spawnlist.append([300, 9, 400, 0, 0, 4, [(0,0)], [(60,1,0)],200])
@@ -84,6 +110,8 @@ class Level:
             self.spawnlist.append([1100, 9, 75, 0, 0, 2, [(0,0), (40,3,0,0),(0,0),(0,0,0,0)], [(100,1,1)],200])
             self.spawnlist.append([1160, 10, 650, 0, 0, 1, [(0, 0), (250, 1)], [(40, 2, 0)], 0])
             self.spawnlist.append([1220, 9, 1350, 0, 0, 2, [(0, 0), (40, 3, 0, 0), (0, 0), (0, 0, 0, 0)], [(100, 1, 1)], 200])
+
+
 
             # 1700 ticks: vierde aanval fighters (driveby shooting)
             self.spawnlist.append([1700, 9, 0, 0, 5, 5, [(0,0)], [(60,1,0)],0])
@@ -221,10 +249,11 @@ class Level:
             ###################################################################################################
             #lijst wordt gesorteerd om op volgorde uit te kunnen voeren.
             self.spawnlist.sort(key=lambda x: x[0])
+            self.propslist.sort(key=lambda x: x[0])
 
-        for x in range(250):
+        for x in range(200):
             star = Backgroundprops.Star(True)
-            Gamedata.background.add(star)
+            Gamedata.stars.add(star)
 
     def spawning(self):
         if len(self.spawnlist) > 0:
@@ -238,9 +267,21 @@ class Level:
                 Gamedata.mobs.add(m)
                 self.spawnlist.pop(0)
                 self.spawning()
+        if len(self.propslist) > 0:
+            if self.propslist[0][0] == self.ticks:
+                prop = Backgroundprops.Backgroundprop(self.propslist[0][1],self.propslist[0][2],self.propslist[0][3],self.propslist[0][4])
+                Gamedata.background.add(prop)
+                self.propslist.pop(0)
+
+        if len(self.textlist) > 0:
+            if self.textlist[0][0] == self.ticks:
+                text = Gametext.Text(self.textlist[0][1],self.textlist[0][2],self.textlist[0][3],self.textlist[0][4],self.textlist[0][5],self.textlist[0][6])
+                Gamedata.background.add(text)
+                self.textlist.pop(0)
+
         if random.randint(0,10) == 0:
             star = Backgroundprops.Star(False)
-            Gamedata.background.add(star)
+            Gamedata.stars.add(star)
         self.ticks += 1
         return
 

@@ -12,7 +12,7 @@ pygame.init()
 pygame.mixer.init()
 screen = pygame.display.set_mode((windowwidth, windowheight), pygame.HWSURFACE | pygame.DOUBLEBUF | pygame.FULLSCREEN)
 clock = pygame.time.Clock()
-pygame.display.set_caption("Cydonia")
+pygame.display.set_caption("Red Star")
 
 import GameplayConstants
 GameplayConstants.screen = screen
@@ -81,6 +81,7 @@ class Game:
                             filelist.append("Load game")
                             self.submenu(len(filelist), 3, filelist)
                         elif self.menurects[4].collidepoint(mousepos):
+
                             self.submenu(8, 4)
                         elif self.menurects[5].collidepoint(mousepos):
                             pygame.quit()

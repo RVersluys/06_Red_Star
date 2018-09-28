@@ -33,6 +33,7 @@ class Gameloop:
             self.barrects.append(pygame.Rect(1474, 820 + x * 80, 413, 40))
         # pygame.display.update()
         running = True
+
         while running:
             # Eventcheck
             for event in pygame.event.get():
@@ -54,6 +55,7 @@ class Gameloop:
             # Spawn enemies
             self.level.spawning()
             # Update
+            Gamedata.stars.update()
             Gamedata.background.update()
             Gamedata.all_sprites.update()
             # Collisioncheck
@@ -85,6 +87,7 @@ class Gameloop:
                 return
             # Draw / render
             pygame.draw.rect(screen, GameplayConstants.black, warrect)
+            Gamedata.stars.draw(screen)
             Gamedata.background.draw(screen)
             Gamedata.all_sprites.draw(screen)
             self.sidebar()
