@@ -27,15 +27,15 @@ effectsvolume = 100
 extendedscreen = pygame.Rect(-10,-10,windowwidth+20,windowheight+20)
 
 # de vorm van elk shippart: tuples zijn verticale lijnen. 1 is dat er iets zit.
-kinetic_weapon = [(1), (1), (1)]
-flak_cannon = [(0, 1, 0), (0, 1, 0), (1, 1, 1)]
-laser_cannon = [(1), (1), (1), (1)]
-rocket_engine = [(1), (1)]
-ion_thruster = [(1, 1), (1, 1)]
-magnatic_shield = [(1, 1)]
-flux_shield = [(1, 1, 1)]
-solar_panel = [(1)]
-fission_reactor = [(1, 1), (0, 1)]
+kinetic_weapon = [[1,], [1,], [1,]]
+flak_cannon = [[0, 1, 0], [0, 1, 0], [1, 1, 1]]
+laser_cannon = [[1,], [1,], [1,], [1,]]
+rocket_engine = [[1,], [1,]]
+ion_thruster = [[1, 1], [1, 1]]
+magnatic_shield = [[1, 1]]
+flux_shield = [[1, 1, 1]]
+solar_panel = [[1,]]
+fission_reactor = [[1, 1], [0, 1]]
 
 # specificaties en namen van de onderdelen
 # prijs is keer duizend voor aanschaf. Upgrades: upgrade 1: *2250, upgrade 2: *4000, upgrade 3: *6259, upgrade 4: *9000
@@ -78,10 +78,10 @@ def shippartinfo(list, index, upgrade):
         shippartinfo.append("Current level: " + str(upgrade))
         shippartinfo.append("Cost to upgrade: " + str(price))
         upgrade -= 1
-
-    shippartinfo.append(shippartslist[list][index][5])
-    shippartinfo.append(shippartslist[list][index][6])
-    shippartinfo.append(shippartslist[list][index][7])
+    for info in range(5,8):
+        shippartinfo.append(shippartslist[list][index][info])
+    #shippartinfo.append(shippartslist[list][index][6])
+    #shippartinfo.append(shippartslist[list][index][7])
     shippartinfo.append("")
     if list == 1:
         shippartinfo.append("Damage: " + str(shippartslist[list][index][8]*(upgrade+1)))

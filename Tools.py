@@ -34,18 +34,18 @@ def create_dragbar(rect, text, options, chosenoption):
     return dragrect
 
 
-def displayshippart(list, shippartdisplayed, image, posx, posy):
+def displayshippart(image, posx, posy, shippartshape):
     background = pygame.Rect(posx - 90, posy - 180, 180, 360)
     rect = image.get_rect()
     rect.center = (posx, posy)
     pygame.draw.rect(GameplayConstants.screen, black, background)
     GameplayConstants.screen.blit(image, rect)
-    for height in range(len(GameplayConstants.shippartslist[list][shippartdisplayed][2])):
-        if isinstance(GameplayConstants.shippartslist[list][shippartdisplayed][2][height], tuple):
-            for width in range(len(GameplayConstants.shippartslist[list][shippartdisplayed][2][height])):
-                if GameplayConstants.shippartslist[list][shippartdisplayed][2][height][width] == 1:
+    for height in range(len(shippartshape)):
+        if isinstance(shippartshape[height], list):
+            for width in range(len(shippartshape[height])):
+                if shippartshape[height][width] == 1:
                     pygame.draw.rect(GameplayConstants.screen, lightgray, pygame.Rect(rect.left + 60 * width, rect.top + 60 * height, 57, 57), 2)
-        elif GameplayConstants.shippartslist[list][shippartdisplayed][2][height] == 1:
+        elif shippartshape[height] == 1:
             pygame.draw.rect(GameplayConstants.screen, lightgray, pygame.Rect(rect.left, rect.top + 60 * height, 57, 57), 2)
 
 def getangle(rect1, rect2):

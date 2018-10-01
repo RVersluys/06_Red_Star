@@ -31,10 +31,7 @@ class Player:
         x = part.xpos
         y = part.ypos
         height = len(part.shape)
-        if isinstance(part.shape[0], tuple):
-            width = len(part.shape[0])
-        else:
-            width = 1
+        width = len(part.shape[0])
         for stepdown in range(height):
             if width > 1:
                 for step in range(width):
@@ -45,13 +42,15 @@ class Player:
         part.remove()
 
 class Shippart:
-    def __init__(self, xpos, ypos, type, index):
+    def __init__(self, xpos, ypos, type, index, shape, rotations):
         self.xpos = xpos
         self.ypos = ypos
-        self.shape = GameplayConstants.shippartslist[type][index][2]
+        self.shape = shape
+        #self.shape = GameplayConstants.shippartslist[type][index][2]
         self.type = type
         self.index = index
         self.upgrades = 0
+        self.rotations = rotations
         Gamedata.player.gold -= GameplayConstants.shippartprice(type, index, 0)
 
     def remove(self):
@@ -134,8 +133,8 @@ class Shippart:
 
         Tools.draw_text(GameplayConstants.screen, GameplayConstants.shippartslist[self.type][self.index][0], 30, startwidth + 220, startheight + 45, "Xolonium")
         self.shipmenutext(self,startwidth,startheight, textrect)
-        image = GameplayConstants.shippartimages[self.type-1][self.index]
-        Tools.displayshippart(self.type, self.index, image, startwidth+110, startheight+200)
+        image = pygame.transform.rotate(GameplayConstants.shippartimages[self.type-1][self.index], -self.rotations * 90)
+        Tools.displayshippart(image, startwidth+110, startheight+200, self.shape)
         pygame.display.flip()
         while running:
             for event in pygame.event.get():
@@ -189,17 +188,19 @@ class Shippart:
             Tools.draw_text(GameplayConstants.screen, text[line], 15, startwidth + 215, startheight +100 + 20 * line, "Xolonium")
 
 class Weapon(Shippart):
-    def __init__(self, index, xposition, yposition):
+    def __init__(self, index, xposition, yposition, shape):
         self.xpos = xposition
         self.ypos = yposition
         self.type = 1
-        self.shape = GameplayConstants.shippartslist[self.type][index][2]
+        #self.shape = GameplayConstants.shippartslist[self.type][index][2]
+        self.shape = shape
         self.index = index
         self.energyuse = GameplayConstants.shippartslist[self.type][index][3]
         self.cooldown = GameplayConstants.shippartslist[self.type][index][4]
         self.nowcooldown = 0
         self.upgrades = 0
         self.keybind = 0
+        self.rotations = 0
         Gamedata.player.gold -= GameplayConstants.shippartprice(self.type, index, 0)
 
     def update(self):

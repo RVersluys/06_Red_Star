@@ -75,13 +75,14 @@ class Game:
                             Gamedata.player = Player.Player()
                             self.shipmenuloop()
                         elif self.menurects[2].collidepoint(mousepos):
-                            self.optionmenu()
+                            pass
+                            #self.optionmenu()
                         elif self.menurects[3].collidepoint(mousepos):
+                            pass
                             filelist = self.get_savegames()
                             filelist.append("Load game")
                             self.submenu(len(filelist), 3, filelist)
                         elif self.menurects[4].collidepoint(mousepos):
-
                             self.submenu(8, 4)
                         elif self.menurects[5].collidepoint(mousepos):
                             pygame.quit()
@@ -192,11 +193,14 @@ class Game:
         launchrect = pygame.Rect(1535, 935, 300, 60)
         abortrect = pygame.Rect(30, 30, 400, 50)
         saverect = pygame.Rect(30, 90, 400, 50)
+        rotaterect = pygame.Rect(1335, 910,180,50)
 
         self.activenames = [GameplayConstants.shippartslist[self.menunumber][x][0] for x in range(len(GameplayConstants.shippartslist[self.menunumber]))]
         self.activerects = [pygame.Rect(920, 553 + x * 60, 400, 50) for x in range(7)]
-        self.activebuttons2names = ["Launch", "Quit", "Save game", "Back"]
-        self.activebuttons2 = [launchrect, abortrect, saverect]
+        self.buttons2names = ["Launch", "Quit", "Save game", "Rotate", "Back"]
+        self.buttons2 = [launchrect, abortrect, saverect, rotaterect, backrect]
+        self.buttons2active = [1,1,1,0,0]
+
 
         self.resetscreen()
         shippartdrag = False
@@ -208,17 +212,18 @@ class Game:
                 elif event.type == pygame.MOUSEMOTION:
                     # beweging van de muis bij een geselecteerd schiponderdeel
                     if self.shippartselected == True:
-                        image = GameplayConstants.shippartimages[self.menunumber - 1][self.shippartdisplayed]
+                        #image = GameplayConstants.shippartimages[self.menunumber - 1][self.shippartdisplayed]
                         mouserect.center = (mousepos[0], mousepos[1])
                         self.resetscreen()
-                        Tools.displayshippart(self.menunumber, self.shippartdisplayed, image, 1427, 730)
+                        Tools.displayshippart(mouseimage, 1427, 730, self.shippartshape)
                         screen.blit(mouseimage, mouserect)
                     else:
                         # kleuren van de knoppen bij het er overheen hoveren.
                         for x in range(len(self.activenames)):
                             Tools.refresh_menubutton(self.activerects[x], mousepos,GameplayConstants.shippartslist[self.menunumber][x][0], False)
-                        for x in range(len(self.activebuttons2)):
-                            Tools.refresh_menubutton(self.activebuttons2[x], mousepos, self.activebuttons2names[x], False)
+                        for x in range(len(self.buttons2)):
+                            if self.buttons2active[x] == 1:
+                                Tools.refresh_menubutton(self.buttons2[x], mousepos, self.buttons2names[x], False)
                 elif event.type == pygame.MOUSEBUTTONUP and shippartdrag:
                     self.placeshippart(mousepos, mouseimage)
                     shippartdrag = False
@@ -230,7 +235,7 @@ class Game:
                             pygame.mouse.set_visible(True)
                             self.shippartselected = False
                             self.resetscreen()
-                            Tools.displayshippart(self.menunumber, self.shippartdisplayed, image, 1427, 730)
+                            Tools.displayshippart(mouseimage, 1427, 730, self.shippartshape)
                         else:  # verwijder een schipdeel in het schip met de rechter muisknop
                             x = int((mousepos[0] - 69) / 60)
                             y = int((mousepos[1] - 529) / 60)
@@ -249,7 +254,7 @@ class Game:
                                 if not isinstance(Gamedata.player.shipfill[y][x], int):
                                     Sounds.sounds.soundclick.play()
                                     Gamedata.player.shipfill[y][x].itemmenu()
-                                    self.shippartselected = False
+                                    #self.shippartselected = False
                                     self.resetscreen()
 
                             # er wordt geklikt op het onderdelenmenu
@@ -261,13 +266,16 @@ class Game:
                                         self.activenames = [GameplayConstants.shippartslist[self.menunumber][x][0] for x in range(len(GameplayConstants.shippartslist[self.menunumber]))]
                                         self.create_menu()
                                         Tools.refresh_menubutton(backrect, mousepos, "Back", True)  # back knop
-                                        self.activebuttons2.append(backrect)  # backknop is 'actief' (kleur bij hover veranderd)
-
+                                        self.buttons2active[4] = 1
                                     else:  # op een van de onderdelen van het submenu
+                                        self.rotations = 0
                                         self.shippartdisplayed = button
-                                        image = GameplayConstants.shippartimages[self.menunumber - 1][self.shippartdisplayed]
-                                        Tools.displayshippart(self.menunumber, self.shippartdisplayed, image, 1427, 730)
-
+                                        self.shippartshape = GameplayConstants.shippartslist[self.menunumber][self.shippartdisplayed][2]
+                                        mouseimage = GameplayConstants.shippartimages[self.menunumber - 1][self.shippartdisplayed]
+                                        Tools.displayshippart(mouseimage, 1427, 730, self.shippartshape)
+                                        if self.menunumber >= 3:
+                                            Tools.refresh_menubutton(rotaterect, mousepos, "Rotate", True)  # Rotate knop
+                                            self.buttons2active[3] = 1
                                         pygame.draw.rect(screen, GameplayConstants.lightgray, pygame.Rect(1515, 550, 320, 260))
                                         text = GameplayConstants.shippartinfo(self.menunumber, self.shippartdisplayed,0)
                                         for line in range(len(text)):
@@ -287,22 +295,31 @@ class Game:
                                     pickle_out = open(filepath, "wb")
                                     pickle.dump(Gamedata.player, pickle_out)
                                 self.resetscreen()
+                            # op de backknop (alleen in submenu)
                             elif backrect.collidepoint(mousepos) and self.menunumber != 0:
                                 Sounds.sounds.soundcancel.play()
                                 self.menunumber = 0
                                 self.shippartselected = -1
                                 self.activenames = [GameplayConstants.shippartslist[self.menunumber][x][0] for x in range(len(GameplayConstants.shippartslist[self.menunumber]))]
-                                self.activebuttons2.pop(3)
+                                self.buttons2active[3] = 0
+                                self.buttons2active[4] = 0
                                 self.create_menu()
+                            # op savegame
                             elif saverect.collidepoint(mousepos):
                                 self.savegameloop()
                                 self.resetscreen()
+                            # op de rotateknop (alleen bij bepaalde items)
+                            elif rotaterect.collidepoint(mousepos) and self.menunumber >= 3:
+                                self.shippartshape = self.rotateshippart(self.shippartshape)
+                                mouseimage = pygame.transform.rotate(GameplayConstants.shippartimages[self.menunumber - 1][self.shippartdisplayed], -self.rotations * 90)
+                                #self.resetscreen()
+                                Tools.displayshippart(mouseimage, 1427, 730, self.shippartshape)
                             # op het displayed onderdeel
                             elif self.shippartrect.collidepoint(mousepos) and self.shippartdisplayed >= 0:
                                 if Gamedata.player.gold >= GameplayConstants.shippartprice(self.menunumber, self.shippartdisplayed, 0):
                                     Sounds.sounds.soundclick.play()
-                                    mouseimage = GameplayConstants.shippartimages[self.menunumber - 1][self.shippartdisplayed]
-                                    mouserect = image.get_rect()
+                                    mouseimage = pygame.transform.rotate(GameplayConstants.shippartimages[self.menunumber - 1][self.shippartdisplayed], -self.rotations*90)
+                                    mouserect = mouseimage.get_rect()
                                     mouserect.center = (mousepos[0], mousepos[1])
                                     pygame.mouse.set_visible(False)
                                     pygame.mouse.set_pos(970, 530)
@@ -313,6 +330,20 @@ class Game:
                                     Sounds.sounds.soundfail.play()
             pygame.display.flip()
             clock.tick(GameplayConstants.fps)
+
+    def rotateshippart(self, shippart):
+        newobject = []
+        height = len(shippart)
+        width = len(shippart[0])
+        for x in range(width):
+            list = []
+            for y in range(height):
+                list.append(shippart[height - (y+1)][x])
+                print(list)
+            newobject.append(list)
+        self.rotations = (self.rotations+1)%4
+        print(newobject)
+        return newobject
 
     def savegameloop(self):
         saves = self.get_savegames()
@@ -360,12 +391,10 @@ class Game:
     def placeshippart(self, mousepos, mouseimage):
         x = int((mousepos[0] - 69) / 60)
         y = int((mousepos[1] - 529) / 60)
-        partlayout = GameplayConstants.shippartslist[self.menunumber][self.shippartdisplayed][2]
+        partlayout = self.shippartshape
+        #partlayout = GameplayConstants.shippartslist[self.menunumber][self.shippartdisplayed][2]
         height = len(partlayout)
-        if isinstance(partlayout[0], tuple):
-            width = len(partlayout[0])
-        else:
-            width = 1
+        width = len(partlayout[0])
         if x >= 0 and x <= 9 - width and y >= 0 and y <= 8 - height:  # past het object in het schipdisplay
             # in dit gedeelte wordt gekeken waar de hoek van het object zit.
             if width % 2 == 1:
@@ -388,15 +417,15 @@ class Game:
                     for step in range(width):
                         if self.greenlist[yadjusted + stepdown][xadjusted + step] != 1 and partlayout[stepdown][step] == 1:
                             succes = False
-                elif self.greenlist[yadjusted + stepdown][xadjusted] != 1 and partlayout[stepdown] == 1:
+                elif self.greenlist[yadjusted + stepdown][xadjusted] != 1:
                     succes = False
 
             if succes == True:  # het onderdeel wordt geplaatst op een mogelijke plek.
                 if self.menunumber == 1:
-                    item = Player.Weapon(self.shippartdisplayed, xadjusted, yadjusted)
+                    item = Player.Weapon(self.shippartdisplayed, xadjusted, yadjusted, self.shippartshape)
                     Gamedata.player.weapons.append(item)
                 else:
-                    item = Player.Shippart(xadjusted, yadjusted, self.menunumber,self.shippartdisplayed)  # itemobject
+                    item = Player.Shippart(xadjusted, yadjusted, self.menunumber,self.shippartdisplayed, self.shippartshape, self.rotations) # itemobject
                     Gamedata.player.shipparts.append(item)
                 item.increasestats()  # geef hero de statsboost van het geplaatste item
                 for stepdown in range(height):
@@ -404,7 +433,7 @@ class Game:
                         for step in range(width):
                             if partlayout[stepdown][step] == 1:
                                 Gamedata.player.shipfill[yadjusted + stepdown][xadjusted + step] = item
-                    elif partlayout[stepdown] == 1:
+                    else:
                         Gamedata.player.shipfill[yadjusted + stepdown][xadjusted] = item
 
                 screen.blit(mouseimage, (70 + 60 * xadjusted, 530 + 60 * yadjusted))
@@ -465,7 +494,7 @@ class Game:
 
         # display geplaatste scheepsonderdelen
         for shippart in Gamedata.player.shippartsused:
-            image = GameplayConstants.shippartimages[shippart.type-1][shippart.index]
+            image = pygame.transform.rotate(GameplayConstants.shippartimages[shippart.type-1][shippart.index], -shippart.rotations * 90)
             rect = image.get_rect()
             rect.top = 530 + int(shippart.ypos) * 60
             rect.left = 70 + int(shippart.xpos) * 60
@@ -478,12 +507,9 @@ class Game:
                         if Gamedata.player.shipfill[y][x] > 0 and Gamedata.player.shipfill[y][x] <= 1:
                             pygame.draw.rect(screen, GameplayConstants.lightgray, pygame.Rect(70 + x * 60, 530 + y * 60, 57, 57), 2)
         else:  # onderstaande is het inventariseren waar op het schip het geselecteerde object kan worden geplaatst.
-            partlayout = GameplayConstants.shippartslist[self.menunumber][self.shippartdisplayed][2]
+            partlayout = self.shippartshape
             height = len(partlayout)
-            if isinstance(partlayout[0], tuple):
-                width = len(partlayout[0])
-            else:
-                width = 1
+            width = len(partlayout[0])
             for x in range(9 - (width - 1)):
                 for y in range(8 - (height - 1)):
                     succes = True
@@ -518,8 +544,9 @@ class Game:
         for x in range(len(self.activenames)):
             pygame.draw.rect(screen, GameplayConstants.black, pygame.Rect(basex + 17, 550 + x * 60, 406, 56))
             Tools.refresh_menubutton(self.activerects[x], mousepos, self.activenames[x], True)
-        for button in range(len(self.activebuttons2)):
-            Tools.refresh_menubutton(self.activebuttons2[button], mousepos, self.activebuttons2names[button], True)
+        for button in range(len(self.buttons2)):
+            if self.buttons2active[button] == 1:
+                Tools.refresh_menubutton(self.buttons2[button], mousepos, self.buttons2names[button], True)
         self.shippartrect = pygame.Rect(basex + 435, 550, 180, 360)
         pygame.draw.rect(screen, GameplayConstants.black, self.shippartrect)
 
