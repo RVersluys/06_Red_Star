@@ -149,9 +149,19 @@ class Level:
             self.spawnlist.append([4700, 9, 0, 100, 5, 0, [(0, 0)], [(100, 2, 0)], 200])
             self.spawnlist.append([4800, 9, 0, 150, 5, 0, [(0, 0)], [(100, 2, 0)], 0])
 
-            # 5000 ticks: elfde aanval: fighters (move, stop, strafe, shoot aimed)
-            # IN PROGRESS
-            self.spawnlist.append([0, 9, 650, 0, 0, 2, [(0, 0), (40, 2)], [(60, 1, 0)], 200])
+            # 5000 ticks: elfde aanval: fighters (move, stop, change direction, shoot aimed)
+            self.spawnlist.append([5000, 9, 75, 0, 0, 2, [(0, 0), (60, 3,0,0),(150,3,3,3)], [(100, 1, 0)], 0])
+            self.spawnlist.append([5050, 9, 275, 0, 0, 2, [(0, 0), (60, 3, 0, 0), (130, 3, 3, 3)], [(100, 1, 0)], 0])
+            self.spawnlist.append([5080, 9, 175, 0, 0, 2, [(0, 0), (60, 3, 0, 0), (120, 3, 3, 3)], [(100, 1, 0)], 200])
+            self.spawnlist.append([5160, 9, 1200, 0, 0, 2, [(0, 0), (60, 3,0,0),(150,3,-3,4)], [(100, 1, 0)], 0])
+            self.spawnlist.append([5200, 9, 1000, 0, 0, 2, [(0, 0), (60, 3, 0, 0), (130, 3, -3, 4)], [(100, 1, 0)], 0])
+            self.spawnlist.append([5230, 9, 1100, 0, 0, 2, [(0, 0), (60, 3, 0, 0), (120, 3, -3, 4)], [(100, 1, 0)], 200])
+
+            # 5400 ticks: twaalfde aanval: cruiser (zigzag strafing mg)
+            self.spawnlist.append([5400, 10, 100, 0, 0, 1, [(0, 0), (250, 1)], [(40, 2, 0)], 500])
+
+            # 5800 ticks: dertiende aanval: fighters
+
 
 
 
@@ -264,7 +274,7 @@ class Level:
            # self.spawnlist.append([5200, 12, 320, 0, 0, 6, [(0, 0), (60, 3,0,0), (150,1)], [(100, 4, 0, 6, 15), (60,1,1)], 1000])
 
             #level end
-            self.spawnlist.append([5300, -1])
+            self.spawnlist.append([20000, -1])
 
             ###################################################################################################
             #lijst wordt gesorteerd om op volgorde uit te kunnen voeren.
