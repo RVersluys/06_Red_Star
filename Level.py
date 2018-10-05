@@ -51,7 +51,7 @@ class Level:
                     #4 = charge (charge duurt 78 ticks, retour 156) (wanneer op derde en vierde plaats coordinaten worden
                     #    geplaatst charged die daar naar toe, anders naar de hero.
             #8 = wapenprogramma
-                #1 = cooldown
+                #1 = cooldown (of een tuple: (cooldown, startticks, endticks)
                 #2 = weaponprogram
                     #0 = no weapon
                     #1 = aimed shot
@@ -93,8 +93,11 @@ class Level:
             self.propslist.append([9000, 2, 200, 2, (518, 520)])
             self.propslist.append([12000, 3, 800, 1, (100, 41)])
 
+            # Cruiser komt in scherm, opend vuur. stopt vuur, straved weg.
+            self.spawnlist.append([50, 10, warscreenwidth/2, 0, 0, 5, [(0, 0), (60,3,0,0), (240,2)], [((20,70,240), 4, 0, 5, 20)], 0])
+
             # 300 ticks: eerste aanval: fighters (horizontaal naar links, straight shot)
-            self.spawnlist.append([300, 9, warscreenwidth, 200, -6, 0, [(0,0)], [(30,3,0)],0])
+            self.spawnlist.append([300, 9, warscreenwidth, 200, -6, 0, [(0, 0)], [(30, 3, 0)],0])
             self.spawnlist.append([360, 9, warscreenwidth, 200, -6, 0, [(0, 0)], [(30, 3, 0)], 200])
             self.spawnlist.append([420, 9, warscreenwidth, 200, -6, 0, [(0, 0)], [(30, 3, 0)], 0])
 

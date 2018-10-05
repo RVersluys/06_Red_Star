@@ -171,56 +171,66 @@ class Mob(pygame.sprite.Sprite):
         self.ticks += 1
 
     def wprogram(self):
+
         for program in self.wprogramlist:
-            if program[1] == 1: #aimed weapon
-                if self.ticks % program[0] == 0:
-                    speed = Projectiles.images.projectiles[program[2]][0]
-                    angle = Tools.getangle(self.rect, Gamedata.hero.rect)
-                    move = Tools.getmovement(self.rect, Gamedata.hero.rect, speed)
-                    bullet = Projectiles.Mobbullet(self.rect.centerx, self.rect.centery, move[0], move[1], angle, program[2])
-                    Gamedata.mobbullets.add(bullet)
-                    Gamedata.all_sprites.add(bullet)
-            elif program[1] == 2: #machinegun
-                if self.ticks % program[0] in [0,3,6,9,12,15]:
-                    movex = 0
-                    movey = -Projectiles.images.projectiles[program[2]][0]
-                    angle = 180
-                    change = ((self.ticks % program[0]) %6) * 30-45
-                    bullet = Projectiles.Mobbullet(self.rect.centerx + change, self.rect.centery, movex, movey, angle, program[2])
-                    Gamedata.mobbullets.add(bullet)
-                    Gamedata.all_sprites.add(bullet)
-            elif program[1] == 3: #forward shot
-                if self.ticks % program[0] == 0:
-                    movex = 0
-                    movey = -Projectiles.images.projectiles[program[2]][0]
-                    angle = 180
-                    bullet = Projectiles.Mobbullet(self.rect.centerx, self.rect.centery, movex, movey, angle, program[2])
-                    Gamedata.mobbullets.add(bullet)
-                    Gamedata.all_sprites.add(bullet)
-            elif program[1] == 4: #cluster shot
-                if self.ticks % program[0] == 0:
-                    speed = Projectiles.images.projectiles[program[2]][0]
-                    for x in range(program[3]):
-                        angle = -(program[3]-1)*program[4]*0.5 + x * program[4]
-                        movey = -math.cos(math.radians(angle)) * speed
-                        movex = math.sin(math.radians(angle)) * speed
-                        bullet = Projectiles.Mobbullet(self.rect.centerx, self.rect.centery, movex, movey, (angle + 180) % 360, program[2])
-                        Gamedata.mobbullets.add(bullet)
-                        Gamedata.all_sprites.add(bullet)
-            elif program[1] == 5: #flame thrower
-                if self.ticks % program[0] == 0:
-                    speed = Projectiles.images.projectiles[2][0]
-                    if program[2] == -1:
-                        move = Tools.getmovement(self.rect, Gamedata.hero.rect, speed)
-                    else:
-                        angle = program[2]%360
-                        movey = -math.cos(math.radians(angle)) * speed
-                        movex = -math.sin(math.radians(angle)) * speed
-                        move = (movex, movey)
-                    damage = Projectiles.images.projectiles[2][1]
-                    bullet = Projectiles.Flamethrower(self.rect.centerx, self.rect.centery, move[0], move[1], damage)
-                    Gamedata.mobbullets.add(bullet)
-                    Gamedata.all_sprites.add(bullet)
+            if isinstance(program[0], tuple):
+                if self.ticks > program[0][1] and self.ticks < program[0][2]:
+                    if program[1] == 2:
+                        if self.ticks % program[0][0] in [0, 3, 6, 9, 12, 15]:
+                            self.weaponfire(program)
+                    elif self.ticks % program[0][0] == 0:
+                        self.weaponfire(program)
+            elif program[1] == 2:
+                if self.ticks % program[0] in [0, 3, 6, 9, 12, 15]:
+                    self.weaponfire(program)
+            elif self.ticks % program[0] == 0:
+                self.weaponfire(program)
+
+    def weaponfire(self, program):
+        if program[1] == 1:  # aimed weapon
+            speed = Projectiles.images.projectiles[program[2]][0]
+            angle = Tools.getangle(self.rect, Gamedata.hero.rect)
+            move = Tools.getmovement(self.rect, Gamedata.hero.rect, speed)
+            bullet = Projectiles.Mobbullet(self.rect.centerx, self.rect.centery, move[0], move[1], angle, program[2])
+            Gamedata.mobbullets.add(bullet)
+            Gamedata.all_sprites.add(bullet)
+        elif program[1] == 2:  # machinegun
+            movex = 0
+            movey = -Projectiles.images.projectiles[program[2]][0]
+            angle = 180
+            change = ((self.ticks % program[0]) % 6) * 30 - 45
+            bullet = Projectiles.Mobbullet(self.rect.centerx + change, self.rect.centery, movex, movey, angle, program[2])
+            Gamedata.mobbullets.add(bullet)
+            Gamedata.all_sprites.add(bullet)
+        elif program[1] == 3:  # forward shot
+            movex = 0
+            movey = -Projectiles.images.projectiles[program[2]][0]
+            angle = 180
+            bullet = Projectiles.Mobbullet(self.rect.centerx, self.rect.centery, movex, movey, angle, program[2])
+            Gamedata.mobbullets.add(bullet)
+            Gamedata.all_sprites.add(bullet)
+        elif program[1] == 4:  # cluster shot
+            speed = Projectiles.images.projectiles[program[2]][0]
+            for x in range(program[3]):
+                angle = -(program[3] - 1) * program[4] * 0.5 + x * program[4]
+                movey = -math.cos(math.radians(angle)) * speed
+                movex = math.sin(math.radians(angle)) * speed
+                bullet = Projectiles.Mobbullet(self.rect.centerx, self.rect.centery, movex, movey, (angle + 180) % 360, program[2])
+                Gamedata.mobbullets.add(bullet)
+                Gamedata.all_sprites.add(bullet)
+        elif program[1] == 5:  # flame thrower
+            speed = Projectiles.images.projectiles[2][0]
+            if program[2] == -1:
+                move = Tools.getmovement(self.rect, Gamedata.hero.rect, speed)
+            else:
+                angle = program[2] % 360
+                movey = -math.cos(math.radians(angle)) * speed
+                movex = -math.sin(math.radians(angle)) * speed
+                move = (movex, movey)
+            damage = Projectiles.images.projectiles[2][1]
+            bullet = Projectiles.Flamethrower(self.rect.centerx, self.rect.centery, move[0], move[1], damage)
+            Gamedata.mobbullets.add(bullet)
+            Gamedata.all_sprites.add(bullet)
 
 
 
