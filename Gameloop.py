@@ -15,6 +15,7 @@ import Gamedata
 import Level
 import Sounds
 import Hero
+import Gametext
 
 screen = GameplayConstants.screen
 
@@ -33,6 +34,7 @@ class Gameloop:
             self.barrects.append(pygame.Rect(1474, 820 + x * 80, 413, 40))
         # pygame.display.update()
         running = True
+        endlevelbool = False
 
         while running:
             # Eventcheck
@@ -83,8 +85,17 @@ class Gameloop:
                     Sounds.sounds.pickupsound.play()
             # check end level
             if self.level.end and len(Gamedata.mobs) == 0 and len(Gamedata.powerups) == 0 or self.level.abort:
-                self.endlevel(self.level.succes)
-                return
+                if endlevelbool == False:
+                    endlevelbool = True
+                    endleveltime = pygame.time.get_ticks()  # starter tick
+                    if self.level.succes:
+                        text = Gametext.Text("Mission Accomplished", 35, (100,255,100), (120,30), (warscreenwidth/2, windowheight/2), (800,100))
+                    else:
+                        text = Gametext.Text("Mission Failed", 35, (200, 0, 0), (120,30), (warscreenwidth/2, windowheight/2), (800, 100))
+                    Gamedata.background.add(text)
+                if pygame.time.get_ticks() > endleveltime + 2500:
+                    self.endlevel(self.level.succes)
+                    return
             # Draw / render
             pygame.draw.rect(screen, GameplayConstants.black, warrect)
             Gamedata.stars.draw(screen)

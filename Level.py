@@ -320,7 +320,7 @@ class Level:
            # self.spawnlist.append([5200, 12, 320, 0, 0, 6, [(0, 0), (60, 3,0,0), (150,1)], [(100, 4, 0, 6, 15), (60,1,1)], 1000])
 
             #level end
-            self.spawnlist.append([20000, -1])
+            self.spawnlist.append([10000, -1])
 
             ###################################################################################################
             #lijst wordt gesorteerd om op volgorde uit te kunnen voeren.
