@@ -25,16 +25,27 @@ class Mobsloading:
     def __init__(self):
         self.imagenames = []
         self.hitimagenames = []
-        for index in range(13):
-            self.imagenames.append("normal_" + str(index) + ".png")
-            self.hitimagenames.append("hit_" + str(index) + ".png")
+        for damagestate in range(3):
+            imagenames = []
+            hitimagenames = []
+            for index in range(13):
+                imagenames.append("normal_" + str(index) + '_' + str(damagestate) + ".png")
+                hitimagenames.append("hit_" + str(index) + '_' + str(damagestate) + ".png")
+            self.imagenames.append(imagenames)
+            self.hitimagenames.append(hitimagenames)
 
     def load_level(self, mobtypes):
         self.imagelist = []
         self.imagehitlist = []
-        for type in mobtypes:
-            self.imagelist.append(pygame.image.load(os.path.join(game_folder, 'img', 'mob', self.imagenames[type])).convert_alpha())
-            self.imagehitlist.append(pygame.image.load(os.path.join(game_folder, 'img', 'mob', self.hitimagenames[type])).convert_alpha())
+        for damagestate in range(3):
+            imagelist = []
+            imagehitlist = []
+            for type in mobtypes:
+                imagelist.append(pygame.image.load(os.path.join(game_folder, 'img', 'mob', self.imagenames[damagestate][type])).convert_alpha())
+                imagehitlist.append(pygame.image.load(os.path.join(game_folder, 'img', 'mob', self.hitimagenames[damagestate][type])).convert_alpha())
+            self.imagelist.append(imagelist)
+            self.imagehitlist.append(imagehitlist)
+
 
 unitstats = Unitstats()
 images = Mobsloading()
@@ -43,7 +54,7 @@ class Mob(pygame.sprite.Sprite):
     def __init__(self, unitindex, startx, starty, speedx, speedy, programlist, wprogramlist, powerup):
         pygame.sprite.Sprite.__init__(self)
         self.imageindex = unitindex
-        self.image = images.imagelist[unitindex]
+        self.image = images.imagelist[0][unitindex]
         self.rect = self.image.get_rect()
         #hitpox radius, alleen voor collision met hero, niet met projectiles
         self.radius = int(self.rect.width*0.9/2)
@@ -53,6 +64,7 @@ class Mob(pygame.sprite.Sprite):
         #verandering x en y per frame, movement programma's kunnen dit overschrijven
         self.speedx = speedx
         self.speedy = speedy
+        self.damagestate = 0
 
         #laden specificaties van schip
         self.hp = unitstats.hitpoints[unitindex]
@@ -82,7 +94,9 @@ class Mob(pygame.sprite.Sprite):
             Gamedata.player.gold += self.worth
             return self.points
         else:
-            self.image = images.imagehitlist[self.imageindex]
+            maxhp = unitstats.hitpoints[self.imageindex]
+            self.damagestate = int(3-(3/maxhp*self.hp))
+            self.image = images.imagehitlist[self.damagestate][self.imageindex]
             self.lasthit = pygame.time.get_ticks()
             self.hit = True
             return 0
@@ -104,7 +118,8 @@ class Mob(pygame.sprite.Sprite):
 
         if self.hit == True:
             if pygame.time.get_ticks() - self.lasthit > 200:
-                self.image = images.imagelist[self.imageindex]
+                self.image = images.imagelist[self.damagestate][self.imageindex]
+                self.hit = False
 
     def programinit(self): #eenmalige trigger aan het begin van het programma.
         if self.programlist[0][1] == 1:
