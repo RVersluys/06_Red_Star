@@ -44,6 +44,18 @@ class Sounds:
         for sound in self.bangs:
             sound.set_volume(GameplayConstants.effectsvolume / 100)
 
+def playsong(name, queue):
+    file = os.path.join(os.path.join(os.path.dirname(__file__), 'sounds', 'music', name))
+
+
+    if queue:
+        pygame.mixer.music.queue(file)
+    else:
+        pygame.mixer.music.load(file)
+        pygame.mixer.music.play(loops=0)
+        pygame.mixer.music.set_volume(GameplayConstants.musicvolume / 100)
+
+
 
 sounds = Sounds()
 sounds.soundchange()

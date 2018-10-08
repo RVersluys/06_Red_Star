@@ -29,7 +29,7 @@ fps = GameplayConstants.fps
 class Game:
     def __init__(self):
         # initialize music
-        pygame.mixer.music.load(os.path.join(game_folder, 'sounds', 'Hymne.mp3'))
+        pygame.mixer.music.load(os.path.join(game_folder, 'sounds', 'music', 'Hymne.mp3'))
         pygame.mixer.music.set_volume(GameplayConstants.musicvolume/100)
         pygame.mixer.music.play(loops=-1)
 

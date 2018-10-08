@@ -11,7 +11,7 @@ clock = pygame.time.Clock()
 
 class Player:
     def __init__(self):
-        self.speed = 16
+        self.speed = 18
         self.weapons = []
         self.shipparts = []
         self.score = 0
@@ -102,7 +102,7 @@ class Shippart:
         windowrect = pygame.Rect(startwidth, startheight, 850, 400)
         textrect = pygame.Rect(startwidth + 210, startheight + 85, 300, 295)
         headerrect = pygame.Rect(startwidth + 210, startheight + 20, 430, 50)
-        goldrect = pygame.Rect(30, 30, 400, 50)
+        goldrect = pygame.Rect(1490, 30, 400, 50)
         refreshrects = [windowrect, goldrect]
 
         pygame.draw.rect(GameplayConstants.screen, GameplayConstants.darkgray, windowrect)
@@ -159,7 +159,7 @@ class Shippart:
                                 self.upgrade()
                                 self.shipmenutext(self, startwidth, startheight, textrect)
                                 pygame.draw.rect(GameplayConstants.screen, GameplayConstants.lightgray, goldrect)
-                                Tools.draw_text(GameplayConstants.screen, "Gold: " + str(Gamedata.player.gold), 35, 40, 55, "Xolonium")
+                                Tools.draw_text(GameplayConstants.screen, "Gold: " + str(Gamedata.player.gold), 35, 1495, 55, "Xolonium")
                                 if self.upgrades == 5:
                                     pygame.draw.rect(GameplayConstants.screen, GameplayConstants.darkgray, (upgraderect.left -3, upgraderect.top -3, upgraderect.width +6, upgraderect.height +6))
                                     indexnr = rects.index(upgraderect)

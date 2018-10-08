@@ -4,6 +4,7 @@ import Mobs
 import Gamedata
 import Backgroundprops
 import Gametext
+import Sounds
 
 windowheight = 1080
 warscreenwidth = 1440
@@ -19,6 +20,7 @@ class Level:
             self.spawnlist = []
             self.propslist = []
             self.textlist = []
+            self.musiclist = []
             self.startscore = Gamedata.player.score
             self.startgold = Gamedata.player.gold
             for enemy in range(300):
@@ -83,15 +85,20 @@ class Level:
             #hier laad je de achtergrondplaatjes. Het nummer correspondeerd met het bestandsnummeer. Er kunnen dus ook nieuwe plaatjes worden toegevoegd.
             Gamedata.bgimages = Backgroundprops.Images([0,1,2,3])
 
+            #liedje starten is simpel: ticks + naam. Zorg dat de file staat in de musicfolder.
+            #False = start direct, onderbreek huidige muziek, True betekend: speel af na huidige nummer.
+            self.musiclist.append([0, '04. Cry.flac', False])
+            self.musiclist.append([0, '07. Final Frontier.flac', True])
+
             # 0 ticks: aankondiging level text
             self.textlist.append([100, "Level 1: Jupiter", 30, (0,150,0), (160,40), (warscreenwidth/2,100), (800,50)])
             self.textlist.append([150, "WARNING: ASTERIOD STORM DETECTED", 30, (200, 0, 0), (100, 40), (warscreenwidth / 2, 150), (warscreenwidth, 50)])
             self.textlist.append([200, "WARNING: ENEMY SHIPS DETECTED", 30, (200, 0, 0), (100, 40), (warscreenwidth / 2, 200),(warscreenwidth, 50)])
 
-            self.propslist.append([5000, 0, 0, 1, (2260, 3207)])
+            self.propslist.append([5000, 0, 0, 1, (700, 700)])
             self.propslist.append([5500, 1, 500, 2, (675, 675)])
             self.propslist.append([9000, 2, 200, 2, (518, 520)])
-            self.propslist.append([12000, 3, 800, 1, (100, 41)])
+            self.propslist.append([12000, 3, 800, 1, (100, 100)])
 
             # Cruiser komt in scherm, opend vuur. stopt vuur, straved weg.
             self.spawnlist.append([50, 10, warscreenwidth/2, 0, 0, 5, [(0, 0), (60,3,0,0), (240,2)], [((20,70,240), 4, 0, 5, 20)], 0])
@@ -354,6 +361,10 @@ class Level:
                 text = Gametext.Text(self.textlist[0][1],self.textlist[0][2],self.textlist[0][3],self.textlist[0][4],self.textlist[0][5],self.textlist[0][6])
                 Gamedata.background.add(text)
                 self.textlist.pop(0)
+        if len(self.musiclist) > 0:
+            if self.musiclist[0][0] == self.ticks:
+                Sounds.playsong(self.musiclist[0][1], self.musiclist[0][2])
+                self.musiclist.pop(0)
 
         if random.randint(0,10) == 0:
             star = Backgroundprops.Star(False)

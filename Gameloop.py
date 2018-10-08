@@ -155,6 +155,7 @@ class Gameloop:
         Gamedata.mobbullets.empty()
         Gamedata.all_sprites.empty()
         pygame.mouse.set_visible(True)
+        Sounds.playsong('Hymne.mp3', True)
 
 
     def generate_menu(self, buttonlist):
