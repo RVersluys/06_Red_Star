@@ -339,10 +339,8 @@ class Game:
             list = []
             for y in range(height):
                 list.append(shippart[height - (y+1)][x])
-                print(list)
             newobject.append(list)
         self.rotations = (self.rotations+1)%4
-        print(newobject)
         return newobject
 
     def savegameloop(self):
