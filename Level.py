@@ -83,7 +83,7 @@ class Level:
             #7 grote van het plaatje (hoe meer en hoe groter de text, hoe groter het plaatje moet zijn. Anders wordt de text afgeknipt.
 
             #hier laad je de achtergrondplaatjes. Het nummer correspondeerd met het bestandsnummeer. Er kunnen dus ook nieuwe plaatjes worden toegevoegd.
-            Gamedata.bgimages = Backgroundprops.Images([0,1,2,3])
+            Gamedata.bgimages = Backgroundprops.Images([0,1,2,3,4])
 
             #liedje starten is simpel: ticks + naam. Zorg dat de file staat in de musicfolder.
             #False = start direct, onderbreek huidige muziek, True betekend: speel af na huidige nummer.
@@ -95,10 +95,12 @@ class Level:
             self.textlist.append([150, "WARNING: ASTERIOD STORM DETECTED", 30, (200, 0, 0), (100, 40), (warscreenwidth / 2, 150), (warscreenwidth, 50)])
             self.textlist.append([200, "WARNING: ENEMY SHIPS DETECTED", 30, (200, 0, 0), (100, 40), (warscreenwidth / 2, 200),(warscreenwidth, 50)])
 
-            self.propslist.append([5000, 0, 0, 1, (700, 700)])
+            self.propslist.append([0, 4, 0, 1, (1920, 20000)])
+            self.propslist.append([5000, 0, 700, 1, (900, 1278)])
             self.propslist.append([5500, 1, 500, 2, (675, 675)])
             self.propslist.append([9000, 2, 200, 2, (518, 520)])
             self.propslist.append([12000, 3, 800, 1, (100, 100)])
+
 
             # Cruiser komt in scherm, opend vuur. stopt vuur, straved weg.
             self.spawnlist.append([50, 10, warscreenwidth/2, 0, 0, 5, [(0, 0), (60,3,0,0), (240,2)], [((20,70,240), 4, 0, 5, 20)], 0])
