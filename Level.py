@@ -12,7 +12,8 @@ warscreenwidth = 1440
 class Level:
     def __init__(self, levelnumber):
         if levelnumber == 0:
-            Mobs.images.load_level([x for x in range(13)])
+            mobslist = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
+            Mobs.images.load_level(mobslist)
             self.end = False
             self.succes = False
             self.abort = False
@@ -95,7 +96,7 @@ class Level:
             self.textlist.append([150, "WARNING: ASTERIOD STORM DETECTED", 30, (200, 0, 0), (100, 40), (warscreenwidth / 2, 150), (warscreenwidth, 50)])
             self.textlist.append([200, "WARNING: ENEMY SHIPS DETECTED", 30, (200, 0, 0), (100, 40), (warscreenwidth / 2, 200),(warscreenwidth, 50)])
 
-            self.propslist.append([0, 4, 0, 1, (1920, 20000)])
+            self.propslist.append([0, 4, 0, 1, (500, 500)])
             self.propslist.append([5000, 0, 700, 1, (900, 1278)])
             self.propslist.append([5500, 1, 500, 2, (675, 675)])
             self.propslist.append([9000, 2, 200, 2, (518, 520)])
@@ -103,7 +104,7 @@ class Level:
 
 
             # Cruiser komt in scherm, opend vuur. stopt vuur, straved weg.
-            self.spawnlist.append([50, 10, warscreenwidth/2, 0, 0, 5, [(0, 0), (60,3,0,0), (240,2)], [((20,70,240), 4, 0, 5, 20)], 0])
+            self.spawnlist.append([50, 13, warscreenwidth/2, 0, 0, 5, [(0, 0), (60,3,0,0), (240,2)], [((20,70,240), 4, 0, 5, 20), (4,5, 330), (4,5, 30)], 0])
 
             # 300 ticks: eerste aanval: fighters (horizontaal naar links, straight shot)
             self.spawnlist.append([300, 9, warscreenwidth, 200, -6, 0, [(0, 0)], [(30, 3, 0)],0])
