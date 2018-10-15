@@ -103,9 +103,7 @@ class Schipmenu:
                                             self.submenu[x].text = GameplayConstants.shippartslist[self.menunumber][x][0]
                                             self.submenu[x].active = True
                                         for x in range(len(GameplayConstants.shippartslist[self.menunumber]), 6):
-                                            self.submenu[x].text = ""
                                             self.submenu[x].active = False
-
                                         self.menu[0].active = True #activeer back knop
                                         self.menu[0].update()
                                     else: # op een van de onderdelen van het submenu
@@ -257,14 +255,13 @@ class Schipmenu:
                     succes = False
 
             if succes == True:  # het onderdeel wordt geplaatst op een mogelijke plek.
-                print("Succes")
                 if self.menunumber == 1:
                     item = Player.Weapon(self.shippartdisplayed, xadjusted, yadjusted, self.shippartshape)
                     Gamedata.player.weapons.append(item)
                 else:
                     item = Player.Shippart(xadjusted, yadjusted, self.menunumber, self.shippartdisplayed, self.shippartshape, self.rotations)  # itemobject
                     Gamedata.player.shipparts.append(item)
-                item.increasestats()  # geef hero de statsboost van het geplaatste item
+                item.changestats(1)  # geef hero de statsboost van het geplaatste item
                 for stepdown in range(height):
                     if width > 1:
                         for step in range(width):

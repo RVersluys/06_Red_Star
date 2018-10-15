@@ -7,6 +7,7 @@ import GameplayConstants
 import Tools
 import Sounds
 import Colors
+import Button
 
 clock = pygame.time.Clock()
 
@@ -29,6 +30,8 @@ class Player:
 
     def removepart(self, part):
         self.shippartsused.remove(part)
+        if part.type == 1:
+            self.weapons.remove(part)
         x = part.xpos
         y = part.ypos
         height = len(part.shape)
@@ -59,128 +62,129 @@ class Shippart:
         for x in range(self.upgrades + 1):
             returnprice += GameplayConstants.shippartprice(self.type, self.index, x)
         Gamedata.player.gold += returnprice
-
-        if self.type == 1:
-            Gamedata.player.weapons.remove(self)
-            Gamedata.player.speed += GameplayConstants.shippartslist[self.type][self.index][9] * (self.upgrades + 1)
-        elif self.type == 2:
-            Gamedata.player.energyuse -= GameplayConstants.shippartslist[self.type][self.index][3] * (self.upgrades+1)
-            Gamedata.player.speed -= GameplayConstants.shippartslist[self.type][self.index][4]* (self.upgrades+1)
-        elif self.type == 3:
-            Gamedata.player.energyuse -= GameplayConstants.shippartslist[self.type][self.index][3]* (self.upgrades+1)
-            Gamedata.player.maxshield -= GameplayConstants.shippartslist[self.type][self.index][4]* (self.upgrades+1)
-        elif self.type == 4:
-            Gamedata.player.energyregen -= GameplayConstants.shippartslist[self.type][self.index][3]* (self.upgrades+1)
-            Gamedata.player.maxenergy -= GameplayConstants.shippartslist[self.type][self.index][4]* (self.upgrades+1)
+        self.changestats(self.upgrades+1, False)
 
     def upgrade(self):
         price = GameplayConstants.shippartprice(self.type,self.index, self.upgrades+1)
         if Gamedata.player.gold >= price:
             Gamedata.player.gold -= price
             self.upgrades += 1
-            self.increasestats()
+            self.changestats(1)
             Sounds.sounds.soundimplement.play()
         else:
             Sounds.sounds.soundfail.play()
 
-    def increasestats(self):
-        if self.type == 1:
-            Gamedata.player.speed -= GameplayConstants.shippartslist[1][self.index][9]
-        elif self.type == 2:
-            Gamedata.player.energyuse += GameplayConstants.shippartslist[2][self.index][3]
-            Gamedata.player.speed += GameplayConstants.shippartslist[2][self.index][4]
-        elif self.type == 3:
-            Gamedata.player.energyuse += GameplayConstants.shippartslist[3][self.index][3]
-            Gamedata.player.maxshield += GameplayConstants.shippartslist[3][self.index][4]
-        elif self.type == 4:
-            Gamedata.player.energyregen += GameplayConstants.shippartslist[4][self.index][3]
-            Gamedata.player.maxenergy += GameplayConstants.shippartslist[4][self.index][4]
+    def downgrade(self):
+        price = GameplayConstants.shippartprice(self.type, self.index, self.upgrades)
+        Gamedata.player.gold += price
+        self.upgrades -= 1
+        self.changestats(1, False)
+        Sounds.sounds.soundremove.play()
+
+    def changestats(self, rounds, add = True):
+        if add:
+            multiply = 1
+        else:
+            multiply = -1
+        for x in range(rounds):
+            if self.type == 1:
+                Gamedata.player.speed -= GameplayConstants.shippartslist[1][self.index][9] * multiply
+            elif self.type == 2:
+                Gamedata.player.energyuse += GameplayConstants.shippartslist[2][self.index][3]* multiply
+                Gamedata.player.speed += GameplayConstants.shippartslist[2][self.index][4]* multiply
+            elif self.type == 3:
+                Gamedata.player.energyuse += GameplayConstants.shippartslist[3][self.index][3]* multiply
+                Gamedata.player.maxshield += GameplayConstants.shippartslist[3][self.index][4]* multiply
+            elif self.type == 4:
+                Gamedata.player.energyregen += GameplayConstants.shippartslist[4][self.index][3]* multiply
+                Gamedata.player.maxenergy += GameplayConstants.shippartslist[4][self.index][4]* multiply
 
     def itemmenu(self): #submenu dat geopend wordt in het schipontwerpmenu
-        running = True
         startwidth = (GameplayConstants.windowwidth-850)/2
         startheight = (GameplayConstants.windowheight-400)/2
         windowrect = pygame.Rect(startwidth, startheight, 850, 400)
         textrect = pygame.Rect(startwidth + 210, startheight + 85, 300, 295)
         headerrect = pygame.Rect(startwidth + 210, startheight + 20, 430, 50)
         goldrect = pygame.Rect(1490, 30, 400, 50)
-        refreshrects = [windowrect, goldrect]
+
+        buttons = [Button.Button(pygame.Rect(startwidth + 530, startheight + 90, 300, 50),"","Keybind"),
+                   Button.Button(pygame.Rect(startwidth + 530, startheight + 150, 300, 50),"Upgrade", "Upgrade"),
+                   Button.Button(pygame.Rect(startwidth + 530, startheight + 210, 300, 50), "Downgrade", "Downgrade"),
+                   Button.Button(pygame.Rect(startwidth + 530, startheight + 270, 300, 50),"Remove", "Remove"),
+                   Button.Button(pygame.Rect(startwidth + 530, startheight + 330, 300, 50),"Done","Done")]
 
         pygame.draw.rect(GameplayConstants.screen, Colors.darkgray, windowrect)
         pygame.draw.rect(GameplayConstants.screen, Colors.lightgray, headerrect)
 
-        rects = []
-        names = []
-        if self.type == 1:
-            keybind = pygame.Rect(startwidth + 530, startheight + 150, 300, 50)
-            if self.keybind == 0:
-                names.append("Left keybind")
-            else:
-                names.append("Right keybind")
-            rects.append(keybind)
-        if self.upgrades < 5:
-            upgraderect = pygame.Rect(startwidth + 530, startheight + 210, 300, 50)
-            rects.append(upgraderect)
-            names.append("Upgrade")
-        removerect = pygame.Rect(startwidth + 530, startheight + 270, 300, 50)
-        rects.append(removerect)
-        names.append("Remove")
-        donerect = pygame.Rect(startwidth + 530, startheight + 330, 300, 50)
-        rects.append(donerect)
-        names.append("Done")
 
-        for x in range(len(rects)):
-            Tools.refresh_menubutton(rects[x], pygame.mouse.get_pos(), names[x], True)
+        if self.type == 1:
+            if self.keybind == 0:
+                buttons[0].text = "Left keybind"
+            else:
+                buttons[0].text = "Right keybind"
+        else:
+            buttons[0].active = False
+        if self.upgrades == 5:
+            buttons[1].active = False
+        elif self.upgrades == 0:
+            buttons[2].active = False
+
+        for button in buttons:
+            button.update()
 
         Tools.draw_text(GameplayConstants.screen, GameplayConstants.shippartslist[self.type][self.index][0], 30, startwidth + 220, startheight + 45, "Xolonium")
         self.shipmenutext(self,startwidth,startheight, textrect)
         image = pygame.transform.rotate(GameplayConstants.shippartimages[self.type-1][self.index], -self.rotations * 90)
         Tools.displayshippart(image, startwidth+110, startheight+200, self.shape)
         pygame.display.flip()
-        while running:
+        while True:
             for event in pygame.event.get():
                 mousepos = pygame.mouse.get_pos()
                 if event.type == pygame.QUIT:
-                    running = False
                     pygame.quit()
                 elif event.type == pygame.MOUSEMOTION:
-                    for x in range(len(rects)):
-                        Tools.refresh_menubutton(rects[x], mousepos, names[x], False)
+                    for button in buttons:
+                        button.update()
                 elif event.type == pygame.MOUSEBUTTONDOWN:
                     mouse = pygame.mouse.get_pressed()
                     if mouse[0]:
-                        for x in range(len(rects)):
-                            if names[x] == "Right keybind" and rects[x].collidepoint(mousepos):
-                                self.keybind = 0
-                                Sounds.sounds.soundclick.play()
-                                names[x] = "Left keybind"
-                                Tools.refresh_menubutton(rects[x], mousepos, names[x], False)
-                                break
-                            elif names[x] == "Upgrade" and rects[x].collidepoint(mousepos) and self.upgrades < 5:
-                                self.upgrade()
-                                self.shipmenutext(self, startwidth, startheight, textrect)
-                                pygame.draw.rect(GameplayConstants.screen, Colors.lightgray, goldrect)
-                                Tools.draw_text(GameplayConstants.screen, "Gold: " + str(Gamedata.player.gold), 35, 1495, 55, "Xolonium")
-                                if self.upgrades == 5:
-                                    pygame.draw.rect(GameplayConstants.screen, Colors.darkgray, (upgraderect.left -3, upgraderect.top -3, upgraderect.width +6, upgraderect.height +6))
-                                    indexnr = rects.index(upgraderect)
-                                    rects.pop(indexnr)
-                                    names.pop(indexnr)
-                                break
-                            elif names[x] == "Remove" and rects[x].collidepoint(mousepos):
-                                Gamedata.player.removepart(self)
-                                Sounds.sounds.soundremove.play()
-                                return
-                            elif names[x] == "Done" and rects[x].collidepoint(mousepos):
-                                Sounds.sounds.soundcancel.play()
-                                return
-                    if mouse[2] and names[0] == "Left keybind" and rects[0].collidepoint(mousepos):
+                        for button in buttons:
+                            if button.rect.collidepoint(mousepos):
+                                if button.function == "Keybind":
+                                    button.text = "Left keybind"
+                                    self.keybind = 0
+                                elif button.function == "Upgrade":
+                                    self.upgrade()
+                                    self.shipmenutext(self, startwidth, startheight, textrect)
+                                    pygame.draw.rect(GameplayConstants.screen, Colors.lightgray, goldrect)
+                                    Tools.draw_text(GameplayConstants.screen, "Gold: " + str(Gamedata.player.gold), 35, 1495, 55, "Xolonium")
+                                    buttons[2].active = True
+                                    buttons[2].update()
+                                    if self.upgrades == 5:
+                                        pygame.draw.rect(GameplayConstants.screen, Colors.darkgray, (button.rect.left - 3, button.rect.top - 3, button.rect.width + 6, button.rect.height + 6))
+                                        button.active = False
+                                elif button.function == "Downgrade":
+                                    self.downgrade()
+                                    self.shipmenutext(self, startwidth, startheight, textrect)
+                                    pygame.draw.rect(GameplayConstants.screen, Colors.lightgray, goldrect)
+                                    Tools.draw_text(GameplayConstants.screen, "Gold: " + str(Gamedata.player.gold), 35, 1495, 55, "Xolonium")
+                                    if self.upgrades == 0:
+                                        pygame.draw.rect(GameplayConstants.screen, Colors.darkgray, (button.rect.left - 3, button.rect.top - 3, button.rect.width + 6, button.rect.height + 6))
+                                        button.active = False
+                                elif button.function == "Remove":
+                                    Gamedata.player.removepart(self)
+                                    Sounds.sounds.soundremove.play()
+                                    return
+                                elif button.function == "Done":
+                                    Sounds.sounds.soundcancel.play()
+                                    return
+                    if mouse[2] and buttons[0].rect.collidepoint(mousepos):
                         self.keybind = 2
                         Sounds.sounds.soundclick.play()
-                        names[0] = "Right keybind"
-                        Tools.refresh_menubutton(rects[0], mousepos, names[0], False)
+                        buttons[0].text = "Right keybind"
+                        buttons[0].update()
             clock.tick(GameplayConstants.fps)
-            pygame.display.update(refreshrects)
+            pygame.display.flip()
 
     def shipmenutext(self, part, startwidth,startheight, textrect):
         pygame.draw.rect(GameplayConstants.screen, Colors.lightgray, textrect)
@@ -207,6 +211,13 @@ class Weapon(Shippart):
     def update(self):
         if self.nowcooldown != 0:
             self.nowcooldown -= 1
+
+    def remove(self):
+        returnprice = 0
+        for x in range(self.upgrades + 1):
+            returnprice += GameplayConstants.shippartprice(self.type, self.index, x)
+        Gamedata.player.gold += returnprice
+        self.changestats(self.upgrades+1, False)
 
     def fireevent(self):
         if self.nowcooldown == 0:
