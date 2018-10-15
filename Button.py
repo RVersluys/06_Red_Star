@@ -11,9 +11,8 @@ class Button:
         self.function = function
         self.active = active
         self.selected = False
+        self.strokerect = (rect.left - 3, rect.top - 3, rect.width + 6, rect.height + 6)
         if active:
-
-            self.strokerect = (rect.left - 3, rect.top - 3, rect.width + 6, rect.height + 6)
             pygame.draw.rect(GameplayConstants.screen, Colors.black, self.strokerect)
             mousepos = pygame.mouse.get_pos()
             if rect.collidepoint(mousepos):
