@@ -22,6 +22,7 @@ import Gamedata
 import Sounds
 import Gameloop
 import Colors
+import Button
 
 game_folder = os.path.dirname(__file__)
 fps = GameplayConstants.fps
@@ -36,21 +37,17 @@ class Game:
 
     def menuloop(self):
         running = True
-        self.menutext = ["Continue", "New Game", "Settings", "Load game", "Hall of fame", "Quit"]
-        self.submenus = {2: []}
-        self.menurects = [pygame.Rect(54, 141 + x * 70, 234, 54) for x in range(6)]
-        self.submenurect = pygame.Rect(0, 0, 0, 0)
-        self.dirtyrects = [pygame.Rect(54, 141 + x * 70, 234, 54) for x in range(6)]
-        self.choice = -1
-        self.submenubuttonrects = []
-
-        # create mainmenu
         self.background = pygame.image.load(os.path.join(game_folder, "img", "menu.png")).convert()
         screen.blit(self.background, dest=(0, 0))
-        pygame.display.flip()
-        mousepos = pygame.mouse.get_pos()
-        for x in range(6):
-            Tools.refresh_menubutton(self.menurects[x], mousepos, self.menutext[x], True)
+        self.menu = [Button.Button(pygame.Rect(54, 141, 234, 54),"Continue","Continue"),
+                     Button.Button(pygame.Rect(54, 211, 234, 54),"New Game", "New Game"),
+                     Button.Button(pygame.Rect(54, 281, 234, 54), "Settings", "Settings"),
+                     Button.Button(pygame.Rect(54, 351, 234, 54), "Load Game", "Load Game"),
+                     Button.Button(pygame.Rect(54, 421, 234, 54), "Hall of Fame", "Hall of Fame"),
+                     Button.Button(pygame.Rect(54, 491, 234, 54), "Quit", "Quit")]
+        self.submenu = []
+        self.choice = -1
+        self.filepath = ""
         pygame.display.flip()
         while running:
             # keep loop running at the right speed
@@ -62,117 +59,90 @@ class Game:
                 elif event.type == pygame.MOUSEBUTTONDOWN:
                     mouse = pygame.mouse.get_pressed()
                     if mouse[0]:
-                        if self.menurects[0].collidepoint(mousepos):
-                            filepath = os.path.join(game_folder, 'savegames', 'auto_save.pickle')
-                            if os.path.isfile(filepath):
-                                Sounds.sounds.soundclick.play()
-                                pickle_in = open(filepath, "rb")
-                                Gamedata.player = pickle.load(pickle_in)
-                                self.shipmenuloop()
-                            else:
-                                Sounds.sounds.soundfail.play()
-                        elif self.menurects[1].collidepoint(mousepos):
-                            Sounds.sounds.soundclick.play()
-                            Gamedata.player = Player.Player()
-                            self.shipmenuloop()
-                        elif self.menurects[2].collidepoint(mousepos):
-                            pass
-                            #self.optionmenu()
-                        elif self.menurects[3].collidepoint(mousepos):
-                            pass
-                            filelist = self.get_savegames()
-                            filelist.append("Load game")
-                            self.submenu(len(filelist), 3, filelist)
-                        elif self.menurects[4].collidepoint(mousepos):
-                            self.submenu(8, 4)
-                        elif self.menurects[5].collidepoint(mousepos):
-                            pygame.quit()
-                        for nr in range(len(self.submenubuttonrects)):
-                            if self.submenubuttonrects[nr].collidepoint(mousepos):
-                                if isinstance(self.list[nr], tuple):
-                                    self.generate_submenu(self.buttons,self.choice,self.list,nr)
-                                    self.selection = self.list[nr]
-                                elif isinstance(self.list[nr], str):
-                                    if self.list[nr] == "Load game":
-                                        filepath = os.path.join(game_folder, 'savegames', str(self.selection[0]+self.selection[1]))
+                        for button in self.menu:
+                            if button.rect.collidepoint(mousepos):
+                                if button.function == "Continue":
+                                    filepath = os.path.join(game_folder, 'savegames', 'auto_save.pickle')
+                                    if os.path.isfile(filepath):
                                         Sounds.sounds.soundclick.play()
                                         pickle_in = open(filepath, "rb")
                                         Gamedata.player = pickle.load(pickle_in)
                                         self.shipmenuloop()
-
+                                    else:
+                                        Sounds.sounds.soundfail.play()
+                                elif button.function == "New Game":
+                                    Sounds.sounds.soundclick.play()
+                                    Gamedata.player = Player.Player()
+                                    self.shipmenuloop()
+                                elif button.function == "Settings":
+                                    pass
+                                elif button.function == "Load Game":
+                                    self.generate_submenu(button)
+                                elif button.function == "Quit":
+                                    pygame.quit()
+                        for button in self.submenu:
+                            if type(button) is Button.Selectable:
+                                if button.rect.collidepoint(mousepos):
+                                    if button.selected == False:
+                                        button.selected = True
+                                        self.filepath = os.path.join(game_folder, 'savegames', str(button.file[0] + button.file[1]))
+                                    else:
+                                        button.selected = False
+                                        self.filepath = False
+                                else:
+                                    button.selected = False
+                            else:
+                                if button.function == "Load" and button.rect.collidepoint(mousepos):
+                                    if self.filepath != "":
+                                        pickle_in = open(self.filepath, "rb")
+                                        Gamedata.player = pickle.load(pickle_in)
+                                        self.shipmenuloop()
+                                        screen.blit(self.background, dest=(0, 0))
+                            button.update()
                 elif event.type == pygame.MOUSEMOTION:
-                    for x in range(6):
-                        Tools.refresh_menubutton(self.menurects[x], mousepos, self.menutext[x], False)
-                        self.dirtyrects.append(self.menurects[x])
-                    for x in range(len(self.submenubuttonrects)):
-                        if isinstance(self.list[x], str):
-                            Tools.refresh_menubutton(self.submenubuttonrects[x], mousepos, self.list[x], False)
-                            self.dirtyrects.append(self.submenubuttonrects[x])
-            if self.dirtyrects:
-                pygame.display.update(self.dirtyrects)
-                self.dirtyrects = []
+                    for button in self.menu:
+                        button.update()
+                    for button in self.submenu:
+                        button.update()
+            pygame.display.flip()
 
-    def get_savegames(self):
-        count = 0
-        filepath = os.path.join(game_folder, 'savegames')
-        allfiles = os.listdir(filepath)
-        filelist = []
-        for file in allfiles:
-            filetuple = os.path.splitext(file)
-            if filetuple[0] != 'auto_save' and filetuple[1] == '.pickle':
-                filelist.append(filetuple)
-                count += 1
-            if count == 10:
-                break
-        return filelist
 
-    def submenu(self, buttons, choice, list = None, selection = None):
-        self.buttons = buttons
-        self.list = list
 
+    def generate_submenu(self, selectedbutton):
         screen.blit(self.background, dest=(0, 0))
-        Tools.draw_text(screen, self.menutext[choice], 38, 105, 152 + choice * 70, "Xolonium")
-        if self.choice >= 0:
-            self.dirtyrects.append(self.submenurect)
-        if choice != self.choice:
-            self.generate_submenu(buttons, choice, list, selection)
-        else:
-            self.submenubuttonrects = []
-            self.choice = -1
+        for button in self.menu:
+            if button != selectedbutton:
+                button.selected = False
+            button.update()
+        if selectedbutton.selected == True:
+            selectedbutton.selected = False
+            self.submenu = []
+            selectedbutton.update()
             Sounds.sounds.soundcancel.play()
-        pygame.display.update(self.dirtyrects)
+        else:
+            Sounds.sounds.soundclick.play()
+            selectedbutton.selected = True
+            selectedbutton.update()
+            if selectedbutton.function == "Load Game":
+                filelist = Tools.get_savegames()
+                self.loadgame(filelist)
 
-    def generate_submenu(self, buttons, choice, list = None, selection = None):
+
+    def loadgame(self, filelist):
         Sounds.sounds.soundclick.play()
-        self.submenurect = pygame.draw.rect(screen, Colors.darkgray, pygame.Rect(windowwidth / 2 - 300, windowheight / 2 - 30 * buttons - 20, 600, 60 * buttons + 30))
-        self.submenubuttonrects = []
+        pygame.draw.rect(screen, Colors.darkgray, pygame.Rect(windowwidth / 2 - 300, windowheight / 2 - 30 * (len(filelist)+1) - 20, 600, 60 * (len(filelist)+1) + 30))
+        self.submenu = []
 
-        for button in range(buttons):
-            self.submenubuttonrects.append(pygame.Rect(windowwidth / 2 - 275, windowheight / 2 - 30 * buttons + 60 * button, 550, 50))
-            pygame.draw.rect(screen, Colors.black, self.submenubuttonrects[button])
-        if choice == 3:
-
-            for button in range(buttons):
-
-                if selection == button:
-                    bold = True
-                    pygame.draw.rect(screen, Colors.white, self.submenubuttonrects[button])
-                    rect = pygame.Rect(self.submenubuttonrects[button].x+3, self.submenubuttonrects[button].y+3, self.submenubuttonrects[button].width-6, self.submenubuttonrects[button].height-6)
-                    pygame.draw.rect(screen, Colors.black, rect)
-                else:
-                    bold = False
-                if button != buttons - 1:
-                    if list[button][1] != 0:
-                        path = os.path.join(game_folder, "savegames", str(list[button][0] + list[button][1]))
-                        date = datetime.datetime.fromtimestamp(os.path.getmtime(path)).strftime('%d-%m-%Y %H:%M:%S')
-                        Tools.draw_text(screen, list[button][0] + " - (" + str(date) + ")", 16, self.submenubuttonrects[button].x + 15, self.submenubuttonrects[button].y + self.submenubuttonrects[button].height / 2, "Xolonium",Colors.white, bold)
-                    else:
-                        Tools.draw_text(screen, list[button][0], 16, self.submenubuttonrects[button].x + 15, self.submenubuttonrects[button].y + self.submenubuttonrects[button].height / 2, "Xolonium",Colors.white, bold)
-            mousepos = pygame.mouse.get_pos()
-            Tools.refresh_menubutton(self.submenubuttonrects[buttons-1], mousepos, list[buttons-1], True)
-
-        self.dirtyrects.append(self.submenurect)
-        self.choice = choice
+        filenr = 0
+        for file in filelist:
+            rect = pygame.Rect(windowwidth / 2 - 275, windowheight / 2 - 30 * (len(filelist)+1) + 60 * filenr, 550, 50)
+            path = os.path.join(game_folder, "savegames", str(file[0] + file[1]))
+            date = datetime.datetime.fromtimestamp(os.path.getmtime(path)).strftime('%d-%m-%Y %H:%M:%S')
+            text = file[0] + " - (" + str(date) + ")"
+            self.submenu.append(Button.Selectable(rect, text, file))
+            filenr += 1
+        rect = pygame.Rect(windowwidth / 2 - 275, windowheight / 2 + 30 * len(filelist)-30, 550, 50)
+        self.submenu.append(Button.Button(rect, "Load Game", "Load"))
 
     def shipmenuloop(self):
         running = True
@@ -345,7 +315,7 @@ class Game:
         return newobject
 
     def savegameloop(self):
-        saves = self.get_savegames()
+        saves = Tools.get_savegames()
         for x in range(len(saves), 10):
             saves.append(("EMPTY SLOT", 0))
         saves.append("Save game")

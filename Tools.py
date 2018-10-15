@@ -1,6 +1,7 @@
 import pygame
 import GameplayConstants
 import math
+import os
 
 import Colors
 
@@ -23,6 +24,20 @@ def refresh_menubutton(rect, mousepos, text, stroke):
     pygame.draw.rect(GameplayConstants.screen, color, rect)
 
     draw_text(GameplayConstants.screen, text, 25, rect.left+5, rect.centery, "Xolonium")
+
+def get_savegames():
+    count = 0
+    filepath = os.path.join(os.path.dirname(__file__), 'savegames')
+    allfiles = os.listdir(filepath)
+    filelist = []
+    for file in allfiles:
+        filetuple = os.path.splitext(file)
+        if filetuple[0] != 'auto_save' and filetuple[1] == '.pickle':
+            filelist.append(filetuple)
+            count += 1
+        if count == 10:
+            break
+    return filelist
 
 def create_dragbar(rect, text, options, chosenoption):
     pygame.draw.rect(GameplayConstants.screen, Colors.lightgray,rect)
