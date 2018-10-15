@@ -27,9 +27,20 @@ flux_shield = [[1, 1, 1]]
 solar_panel = [[1,]]
 fission_reactor = [[1, 1], [0, 1]]
 
+# locaties waar schiponderdelen kunnen worden geplaatst
+# dit is de layout van het schip. 1 = schip1, 1+2 = schip2 en 1+2+3 = schip 3
+shipdesign = [[0, 0, 0, 0, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 1, 0, 0, 0, 0],
+              [0, 3, 0, 0, 1, 0, 0, 3, 0],
+              [0, 2, 3, 1, 1, 1, 3, 2, 0],
+              [0, 2, 1, 1, 1, 1, 1, 2, 0],
+              [3, 2, 1, 1, 3, 1, 1, 2, 3],
+              [3, 3, 3, 0, 0, 0, 3, 3, 3],
+              [0, 0, 0, 0, 0, 0, 0, 0, 0]]
+
 # specificaties en namen van de onderdelen
 # prijs is keer duizend voor aanschaf. Upgrades: upgrade 1: *2250, upgrade 2: *4000, upgrade 3: *6259, upgrade 4: *9000
-shippartslist = [[["Weapons"], ["Engine"], ["Shield"], ["Power"]],
+shippartslist = [[["Weapons"], ["Engine"], ["Shield"], ["Power"],["Ships"]],
                  [["Kinetic Weapon", 1.5, kinetic_weapon, 6, 12, "A large cannon that shoots", "depleted uranium projectiles", "at high rate.", 5, 1], #wapens: 0=name, 1=price, 2=shape, 3=energyuse(shot), 4=cooldown(ticks), 5-7=description, 8=damage, 9=speedreduction
                   ["Flak Cannon", 6, flak_cannon, 10, 21, "Magnatic balista that propels", "projectiles that explode to carpet", "the area with small fragments.", 18, 2],
                   ["Rocket Launcher", 3, rocket_launcher, 0, 10, "Ballistic missile platform with", "limited ammo that shoots missiles", "based on your power source.", 20, 1],
@@ -39,21 +50,14 @@ shippartslist = [[["Weapons"], ["Engine"], ["Shield"], ["Power"]],
                  [["Magnatic Deflector", 2.5, magnatic_shield, 7, 15, "The use of powerful magnetic", "fields are able to dispurse many", "types of projectiles."], #shields: name,  price, energyuse(second), shape, maxschildboost
                   ["Flux Shield", 5, flux_shield, 12, 30, "This shield filters undesirable", "wavelengths while allowing other", "wavelengths to protect the ship."]],
                  [["Solar Panel", 1, solar_panel, 15, 30, "Conventional energy mechanism", "that converts solar energy in large", "batteries."], #power source: name, price, shape, energyregen(second), maxenergyboost
-                  ["Fission Reactor", 4, fission_reactor, 65, 75, "Based on nuclear fission, this", "reactor gives the ship massive", "amounts of energy."]]]
+                  ["Fission Reactor", 4, fission_reactor, 65, 75, "Based on nuclear fission, this", "reactor gives the ship massive", "amounts of energy."]],
+                 [["UE Vanguard", 0, shipdesign, 14, 50, "The first Earth ship made with", "the Alfa technology has immediately", "become the pride of the navy."],
+                 ["UE Victorious", 30, shipdesign, 20, 80, "With superior armor and extra", "weapon space, this ship can compete", "with anything the aliëns send to us."]]]
 
-# locaties waar schiponderdelen kunnen worden geplaatst
-# dit is de layout van het schip. 1 = schip1, 1+2 = schip2 en 1+2+3 = schip 3
-shipdesign = [[0, 0, 0, 0, 0, 0, 0, 0, 0],
-              [0, 0, 0, 0, 1, 0, 0, 0, 0],
-              [0, 3, 0, 0, 1, 0, 0, 3, 0],
-              [0, 3, 3, 1, 1, 1, 3, 3, 0],
-              [0, 3, 1, 1, 1, 1, 1, 3, 0],
-              [3, 2, 1, 1, 2, 1, 1, 2, 3],
-              [3, 2, 2, 0, 0, 0, 2, 2, 3],
-              [0, 0, 0, 0, 0, 0, 0, 0, 0]]
+
 
 shippartimages = []
-for catagory in range(1, 5):
+for catagory in range(1, 6):
     templist = []
     for item in range(len(shippartslist[catagory])):
         templist.append(pygame.image.load(os.path.join(game_folder, "img", "parts", shippartslist[catagory][item][0] + ".png")).convert_alpha())
@@ -100,6 +104,9 @@ def shippartinfo(list, index, upgrade):
     elif list == 4:
         shippartinfo.append("Energy output: " + str(shippartslist[list][index][3]*(upgrade+1)))
         shippartinfo.append("Energy storage: " + str(shippartslist[list][index][4]*(upgrade+1)))
+    elif list == 5:
+        shippartinfo.append("Armor: " + str(shippartslist[list][index][4]))
+        shippartinfo.append("Space: " + str(shippartslist[list][index][3]))
     return shippartinfo
 
 def heroshipinfo(maxuse):

@@ -19,7 +19,8 @@ class Schipmenu:
     def __init__(self):
         # laden images
         self.hangarpic = pygame.image.load(os.path.join(game_folder, "img", "hangar.jpg")).convert()
-        self.shipimage = pygame.image.load(os.path.join(game_folder, "img", "hero", "menuship.png")).convert_alpha()
+        #self.shipimage = GameplayConstants.shippartimages[4][0]
+        self.shipimage = pygame.image.load(os.path.join(game_folder, "img", "hero", "UE Vanguard.png")).convert_alpha()
         self.energymeter = pygame.image.load(os.path.join(game_folder, "img", "Parts", "energymeter.png")).convert()
 
         # deze variabelen houden bij waar de speler is in het menu.
@@ -109,10 +110,18 @@ class Schipmenu:
                                     else: # op een van de onderdelen van het submenu
                                         self.rotations = 0
                                         self.shippartdisplayed = button.function
-                                        self.shippartshape = GameplayConstants.shippartslist[self.menunumber][self.shippartdisplayed][2]
                                         self.partimage = GameplayConstants.shippartimages[self.menunumber - 1][self.shippartdisplayed]
+                                        if self.menunumber == 5:
+                                            self.menu[4].text = "Buy"
+                                            self.menu[4].function = "Buy"
+                                            self.menu[4].active = True  # activeer buyknop
+                                            #pygame.transform.scale(GameplayConstants.shippartslist[self.menunumber][self.shippartdisplayed][2],
+                                        else:
+                                            self.shippartshape = GameplayConstants.shippartslist[self.menunumber][self.shippartdisplayed][2]
 
-                                        if self.menunumber >= 3:
+                                        if self.menunumber == 3 or self.menunumber == 4:
+                                            self.menu[4].text = "Rotate"
+                                            self.menu[4].function = "Rotate"
                                             self.menu[4].active = True #activeer rotateknop
                                         pygame.draw.rect(GameplayConstants.screen, Colors.lightgray, pygame.Rect(1515, 550, 320, 260))
                                         text = GameplayConstants.shippartinfo(self.menunumber, self.shippartdisplayed, 0)
@@ -280,8 +289,6 @@ class Schipmenu:
 
     def resetscreen(self):
         GameplayConstants.screen.blit(self.hangarpic, dest=(0, 0))
-
-
         pygame.draw.rect(GameplayConstants.screen, Colors.black, self.shippartmenurect)
         self.create_menu()
         self.shipoverview()
@@ -319,7 +326,7 @@ class Schipmenu:
 
         background = pygame.Rect(70, 530, 537, 477)
         pygame.draw.rect(GameplayConstants.screen, Colors.blackgray, background)
-        GameplayConstants.screen.blit(self.shipimage, dest=(195, 590))
+        GameplayConstants.screen.blit(self.shipimage, dest=(190, 590))
         GameplayConstants.screen.blit(self.energymeter, dest=(607, 530))
 
         textrect = pygame.Rect(640, 530, 240, 477)
@@ -388,5 +395,8 @@ class Schipmenu:
             button.update()
         self.shippartrect = pygame.Rect(1335, 550, 180, 360)
         pygame.draw.rect(GameplayConstants.screen, Colors.black, self.shippartrect)
-        if self.shippartdisplayed != -1:
+        print(self.menunumber)
+        if self.shippartdisplayed != -1 and self.menunumber != 5:
             Tools.displayshippart(self.partimage, 1427, 730, self.shippartshape)
+        elif self.menunumber == 5:
+            Tools.displayshippart(self.partimage, 1427, 730)
