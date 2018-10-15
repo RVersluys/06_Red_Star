@@ -84,8 +84,9 @@ class Kineticbullet(pygame.sprite.Sprite):
         if not GameplayConstants.extendedscreen.colliderect(self.rect):
             self.kill()
 
-    def hit(self):
+    def hit(self, mob):
         self.kill()
+        return mob.getdamage(self.damage)
 
 class FlakCannon(pygame.sprite.Sprite):
     def __init__(self, adjustment, damage):
@@ -97,6 +98,7 @@ class FlakCannon(pygame.sprite.Sprite):
         self.rect.centerx = Gamedata.hero.rect.centerx + adjustment
         self.rect.y = Gamedata.hero.rect.y - 50
         self.type = 1
+        self.hitlist = []
 
     def update(self):
         self.ticks += 1
@@ -121,17 +123,19 @@ class FlakCannon(pygame.sprite.Sprite):
         else:
             self.kill()
 
-    def hit(self):
-        if self.damage != 0:
+    def hit(self, mob):
+        if mob not in self.hitlist:
+            self.hitlist.append(mob)
             Sounds.sounds.bangs[0].play()
-            self.damage = 0
             if self.ticks < 24:
                 self.ticks = 24
-            x = self.rect.x
-            y = self.rect.y
-            self.image = Explosions.explosions[16][self.ticks - 24]
-            self.rect.x = x
-            self.rect.y = y
+                x = self.rect.x
+                y = self.rect.y
+                self.image = Explosions.explosions[16][0]
+                self.rect.x = x
+                self.rect.y = y
+            return mob.getdamage(self.damage)
+        return 0
 
 class Laser(pygame.sprite.Sprite):
     def __init__(self, adjustment, damage):
@@ -172,8 +176,8 @@ class Laser(pygame.sprite.Sprite):
 
         self.image.fill((rgcoloring,rgcoloring,bcoloring))
 
-    def hit(self):
-        print("Hit")
+    def hit(self, mob):
+        pass
 
 
 
