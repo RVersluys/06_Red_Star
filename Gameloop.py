@@ -16,6 +16,7 @@ import Level
 import Sounds
 import Hero
 import Gametext
+import Colors
 
 screen = GameplayConstants.screen
 
@@ -97,7 +98,7 @@ class Gameloop:
                     self.endlevel(self.level.succes)
                     return
             # Draw / render
-            pygame.draw.rect(screen, GameplayConstants.black, warrect)
+            pygame.draw.rect(screen, Colors.black, warrect)
             Gamedata.stars.draw(screen)
             Gamedata.background.draw(screen)
             Gamedata.all_sprites.draw(screen)
@@ -108,11 +109,11 @@ class Gameloop:
 
 
     def sidebar(self):
-        pygame.draw.rect(screen, GameplayConstants.darkgray, sidebarrect)
-        pygame.draw.rect(screen, GameplayConstants.black, pygame.Rect(1455, 30, 450, 60))
-        pygame.draw.rect(screen, GameplayConstants.lightgray, pygame.Rect(1458, 33, 444, 54))
-        pygame.draw.rect(screen, GameplayConstants.black, pygame.Rect(1455, 120, 450, 60))
-        pygame.draw.rect(screen, GameplayConstants.lightgray, pygame.Rect(1458, 123, 444, 54))
+        pygame.draw.rect(screen, Colors.darkgray, sidebarrect)
+        pygame.draw.rect(screen, Colors.black, pygame.Rect(1455, 30, 450, 60))
+        pygame.draw.rect(screen, Colors.lightgray, pygame.Rect(1458, 33, 444, 54))
+        pygame.draw.rect(screen, Colors.black, pygame.Rect(1455, 120, 450, 60))
+        pygame.draw.rect(screen, Colors.lightgray, pygame.Rect(1458, 123, 444, 54))
         Tools.draw_text(screen, "Score:", 38, 1475, 60, "Xolonium")
         Tools.draw_text(screen, "Gold:", 38, 1475, 150, "Xolonium")
 
@@ -136,10 +137,10 @@ class Gameloop:
         fills.append(pygame.Rect(self.barrects[2].left + 3, self.barrects[2].top + 3,Gamedata.hero.armor / Gamedata.player.maxarmor * 413, 36))
         for barnr in range(3):
             fill = pygame.Rect(startx + 3, starty + 3 + barnr * spacing, (barwidth - 6) / 100 * barfill[barnr], barheight - 6)
-            pygame.draw.rect(screen, GameplayConstants.black, self.barrects[barnr])
-            pygame.draw.rect(screen, GameplayConstants.colorbars[barnr], fills[barnr])
+            pygame.draw.rect(screen, Colors.black, self.barrects[barnr])
+            pygame.draw.rect(screen, Colors.colorbars[barnr], fills[barnr])
         # score
-        pygame.draw.rect(screen, GameplayConstants.lightgray, self.scorerect)
+        pygame.draw.rect(screen, Colors.lightgray, self.scorerect)
         Tools.draw_text(screen, str(Gamedata.player.score), 38, 1610, 60, "Xolonium")
         Tools.draw_text(screen, str(Gamedata.player.gold), 38, 1610, 150, "Xolonium")
 
@@ -161,7 +162,7 @@ class Gameloop:
     def generate_menu(self, buttonlist):
         buttoncount = len(buttonlist)
         buttonrects = []
-        pygame.draw.rect(screen, GameplayConstants.darkgray, pygame.Rect(windowwidth / 2 - 300, windowheight / 2 - 30 * buttoncount - 20, 600, 60 * buttoncount + 30))
+        pygame.draw.rect(screen, Colors.darkgray, pygame.Rect(windowwidth / 2 - 300, windowheight / 2 - 30 * buttoncount - 20, 600, 60 * buttoncount + 30))
         mousepos = pygame.mouse.get_pos()
         for button in range(buttoncount):
             if isinstance(buttonlist[button], tuple):
@@ -178,7 +179,7 @@ class Gameloop:
                 buttonrects.append(Tools.create_dragbar(dragrect, buttonlist[button][0], positions, position))
             else:
                 buttonrects.append(pygame.Rect(windowwidth / 2 - 275, windowheight / 2 - 30 * buttoncount + 60 * button, 550, 50))
-                pygame.draw.rect(screen, GameplayConstants.black, buttonrects[button])
+                pygame.draw.rect(screen, Colors.black, buttonrects[button])
                 Tools.refresh_menubutton(buttonrects[button], mousepos, buttonlist[button], True)
         pygame.display.flip()
         return buttonrects
@@ -190,7 +191,7 @@ class Gameloop:
 
         screenalpha = pygame.Surface((1920, 1080))
         screenalpha.set_alpha(150)
-        screenalpha.fill(GameplayConstants.black)
+        screenalpha.fill(Colors.black)
         screen.blit(screenalpha, dest=(0, 0))
         buttonlist = ["Quit game", "Abort mission", "Settings", "Resume"]
         buttonrects = self.generate_menu(buttonlist)

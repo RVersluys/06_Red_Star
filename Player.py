@@ -6,6 +6,7 @@ import Projectiles
 import GameplayConstants
 import Tools
 import Sounds
+import Colors
 
 clock = pygame.time.Clock()
 
@@ -105,8 +106,8 @@ class Shippart:
         goldrect = pygame.Rect(1490, 30, 400, 50)
         refreshrects = [windowrect, goldrect]
 
-        pygame.draw.rect(GameplayConstants.screen, GameplayConstants.darkgray, windowrect)
-        pygame.draw.rect(GameplayConstants.screen, GameplayConstants.lightgray, headerrect)
+        pygame.draw.rect(GameplayConstants.screen, Colors.darkgray, windowrect)
+        pygame.draw.rect(GameplayConstants.screen, Colors.lightgray, headerrect)
 
         rects = []
         names = []
@@ -158,10 +159,10 @@ class Shippart:
                             elif names[x] == "Upgrade" and rects[x].collidepoint(mousepos) and self.upgrades < 5:
                                 self.upgrade()
                                 self.shipmenutext(self, startwidth, startheight, textrect)
-                                pygame.draw.rect(GameplayConstants.screen, GameplayConstants.lightgray, goldrect)
+                                pygame.draw.rect(GameplayConstants.screen, Colors.lightgray, goldrect)
                                 Tools.draw_text(GameplayConstants.screen, "Gold: " + str(Gamedata.player.gold), 35, 1495, 55, "Xolonium")
                                 if self.upgrades == 5:
-                                    pygame.draw.rect(GameplayConstants.screen, GameplayConstants.darkgray, (upgraderect.left -3, upgraderect.top -3, upgraderect.width +6, upgraderect.height +6))
+                                    pygame.draw.rect(GameplayConstants.screen, Colors.darkgray, (upgraderect.left -3, upgraderect.top -3, upgraderect.width +6, upgraderect.height +6))
                                     indexnr = rects.index(upgraderect)
                                     rects.pop(indexnr)
                                     names.pop(indexnr)
@@ -182,7 +183,7 @@ class Shippart:
             pygame.display.update(refreshrects)
 
     def shipmenutext(self, part, startwidth,startheight, textrect):
-        pygame.draw.rect(GameplayConstants.screen, GameplayConstants.lightgray, textrect)
+        pygame.draw.rect(GameplayConstants.screen, Colors.lightgray, textrect)
         text = GameplayConstants.shippartinfo(part.type, part.index, part.upgrades + 1)
         for line in range(len(text)):
             Tools.draw_text(GameplayConstants.screen, text[line], 15, startwidth + 215, startheight +100 + 20 * line, "Xolonium")

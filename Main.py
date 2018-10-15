@@ -21,6 +21,7 @@ import Player
 import Gamedata
 import Sounds
 import Gameloop
+import Colors
 
 game_folder = os.path.dirname(__file__)
 fps = GameplayConstants.fps
@@ -143,30 +144,30 @@ class Game:
 
     def generate_submenu(self, buttons, choice, list = None, selection = None):
         Sounds.sounds.soundclick.play()
-        self.submenurect = pygame.draw.rect(screen, GameplayConstants.darkgray, pygame.Rect(windowwidth / 2 - 300, windowheight / 2 - 30 * buttons - 20, 600, 60 * buttons + 30))
+        self.submenurect = pygame.draw.rect(screen, Colors.darkgray, pygame.Rect(windowwidth / 2 - 300, windowheight / 2 - 30 * buttons - 20, 600, 60 * buttons + 30))
         self.submenubuttonrects = []
 
         for button in range(buttons):
             self.submenubuttonrects.append(pygame.Rect(windowwidth / 2 - 275, windowheight / 2 - 30 * buttons + 60 * button, 550, 50))
-            pygame.draw.rect(screen, GameplayConstants.black, self.submenubuttonrects[button])
+            pygame.draw.rect(screen, Colors.black, self.submenubuttonrects[button])
         if choice == 3:
 
             for button in range(buttons):
 
                 if selection == button:
                     bold = True
-                    pygame.draw.rect(screen, GameplayConstants.white, self.submenubuttonrects[button])
+                    pygame.draw.rect(screen, Colors.white, self.submenubuttonrects[button])
                     rect = pygame.Rect(self.submenubuttonrects[button].x+3, self.submenubuttonrects[button].y+3, self.submenubuttonrects[button].width-6, self.submenubuttonrects[button].height-6)
-                    pygame.draw.rect(screen, GameplayConstants.black, rect)
+                    pygame.draw.rect(screen, Colors.black, rect)
                 else:
                     bold = False
                 if button != buttons - 1:
                     if list[button][1] != 0:
                         path = os.path.join(game_folder, "savegames", str(list[button][0] + list[button][1]))
                         date = datetime.datetime.fromtimestamp(os.path.getmtime(path)).strftime('%d-%m-%Y %H:%M:%S')
-                        Tools.draw_text(screen, list[button][0] + " - (" + str(date) + ")", 16, self.submenubuttonrects[button].x + 15, self.submenubuttonrects[button].y + self.submenubuttonrects[button].height / 2, "Xolonium",GameplayConstants.white, bold)
+                        Tools.draw_text(screen, list[button][0] + " - (" + str(date) + ")", 16, self.submenubuttonrects[button].x + 15, self.submenubuttonrects[button].y + self.submenubuttonrects[button].height / 2, "Xolonium",Colors.white, bold)
                     else:
-                        Tools.draw_text(screen, list[button][0], 16, self.submenubuttonrects[button].x + 15, self.submenubuttonrects[button].y + self.submenubuttonrects[button].height / 2, "Xolonium",GameplayConstants.white, bold)
+                        Tools.draw_text(screen, list[button][0], 16, self.submenubuttonrects[button].x + 15, self.submenubuttonrects[button].y + self.submenubuttonrects[button].height / 2, "Xolonium",Colors.white, bold)
             mousepos = pygame.mouse.get_pos()
             Tools.refresh_menubutton(self.submenubuttonrects[buttons-1], mousepos, list[buttons-1], True)
 
@@ -276,7 +277,7 @@ class Game:
                                         if self.menunumber >= 3:
                                             Tools.refresh_menubutton(rotaterect, mousepos, "Rotate", True)  # Rotate knop
                                             self.buttons2active[3] = 1
-                                        pygame.draw.rect(screen, GameplayConstants.lightgray, pygame.Rect(1515, 550, 320, 260))
+                                        pygame.draw.rect(screen, Colors.lightgray, pygame.Rect(1515, 550, 320, 260))
                                         text = GameplayConstants.shippartinfo(self.menunumber, self.shippartdisplayed,0)
                                         for line in range(len(text)):
                                             Tools.draw_text(screen, text[line], 15, 1525, 563 + 20 * line, "Xolonium")
@@ -443,11 +444,11 @@ class Game:
 
     def resetscreen(self):
         screen.blit(self.hangarpic, dest=(0, 0))
-        pygame.draw.rect(screen, GameplayConstants.black, self.shippartmenurect)
+        pygame.draw.rect(screen, Colors.black, self.shippartmenurect)
         self.create_menu()
         self.shipoverview()
         if self.menunumber > 0 and self.shippartdisplayed >= 0:
-            pygame.draw.rect(screen, GameplayConstants.lightgray, pygame.Rect(1515, 550, 320, 260))
+            pygame.draw.rect(screen, Colors.lightgray, pygame.Rect(1515, 550, 320, 260))
             text = GameplayConstants.shippartinfo(self.menunumber, self.shippartdisplayed, 0)
             for line in range(len(text)):
                 Tools.draw_text(screen, text[line], 15, 1525, 563 + 20 * line, "Xolonium")
@@ -468,26 +469,26 @@ class Game:
             energybalance = 0
         else:
             energybalance = max(0, min(1, (Gamedata.player.energyregen - Gamedata.player.energyuse) / (maxuse - Gamedata.player.energyuse)))
-        pygame.draw.rect(screen, GameplayConstants.black,pygame.Rect(604, 572 + (432 * (1 - energybalance)), 40, 6))  # indicator op energymeter
+        pygame.draw.rect(screen, Colors.black,pygame.Rect(604, 572 + (432 * (1 - energybalance)), 40, 6))  # indicator op energymeter
 
     def shipoverview(self):
         goldrect = pygame.Rect(1490, 30, 400, 50)
         gold = Gamedata.player.gold
-        pygame.draw.rect(screen, GameplayConstants.lightgray, goldrect)
+        pygame.draw.rect(screen, Colors.lightgray, goldrect)
         Tools.draw_text(screen, "Gold: " + str(gold), 35, 1495, 55, "Xolonium")
 
         background = pygame.Rect(70, 530, 537, 477)
-        pygame.draw.rect(screen, GameplayConstants.blackgray, background)
+        pygame.draw.rect(screen, Colors.blackgray, background)
         screen.blit(self.shipimage, dest=(195, 590))
         screen.blit(self.energymeter, dest=(607, 530))
 
         textrect = pygame.Rect(640, 530, 240, 477)
-        pygame.draw.rect(screen, GameplayConstants.lightgray, textrect)
+        pygame.draw.rect(screen, Colors.lightgray, textrect)
         self.shipinfo()
 
         s2 = pygame.Surface((60, 60))
         s2.set_alpha(50)
-        s2.fill(GameplayConstants.darkgreen)
+        s2.fill(Colors.darkgreen)
         self.greenlist = [[0 for x in range(9)] for y in range(8)]
 
         # display geplaatste scheepsonderdelen
@@ -503,7 +504,7 @@ class Game:
                 for y in range(8):
                     if isinstance(Gamedata.player.shipfill[y][x], int):
                         if Gamedata.player.shipfill[y][x] > 0 and Gamedata.player.shipfill[y][x] <= 1:
-                            pygame.draw.rect(screen, GameplayConstants.lightgray, pygame.Rect(70 + x * 60, 530 + y * 60, 57, 57), 2)
+                            pygame.draw.rect(screen, Colors.lightgray, pygame.Rect(70 + x * 60, 530 + y * 60, 57, 57), 2)
         else:  # onderstaande is het inventariseren waar op het schip het geselecteerde object kan worden geplaatst.
             partlayout = self.shippartshape
             height = len(partlayout)
@@ -525,28 +526,28 @@ class Game:
                                     if partlayout[stepdown][step] == 1 and self.greenlist[y + stepdown][x + step] == 0:
                                         self.greenlist[y + stepdown][x + step] = 1
                                         screen.blit(s2, (70 + (x + step) * 60, 530 + (y + stepdown) * 60))
-                                        pygame.draw.rect(screen, GameplayConstants.darkgreen,pygame.Rect(70 + (x + step) * 60, 530 + (y + stepdown) * 60,57, 57), 2)
+                                        pygame.draw.rect(screen, Colors.darkgreen,pygame.Rect(70 + (x + step) * 60, 530 + (y + stepdown) * 60,57, 57), 2)
                             elif self.greenlist[y + stepdown][x] == 0:
                                 self.greenlist[y + stepdown][x] = 1
                                 screen.blit(s2, (70 + x * 60, 530 + (y + stepdown) * 60))
-                                pygame.draw.rect(screen, GameplayConstants.darkgreen,pygame.Rect(70 + x * 60, 530 + (y + stepdown) * 60, 57, 57), 2)
+                                pygame.draw.rect(screen, Colors.darkgreen, pygame.Rect(70 + x * 60, 530 + (y + stepdown) * 60, 57, 57), 2)
             for x in range(9):
                 for y in range(8):
                     if self.greenlist[y][x] == 0 and Gamedata.player.shipfill[y][x] == 1:
-                        pygame.draw.rect(screen, GameplayConstants.darkred, pygame.Rect(70 + x * 60, 530 + y * 60, 57, 57), 2)
+                        pygame.draw.rect(screen, Colors.darkred, pygame.Rect(70 + x * 60, 530 + y * 60, 57, 57), 2)
 
     def create_menu(self):
         basex = 900
-        pygame.draw.rect(screen, GameplayConstants.blackgray, pygame.Rect(basex, 530, 950, 477))
+        pygame.draw.rect(screen, Colors.blackgray, pygame.Rect(basex, 530, 950, 477))
         mousepos = pygame.mouse.get_pos()
         for x in range(len(self.activenames)):
-            pygame.draw.rect(screen, GameplayConstants.black, pygame.Rect(basex + 17, 550 + x * 60, 406, 56))
+            pygame.draw.rect(screen, Colors.black, pygame.Rect(basex + 17, 550 + x * 60, 406, 56))
             Tools.refresh_menubutton(self.activerects[x], mousepos, self.activenames[x], True)
         for button in range(len(self.buttons2)):
             if self.buttons2active[button] == 1:
                 Tools.refresh_menubutton(self.buttons2[button], mousepos, self.buttons2names[button], True)
         self.shippartrect = pygame.Rect(basex + 435, 550, 180, 360)
-        pygame.draw.rect(screen, GameplayConstants.black, self.shippartrect)
+        pygame.draw.rect(screen, Colors.black, self.shippartrect)
 
 game = Game()
 game.menuloop()
