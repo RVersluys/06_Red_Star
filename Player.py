@@ -197,7 +197,6 @@ class Weapon(Shippart):
         self.xpos = xposition
         self.ypos = yposition
         self.type = 1
-        #self.shape = GameplayConstants.shippartslist[self.type][index][2]
         self.shape = shape
         self.index = index
         self.energyuse = GameplayConstants.shippartslist[self.type][index][3]
@@ -207,6 +206,9 @@ class Weapon(Shippart):
         self.keybind = 0
         self.rotations = 0
         Gamedata.player.gold -= GameplayConstants.shippartprice(self.type, index, 0)
+        if self.index == 2:
+            self.fireleft = True
+            self.ammo = (self.upgrades+1) * 10
 
     def update(self):
         if self.nowcooldown != 0:
@@ -250,6 +252,20 @@ class Weapon(Shippart):
                         Gamedata.herobullets.add(bullet)
 
                 elif self.index == 2:
+                    if self.ammo > 0:
+                        adjustment = -90 + 30 * self.xpos
+                        if self.fireleft:
+                            adjustment += 5
+                        else:
+                            adjustment -= 5
+                        self.fireleft = not self.fireleft
+                        damage = GameplayConstants.shippartslist[self.type][self.index][8]
+                        bullet = Projectiles.Rocket(adjustment, damage)
+                        Gamedata.all_sprites.add(bullet)
+                        Gamedata.herobullets.add(bullet)
+                        self.ammo -= 1
+
+                elif self.index == 3:
                     Sounds.sounds.lasersound.play()
                     totaldamage = (self.upgrades + 1) * GameplayConstants.shippartslist[self.type][self.index][8]
                     beams = 3 + self.upgrades * 2

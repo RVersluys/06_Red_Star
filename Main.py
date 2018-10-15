@@ -108,8 +108,6 @@ class Game:
                         button.update()
             pygame.display.flip()
 
-
-
     def generate_submenu(self, selectedbutton):
         screen.blit(self.background, dest=(0, 0))
         for button in self.menu:

@@ -19,6 +19,7 @@ extendedscreen = pygame.Rect(-10,-10,windowwidth+20,windowheight+20)
 kinetic_weapon = [[1,], [1,], [1,]]
 flak_cannon = [[0, 1, 0], [0, 1, 0], [1, 1, 1]]
 laser_cannon = [[1,], [1,], [1,], [1,]]
+rocket_launcher = [[1,], [1,]]
 rocket_engine = [[1,], [1,]]
 ion_thruster = [[1, 1], [1, 1]]
 magnatic_shield = [[1, 1]]
@@ -30,11 +31,12 @@ fission_reactor = [[1, 1], [0, 1]]
 # prijs is keer duizend voor aanschaf. Upgrades: upgrade 1: *2250, upgrade 2: *4000, upgrade 3: *6259, upgrade 4: *9000
 shippartslist = [[["Weapons"], ["Engine"], ["Shield"], ["Power"]],
                  [["Kinetic Weapon", 1.5, kinetic_weapon, 6, 12, "A large cannon that shoots", "depleted uranium projectiles", "at high rate.", 5, 1], #wapens: 0=name, 1=price, 2=shape, 3=energyuse(shot), 4=cooldown(ticks), 5-7=description, 8=damage, 9=speedreduction
-                  ["Flak Cannon", 6, flak_cannon, 10, 21, "Magnatic balista that propels", "projectiles that explode to carpet", "the area with small fragments.", 20, 2],
+                  ["Flak Cannon", 6, flak_cannon, 10, 21, "Magnatic balista that propels", "projectiles that explode to carpet", "the area with small fragments.", 18, 2],
+                  ["Rocket Launcher", 3, rocket_launcher, 0, 10, "Ballistic missile platform with", "limited ammo that shoots missiles", "based on your power source.", 20, 1],
                   ["Laser Cannon", 10, laser_cannon, 50, 54, "High powered laser weapon that", "can blow a hole in even the ", "strongest armor.", 40, 1]],
                  [["Rocket Engine", 1, rocket_engine, 10, 2, "Conventional rocket propulsion ", "is not necessary efficiënt but it", "is flexible."], #engines: name, price, shape, energyuse(second), speedboost
                   ["Ion Thruster", 3, ion_thruster, 20, 5, "Higly efficient propulsion system", "that fires ions at the opposite", "direction."]],
-                 [["Magnatic Deflector", 2.5, magnatic_shield, 7, 15, "The use of powerfull magnetic", "fields are able to dispurse many", "types of projectiles."], #shields: name,  price, energyuse(second), shape, maxschildboost
+                 [["Magnatic Deflector", 2.5, magnatic_shield, 7, 15, "The use of powerful magnetic", "fields are able to dispurse many", "types of projectiles."], #shields: name,  price, energyuse(second), shape, maxschildboost
                   ["Flux Shield", 5, flux_shield, 12, 30, "This shield filters undesirable", "wavelengths while allowing other", "wavelengths to protect the ship."]],
                  [["Solar Panel", 1, solar_panel, 15, 30, "Conventional energy mechanism", "that converts solar energy in large", "batteries."], #power source: name, price, shape, energyregen(second), maxenergyboost
                   ["Fission Reactor", 4, fission_reactor, 65, 75, "Based on nuclear fission, this", "reactor gives the ship massive", "amounts of energy."]]]
@@ -73,7 +75,18 @@ def shippartinfo(list, index, upgrade):
     #shippartinfo.append(shippartslist[list][index][7])
     shippartinfo.append("")
     if list == 1:
-        shippartinfo.append("Damage: " + str(shippartslist[list][index][8]*(upgrade+1)))
+        if index == 2:
+            succes = False
+            for part in Gamedata.player.shipparts:
+                if part.type == 4 and part.index == 1:
+                    damage = 30
+                    succes = True
+            if not succes:
+                damage = 20
+            shippartinfo.append("Damage: " + str(damage))
+            shippartinfo.append("Ammo: " + str(10 * (upgrade + 1)))
+        else:
+            shippartinfo.append("Damage: " + str(shippartslist[list][index][8] * (upgrade + 1)))
         shippartinfo.append("Cooldown: " + str(shippartslist[list][index][4]) + " ms")
         shippartinfo.append("Energy per shot: " + str(shippartslist[list][index][3]*(upgrade+1)))
         shippartinfo.append("Speed: -" + str(shippartslist[list][index][9] * (upgrade + 1)))

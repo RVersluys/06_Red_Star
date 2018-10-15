@@ -17,6 +17,8 @@ class Imageloading:
         self.projectiles.append([15, 6, pygame.image.load(os.path.join(imgfolder, 'projectiles', 'beam.png')).convert_alpha()])
         self.projectiles.append([11, 18, pygame.image.load(os.path.join(imgfolder, 'projectiles', 'shockblast.png')).convert_alpha()])
         self.projectiles.append([15, 3])
+        self.heroprojectiles = [pygame.image.load(os.path.join(imgfolder, 'projectiles', 'bullet.png')).convert_alpha(),
+                                pygame.image.load(os.path.join(imgfolder, 'projectiles', 'rocket.png')).convert_alpha()]
 
 class Mobbullet(pygame.sprite.Sprite):
     def __init__(self, x, y, movex, movey, angle, type):
@@ -67,8 +69,7 @@ class Flamethrower(pygame.sprite.Sprite):
 class Kineticbullet(pygame.sprite.Sprite):
     def __init__(self, x, y, movex, movey, damage):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.Surface((5,10))
-        self.image.fill(yellow)
+        self.image = images.heroprojectiles[0]
         self.rect = self.image.get_rect()
         self.rect.bottom = y
         self.rect.centerx = x
@@ -147,7 +148,7 @@ class Laser(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.bottom = Gamedata.hero.rect.top
         self.rect.left = Gamedata.hero.rect.centerx + adjustment
-        self.type = 2
+        self.type = 3
 
     def update(self):
         self.rect.top = 0
@@ -179,7 +180,32 @@ class Laser(pygame.sprite.Sprite):
     def hit(self, mob):
         pass
 
+class Rocket(pygame.sprite.Sprite):
+    def __init__(self, adjustment, damage):
+        pygame.sprite.Sprite.__init__(self)
+        self.adjustment = adjustment
+        self.ticks = 0
+        self.image = images.heroprojectiles[1]
+        self.rect = self.image.get_rect()
+        self.rect.top = Gamedata.hero.rect.top
+        self.rect.left = Gamedata.hero.rect.centerx + adjustment
+        self.type = 2
+        self.movey = 16
+        succes = False
+        for part in Gamedata.player.shipparts:
+            if part.type == 4 and part.index == 1:
+                self.damage = damage * 1.5
+            succes = True
+        if not succes:
+            damage = 20
 
+    def update(self):
+        self.rect.y -= self.movey
+        if not GameplayConstants.extendedscreen.colliderect(self.rect):
+            self.kill()
+
+    def hit(self, mob):
+        self.kill()
+        return mob.getdamage(self.damage)
 
 images = Imageloading()
-
