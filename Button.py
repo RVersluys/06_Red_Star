@@ -1,8 +1,15 @@
 import pygame
+import os
 
 import Colors
 import GameplayConstants
 import Tools
+
+
+
+buttonactive = pygame.image.load(os.path.join(os.path.dirname(__file__), 'img', 'button_active.png')).convert()
+buttonpassive = pygame.image.load(os.path.join(os.path.dirname(__file__), 'img', 'button_passive.png')).convert()
+
 
 class Button:
     def __init__(self, rect, text, function, active = True):
@@ -16,22 +23,23 @@ class Button:
             pygame.draw.rect(GameplayConstants.screen, Colors.black, self.strokerect)
             mousepos = pygame.mouse.get_pos()
             if rect.collidepoint(mousepos):
-                color = Colors.bluegray
+                buttonpic = pygame.transform.scale(buttonactive, (rect.width, rect.height))
             else:
-                color = Colors.lightgray
-            pygame.draw.rect(GameplayConstants.screen, color, rect)
-            Tools.draw_text(GameplayConstants.screen, text, 25, rect.left + 5, rect.centery, "Xolonium")
+                buttonpic = pygame.transform.scale(buttonpassive, (rect.width, rect.height))
+            GameplayConstants.screen.blit(buttonpic, dest=(rect.left, rect.top))
+            Tools.draw_text(GameplayConstants.screen, text, 25, rect.left + 10, rect.centery, "Xolonium")
 
     def update(self):
         if self.active:
             pygame.draw.rect(GameplayConstants.screen, Colors.black, self.strokerect)
             mousepos = pygame.mouse.get_pos()
+
             if self.rect.collidepoint(mousepos):
-                color = Colors.bluegray
+                buttonpic = pygame.transform.scale(buttonactive, (self.rect.width, self.rect.height))
             else:
-                color = Colors.lightgray
-            pygame.draw.rect(GameplayConstants.screen, color, self.rect)
-            Tools.draw_text(GameplayConstants.screen, self.text, 25, self.rect.left + 5, self.rect.centery, "Xolonium")
+                buttonpic = pygame.transform.scale(buttonpassive, (self.rect.width, self.rect.height))
+            GameplayConstants.screen.blit(buttonpic, dest=(self.rect.left, self.rect.top))
+            Tools.draw_text(GameplayConstants.screen, self.text, 25, self.rect.left + 10, self.rect.centery, "Xolonium")
 
 
 class Selectable(Button):
