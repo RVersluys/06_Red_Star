@@ -96,10 +96,10 @@ class Level:
             self.textlist.append([150, "WARNING: ASTERIOD STORM DETECTED", 30, (200, 0, 0), (100, 40), (warscreenwidth / 2, 150), (warscreenwidth, 50)])
             self.textlist.append([200, "WARNING: ENEMY SHIPS DETECTED", 30, (200, 0, 0), (100, 40), (warscreenwidth / 2, 200),(warscreenwidth, 50)])
 
-            self.propslist.append([5000, 0, 900, 1, (540,900)])
-            self.propslist.append([5500, 1, 600, 2, (600, 675)])
-            self.propslist.append([9000, 2, 200, 2, (450, 520)])
-            self.propslist.append([12000, 3, 800, 1, (80, 100)])
+            self.propslist.append([5000, 0, 900, 1, (540,767)])
+            self.propslist.append([5500, 1, 600, 2, (675, 675)])
+            self.propslist.append([9000, 2, 200, 2, (518, 520)])
+            self.propslist.append([12000, 3, 800, 1, (240, 97)])
 
 
             # Cruiser komt in scherm, opend vuur. stopt vuur, straved weg.
@@ -332,7 +332,7 @@ class Level:
            # self.spawnlist.append([5200, 12, 320, 0, 0, 6, [(0, 0), (60, 3,0,0), (150,1)], [(100, 4, 0, 6, 15), (60,1,1)], 1000])
 
             #level end
-            self.spawnlist.append([15000, -1])
+            self.spawnlist.append([12000, -1])
 
             ###################################################################################################
             #lijst wordt gesorteerd om op volgorde uit te kunnen voeren.

@@ -51,8 +51,8 @@ shippartslist = [[["Weapons"], ["Engine"], ["Shield"], ["Power"],["Ships"]],
                   ["Flux Shield", 5, flux_shield, 12, 30, "This shield filters undesirable", "wavelengths while allowing other", "wavelengths to protect the ship."]],
                  [["Solar Panel", 1, solar_panel, 15, 30, "Conventional energy mechanism", "that converts solar energy in large", "batteries."], #power source: name, price, shape, energyregen(second), maxenergyboost
                   ["Fission Reactor", 4, fission_reactor, 65, 75, "Based on nuclear fission, this", "reactor gives the ship massive", "amounts of energy."]],
-                 [["UE Vanguard", 0, shipdesign, 14, 50, "The first Earth ship made with", "the Alfa technology has immediately", "become the pride of the navy."],
-                 ["UE Victorious", 30, shipdesign, 20, 80, "With superior armor and extra", "weapon space, this ship can compete", "with anything the aliëns send to us."]]]
+                 [["UE Vanguard", 0, shipdesign, 14, 50, "The first Earth ship made with", "the Alfa technology has immediately", "become the pride of the navy.", (189,590), 16],
+                 ["UE Victorious", 33, shipdesign, 20, 80, "With superior armor and extra", "weapon space, this ship can compete", "with anything the aliëns send to us.", (129,590), 14]]]
 
 
 
@@ -62,6 +62,10 @@ for catagory in range(1, 6):
     for item in range(len(shippartslist[catagory])):
         templist.append(pygame.image.load(os.path.join(game_folder, "img", "parts", shippartslist[catagory][item][0] + ".png")).convert_alpha())
     shippartimages.append(templist)
+
+shipimages = []
+for ship in range(len(shippartslist[5])):
+    shipimages.append(pygame.image.load(os.path.join(game_folder, "img", "hero", shippartslist[5][ship][0] + ".png")).convert_alpha())
 
 def shippartinfo(list, index, upgrade):
     price = shippartprice(list, index, upgrade)
@@ -106,6 +110,7 @@ def shippartinfo(list, index, upgrade):
         shippartinfo.append("Energy storage: " + str(shippartslist[list][index][4]*(upgrade+1)))
     elif list == 5:
         shippartinfo.append("Armor: " + str(shippartslist[list][index][4]))
+        shippartinfo.append("Speed: " + str(shippartslist[list][index][9]) + " AUh")
         shippartinfo.append("Space: " + str(shippartslist[list][index][3]))
     return shippartinfo
 

@@ -1,5 +1,6 @@
 import pygame
 from copy import deepcopy
+from copy import copy
 
 import Gamedata
 import Projectiles
@@ -26,7 +27,18 @@ class Player:
         self.shippartsused = []  # list met alle geimplementeerde scheepsonderdelen
         self.shipfill = deepcopy(GameplayConstants.shipdesign)
         self.levelnumber = 0 # huidige level van het spel
+        self.ship = 0
 
+    def changeship(self, shipnr):
+        Sounds.sounds.soundimplement.play()
+        shipparts = copy(self.shippartsused)
+        for item in shipparts:
+            self.removepart(item)
+        self.gold += GameplayConstants.shippartslist[5][self.ship][1] * 900
+        self.gold -= GameplayConstants.shippartslist[5][shipnr][1] * 900
+        self.ship = shipnr
+        self.maxarmor = GameplayConstants.shippartslist[5][shipnr][4]
+        self.speed = GameplayConstants.shippartslist[5][shipnr][9]
 
     def removepart(self, part):
         self.shippartsused.remove(part)

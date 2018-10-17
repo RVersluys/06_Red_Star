@@ -2,7 +2,6 @@ import pygame
 import os
 import pickle
 
-
 import GameplayConstants
 import Tools
 import Player
@@ -19,8 +18,6 @@ class Schipmenu:
     def __init__(self):
         # laden images
         self.hangarpic = pygame.image.load(os.path.join(game_folder, "img", "hangar.jpg")).convert()
-        #self.shipimage = GameplayConstants.shippartimages[4][0]
-        self.shipimage = pygame.image.load(os.path.join(game_folder, "img", "hero", "UE Vanguard.png")).convert_alpha()
         self.energymeter = pygame.image.load(os.path.join(game_folder, "img", "Parts", "energymeter.png")).convert()
 
         # deze variabelen houden bij waar de speler is in het menu.
@@ -41,7 +38,7 @@ class Schipmenu:
         self.shippartdrag = False
 
     def shipmenuloop(self):
-
+        self.shipimage = GameplayConstants.shipimages[Gamedata.player.ship]
         for x in range(1,4):
             self.menu[x].active = True
         self.resetscreen()
@@ -112,10 +109,19 @@ class Schipmenu:
                                         self.shippartdisplayed = button.function
                                         self.partimage = GameplayConstants.shippartimages[self.menunumber - 1][self.shippartdisplayed]
                                         if self.menunumber == 5:
-                                            self.menu[4].text = "Buy"
-                                            self.menu[4].function = "Buy"
-                                            self.menu[4].active = True  # activeer buyknop
-                                            #pygame.transform.scale(GameplayConstants.shippartslist[self.menunumber][self.shippartdisplayed][2],
+                                            price = GameplayConstants.shippartslist[5][self.shippartdisplayed][1]*900
+                                            price -= GameplayConstants.shippartslist[5][Gamedata.player.ship][1]*900
+                                            for part in Gamedata.player.shippartsused:
+                                                partworth = 0
+                                                for x in range(part.upgrades + 1):
+                                                    partworth += GameplayConstants.shippartprice(part.type, part.index, x)
+                                                price -= partworth
+                                            if Gamedata.player.gold - price >= 0 and self.shippartdisplayed != Gamedata.player.ship:
+                                                self.menu[4].text = "Buy"
+                                                self.menu[4].function = "Buy"
+                                                self.menu[4].active = True  # activeer buyknop als er genoeg geld is
+                                            else:
+                                                self.menu[4].active = False
                                         else:
                                             self.shippartshape = GameplayConstants.shippartslist[self.menunumber][self.shippartdisplayed][2]
 
@@ -156,6 +162,12 @@ class Schipmenu:
                                         self.shippartshape = self.rotateshippart(self.shippartshape)
                                         self.partimage = pygame.transform.rotate(GameplayConstants.shippartimages[self.menunumber - 1][self.shippartdisplayed], -self.rotations * 90)
                                         Tools.displayshippart(self.partimage, 1427, 730, self.shippartshape)
+                                    elif button.function == "Buy":
+                                        self.menu[4].active = False
+                                        Gamedata.player.changeship(self.shippartdisplayed)
+                                        self.shipimage = GameplayConstants.shipimages[Gamedata.player.ship]
+                                        self.resetscreen()
+
 
 
                             # op het displayed onderdeel
@@ -233,7 +245,6 @@ class Schipmenu:
 
 
     def placeshippart(self, mousepos):
-        print(self.shippartshape)
         x = int((mousepos[0] - 69) / 60)
         y = int((mousepos[1] - 529) / 60)
         height = len(self.shippartshape)
@@ -326,7 +337,7 @@ class Schipmenu:
 
         background = pygame.Rect(70, 530, 537, 477)
         pygame.draw.rect(GameplayConstants.screen, Colors.blackgray, background)
-        GameplayConstants.screen.blit(self.shipimage, dest=(190, 590))
+        GameplayConstants.screen.blit(self.shipimage, dest= GameplayConstants.shippartslist[5][Gamedata.player.ship][8])
         GameplayConstants.screen.blit(self.energymeter, dest=(607, 530))
 
         textrect = pygame.Rect(640, 530, 240, 477)
@@ -337,6 +348,7 @@ class Schipmenu:
         s2.set_alpha(50)
         s2.fill(Colors.darkgreen)
         self.greenlist = [[0 for x in range(9)] for y in range(8)]
+        freelist = [[False for x in range(9)] for y in range(8)]
 
         # display geplaatste scheepsonderdelen
         for shippart in Gamedata.player.shippartsused:
@@ -345,31 +357,33 @@ class Schipmenu:
             rect.top = 530 + int(shippart.ypos) * 60
             rect.left = 70 + int(shippart.xpos) * 60
             GameplayConstants.screen.blit(image, rect)
-        if self.shippartselected == False:
-            for x in range(9):
-                for y in range(8):
-                    if isinstance(Gamedata.player.shipfill[y][x], int):
-                        if Gamedata.player.shipfill[y][x] > 0 and Gamedata.player.shipfill[y][x] <= 1:
+
+        for x in range(9):
+            for y in range(8):
+                if isinstance(Gamedata.player.shipfill[y][x], int):
+                    if Gamedata.player.shipfill[y][x] > 0 and Gamedata.player.shipfill[y][x] <= Gamedata.player.ship + 1:
+                        if self.shippartselected == False:
                             pygame.draw.rect(GameplayConstants.screen, Colors.lightgray, pygame.Rect(70 + x * 60, 530 + y * 60, 57, 57), 2)
-        else:  # onderstaande is het inventariseren waar op het schip het geselecteerde object kan worden geplaatst.
-            partlayout = self.shippartshape
-            height = len(partlayout)
-            width = len(partlayout[0])
+                        else:
+                            freelist[y][x] = True
+        if self.shippartselected:  # onderstaande is het inventariseren waar op het schip het geselecteerde object kan worden geplaatst.
+            height = len(self.shippartshape)
+            width = len(self.shippartshape[0])
             for x in range(9 - (width - 1)):
                 for y in range(8 - (height - 1)):
                     succes = True
                     for step in range(height):
                         if width > 1:
                             for stepdown in range(width):
-                                if Gamedata.player.shipfill[y + step][x + stepdown] != 1 and partlayout[step][stepdown] == 1:
+                                if not freelist[y + step][x + stepdown] and self.shippartshape[step][stepdown] == 1:
                                     succes = False
-                        elif Gamedata.player.shipfill[y + step][x] != 1:
+                        elif not freelist[y + step][x]:
                             succes = False
                     if succes == True:
                         for stepdown in range(height):
                             if width > 1:
                                 for step in range(width):
-                                    if partlayout[stepdown][step] == 1 and self.greenlist[y + stepdown][x + step] == 0:
+                                    if self.shippartshape[stepdown][step] == 1 and self.greenlist[y + stepdown][x + step] == 0:
                                         self.greenlist[y + stepdown][x + step] = 1
                                         GameplayConstants.screen.blit(s2, (70 + (x + step) * 60, 530 + (y + stepdown) * 60))
                                         pygame.draw.rect(GameplayConstants.screen, Colors.darkgreen, pygame.Rect(70 + (x + step) * 60, 530 + (y + stepdown) * 60, 57, 57), 2)
@@ -395,8 +409,7 @@ class Schipmenu:
             button.update()
         self.shippartrect = pygame.Rect(1335, 550, 180, 360)
         pygame.draw.rect(GameplayConstants.screen, Colors.black, self.shippartrect)
-        print(self.menunumber)
         if self.shippartdisplayed != -1 and self.menunumber != 5:
             Tools.displayshippart(self.partimage, 1427, 730, self.shippartshape)
-        elif self.menunumber == 5:
+        elif self.shippartdisplayed != -1 and self.menunumber == 5:
             Tools.displayshippart(self.partimage, 1427, 730)
