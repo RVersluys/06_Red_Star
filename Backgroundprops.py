@@ -7,6 +7,8 @@ warscreenwidth = 1440
 import Gamedata
 import Gametext
 
+"""Hier staan de objecten waarmee geen interactie mogelijk is, zoals sterren, en planeten"""
+
 class Star(pygame.sprite.Sprite):
     def __init__(self, start):
         size = random.randint(1, 2)

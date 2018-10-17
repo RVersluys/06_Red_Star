@@ -170,10 +170,8 @@ class Schipmenu:
                                         self.shipimage = GameplayConstants.shipimages[Gamedata.player.ship]
                                         self.resetscreen()
 
-
-
                             # op het displayed onderdeel
-                            if self.shippartrect.collidepoint(mousepos) and self.shippartdisplayed >= 0:
+                            if self.shippartrect.collidepoint(mousepos) and self.shippartdisplayed >= 0 and self.menunumber != 5:
                                 if Gamedata.player.gold >= GameplayConstants.shippartprice(self.menunumber, self.shippartdisplayed, 0):
                                     Sounds.sounds.soundclick.play()
                                     self.partimage = pygame.transform.rotate(GameplayConstants.shippartimages[self.menunumber - 1][self.shippartdisplayed], -self.rotations * 90)
@@ -417,7 +415,6 @@ class Schipmenu:
                 for y in range(8):
                     if self.greenlist[y][x] == 0 and Gamedata.player.shipfill[y][x] == 1:
                         pygame.draw.rect(GameplayConstants.screen, Colors.darkred, pygame.Rect(70 + x * 60, 530 + y * 60, 57, 57), 2)
-
 
     def create_menu(self):
         for x in range(len(GameplayConstants.shippartslist[self.menunumber])):

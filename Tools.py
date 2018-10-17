@@ -39,13 +39,7 @@ def get_savegames():
             break
     return filelist
 
-def create_dragbar(rect, text, options, chosenoption):
-    pygame.draw.rect(GameplayConstants.screen, Colors.lightgray,rect)
-    draw_text(GameplayConstants.screen, text, 25, rect.left + 5, rect.top + 10, "Xolonium")
-    dragrect = pygame.Rect(rect.left + 10, rect.top+20, rect.width -20,rect.height - 50)
-    pygame.draw.rect(GameplayConstants.screen, Colors.black, dragrect)
-    pygame.draw.circle(GameplayConstants.screen,Colors.lightgray,(int(rect.x+25+(rect.width-50)*chosenoption/options),int(rect.y + rect.height/2-5)),10,0)
-    return dragrect
+
 
 
 def displayshippart(image, posx, posy, shippartshape = False):

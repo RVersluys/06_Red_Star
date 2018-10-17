@@ -1,5 +1,7 @@
 import pygame
 
+"""Hier wordt de ingame text geregeld, dus alleen de tekst die tijdens het level langs komt"""
+
 class Text(pygame.sprite.Sprite):
     def __init__(self, text, fontsize, color, persistance, pos, size = (250,100)):
         pygame.sprite.Sprite.__init__(self)

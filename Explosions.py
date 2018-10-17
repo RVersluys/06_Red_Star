@@ -1,6 +1,9 @@
 import os
 import pygame
 
+"""Hier worden alle plaatjes geladen voor de explosies, dat gebeurd bij het opstarten van het programma.
+De explosie sprites worden hier ook gemannaged."""
+
 imgfolder = os.path.join(os.path.dirname(__file__), 'img')
 explosions = []
 explosionsize = [(128,128),(128,128),(128,128),(128,128),(64,64),(128, 128), (64, 64), (128, 128), (256, 256), (320, 320),(192,192),(384,384),(256,256),(64,64),(32,32),(192,192),(192,192)]

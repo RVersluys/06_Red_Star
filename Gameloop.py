@@ -17,8 +17,11 @@ import Sounds
 import Hero
 import Gametext
 import Colors
+import Button
 
 screen = GameplayConstants.screen
+
+"""Hier staat de loop waarin elk level wordt uitgevoerd. De mobs en overige zaken die tevoorschijn komen staan in een lijst in 'Level'."""
 
 class Gameloop:
     def __init__(self, levelnumber):
@@ -158,45 +161,27 @@ class Gameloop:
         pygame.mouse.set_visible(True)
         Sounds.playsong('Hymne.mp3', True)
 
-
-    def generate_menu(self, buttonlist):
-        buttoncount = len(buttonlist)
-        buttonrects = []
-        pygame.draw.rect(screen, Colors.darkgray, pygame.Rect(windowwidth / 2 - 300, windowheight / 2 - 30 * buttoncount - 20, 600, 60 * buttoncount + 30))
-        mousepos = pygame.mouse.get_pos()
-        for button in range(buttoncount):
-            if isinstance(buttonlist[button], tuple):
-                dragrect = pygame.Rect(windowwidth / 2 - 275, windowheight / 2 - 30 * buttoncount + 60 * button, 550, 80)
-                if buttonlist[button][0] == "Game speed":
-                    positions = 6
-                    position = (GameplayConstants.fps - 30) / 5
-                elif buttonlist[button][0] == "Music volume":
-                    positions = 100
-                    position = GameplayConstants.musicvolume
-                elif buttonlist[button][0] == "Effects volume":
-                    positions = 100
-                    position = GameplayConstants.effectsvolume
-                buttonrects.append(Tools.create_dragbar(dragrect, buttonlist[button][0], positions, position))
-            else:
-                buttonrects.append(pygame.Rect(windowwidth / 2 - 275, windowheight / 2 - 30 * buttoncount + 60 * button, 550, 50))
-                pygame.draw.rect(screen, Colors.black, buttonrects[button])
-                Tools.refresh_menubutton(buttonrects[button], mousepos, buttonlist[button], True)
-        pygame.display.flip()
-        return buttonrects
-
-
     def gamemenu(self):
-        running = True
         pygame.mouse.set_visible(True)
-
+        drag = False
         screenalpha = pygame.Surface((1920, 1080))
         screenalpha.set_alpha(150)
         screenalpha.fill(Colors.black)
         screen.blit(screenalpha, dest=(0, 0))
-        buttonlist = ["Quit game", "Abort mission", "Settings", "Resume"]
-        buttonrects = self.generate_menu(buttonlist)
+        pygame.draw.rect(screen, Colors.darkgray, pygame.Rect(windowwidth / 2 - 300, windowheight / 2 - 180, 600, 360))
+        mainmenu = [Button.Button(pygame.Rect(windowwidth / 2 - 275, windowheight / 2 - 115, 550, 50),"Quit game", "Quit"),
+                    Button.Button(pygame.Rect(windowwidth / 2 - 275, windowheight / 2 - 55, 550, 50), "Abort mission", "Abort"),
+                    Button.Button(pygame.Rect(windowwidth / 2 - 275, windowheight / 2 + 5, 550, 50), "Settings", "Settings"),
+                    Button.Button(pygame.Rect(windowwidth / 2 - 275, windowheight / 2 + 65, 550, 50), "Resume", "Resume")]
+        speed = (GameplayConstants.fps - 30) / 5
 
-        while running:
+        optionmenu = [Button.Dragbar(pygame.Rect(windowwidth / 2 - 275, windowheight / 2 - 160, 550, 80),"Game speed", 6, speed, False),
+                      Button.Dragbar(pygame.Rect(windowwidth / 2 - 275, windowheight / 2 - 70, 550, 80), "Music volume", 100, GameplayConstants.musicvolume, False),
+                      Button.Dragbar(pygame.Rect(windowwidth / 2 - 275, windowheight / 2 + 20, 550, 80), "Effects volume", 100, GameplayConstants.effectsvolume, False),
+                      Button.Button(pygame.Rect(windowwidth / 2 - 275, windowheight / 2 + 110, 550, 50), "Return", "Return", False)]
+        pygame.display.flip()
+
+        while True:
             mousepos = pygame.mouse.get_pos()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -204,78 +189,85 @@ class Gameloop:
                 elif event.type == pygame.MOUSEBUTTONDOWN:
                     mouse = pygame.mouse.get_pressed()
                     if mouse[0]:
-                        if buttonrects[0].collidepoint(mousepos):
-                            pygame.quit()
-                        elif buttonrects[1].collidepoint(mousepos):
-                            self.level.abort = True
-                            Sounds.sounds.soundclick.play()
-                            return
-                        elif buttonrects[2].collidepoint(mousepos):
-                            self.optionmenu()
-                            self.generate_menu(buttonlist)
-                            Sounds.sounds.soundclick.play()
-                        elif buttonrects[3].collidepoint(mousepos):
-                            pygame.mouse.set_visible(False)
-                            Sounds.sounds.soundclick.play()
-                            return
-                elif event.type == pygame.MOUSEMOTION:
-                    self.generate_menu(buttonlist)
-            clock.tick(GameplayConstants.fps)
+                        for button in optionmenu:
+                            if button.active and button.rect.collidepoint(mousepos):
+                                if button.function == "Game speed":
+                                    x = int((mousepos[0] - button.rect.left) / (button.rect.width / 7))
+                                    GameplayConstants.fps = 30 + x * 5
+                                    button.chosenoption = x
+                                    Sounds.sounds.soundclick.play()
+                                    drag = True
+                                    choice = 0
+                                    button.update()
+                                elif button.function == "Music volume":
+                                    x = int((mousepos[0] - button.rect.left) / (button.rect.width / 101))
+                                    GameplayConstants.musicvolume = x
+                                    button.chosenoption = x
+                                    Sounds.sounds.soundclick.play()
+                                    pygame.mixer.music.set_volume(GameplayConstants.musicvolume / 100)
+                                    drag = True
+                                    choice = 1
+                                    button.update()
+                                elif button.function == "Effects volume":
+                                    x = int((mousepos[0] - button.rect.left) / (button.rect.width / 101))
+                                    GameplayConstants.effectsvolume = x
+                                    button.chosenoption = x
+                                    Sounds.sounds.soundchange()
+                                    Sounds.sounds.soundclick.play()
+                                    drag = True
+                                    choice = 2
+                                    button.update()
 
+                                elif button.function == "Return":
+                                    pygame.draw.rect(screen, Colors.darkgray, pygame.Rect(windowwidth / 2 - 300, windowheight / 2 - 180, 600, 360))
+                                    for button in optionmenu:
+                                        button.active = False
+                                    for button in mainmenu:
+                                        button.active = True
+                                        button.update()
 
-    def optionmenu(self):
-        running = True
-        drag = False
-        buttonrects = self.generate_menu([("Game speed", 7), ("Music volume", 7), ("Effects volume", 7), "Back"])
-        while running:
-            mousepos = pygame.mouse.get_pos()
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    pygame.quit()
-                elif event.type == pygame.MOUSEBUTTONDOWN:
-                    mouse = pygame.mouse.get_pressed()
-                    if mouse[0]:
-                        if buttonrects[0].collidepoint(mousepos):
-                            x = int((mousepos[0] - buttonrects[0].left) / (buttonrects[0].width / 7))
-                            GameplayConstants.fps = 30 + x * 5
-                            Sounds.sounds.soundclick.play()
-                            drag = True
-                            choice = 0
-                        elif buttonrects[1].collidepoint(mousepos):
-                            x = int((mousepos[0] - buttonrects[0].left) / (buttonrects[0].width / 101))
-                            GameplayConstants.musicvolume = x
-                            Sounds.sounds.soundclick.play()
-                            pygame.mixer.music.set_volume(GameplayConstants.musicvolume / 100)
-                            drag = True
-                            choice = 1
-                        elif buttonrects[2].collidepoint(mousepos):
-                            x = int((mousepos[0] - buttonrects[0].left) / (buttonrects[0].width / 101))
-                            GameplayConstants.effectsvolume = x
-                            Sounds.sounds.soundchange()
-                            Sounds.sounds.soundclick.play()
-                            drag = True
-                            choice = 2
-                        elif buttonrects[3].collidepoint(mousepos):
-                            Sounds.sounds.soundclick.play()
-                            return
-                        else:
-                            choice = 3
-                    self.generate_menu([("Game speed", 7), ("Music volume", 100), ("Effects volume", 100), "Back"])
+                        for button in mainmenu:
+                            if button.rect.collidepoint(mousepos) and button.active:
+                                if button.function == "Quit":
+                                    pygame.quit()
+                                elif button.function == "Abort":
+                                    self.level.abort = True
+                                    Sounds.sounds.soundclick.play()
+                                    return
+                                elif button.function == "Settings":
+                                    pygame.draw.rect(screen, Colors.darkgray, pygame.Rect(windowwidth / 2 - 300, windowheight / 2 - 180, 600, 360))
+                                    for button in mainmenu:
+                                        button.active = False
+                                    for button in optionmenu:
+                                        button.active = True
+                                        button.update()
+                                    Sounds.sounds.soundclick.play()
+                                elif button.function == "Resume":
+                                    pygame.mouse.set_visible(False)
+                                    Sounds.sounds.soundclick.play()
+                                    return
+
                 elif event.type == pygame.MOUSEMOTION:
-                    self.generate_menu([("Game speed", 7), ("Music volume", 100), ("Effects volume", 100), "Back"])
-                    if drag == True and choice < 3:
+                    if drag:
                         if choice == 0:
-                            x = max(0, min(6, int((mousepos[0] - buttonrects[0].left) / (buttonrects[0].width / 7))))
+                            x = max(0, min(6, int((mousepos[0] - optionmenu[0].rect.left) / (optionmenu[0].rect.width / 7))))
                             GameplayConstants.fps = 30 + x * 5
+                            optionmenu[0].chosenoption = x
                         elif choice == 1:
-                            x = max(0, min(100, int((mousepos[0] - buttonrects[0].left) / (buttonrects[0].width / 101))))
+                            x = max(0, min(100, int((mousepos[0] - optionmenu[1].rect.left) / (optionmenu[1].rect.width / 101))))
                             GameplayConstants.musicvolume = x
                             pygame.mixer.music.set_volume(GameplayConstants.musicvolume / 100)
+                            optionmenu[1].chosenoption = x
                         elif choice == 2:
-                            x = max(0, min(100, int((mousepos[0] - buttonrects[0].left) / (buttonrects[0].width / 101))))
+                            x = max(0, min(100, int((mousepos[0] - optionmenu[2].rect.left) / (optionmenu[2].rect.width / 101))))
                             GameplayConstants.effectsvolume = x
                             Sounds.sounds.soundchange()
+                            optionmenu[2].chosenoption = x
+                    for button in mainmenu:
+                        button.update()
+                    for button in optionmenu:
+                        button.update()
                 elif event.type == pygame.MOUSEBUTTONUP:
                     drag = False
-
+            pygame.display.flip()
             clock.tick(GameplayConstants.fps)
