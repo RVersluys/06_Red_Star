@@ -130,7 +130,7 @@ class Game:
 
     def loadgame(self, filelist):
         Sounds.sounds.soundclick.play()
-        pygame.draw.rect(screen, Colors.darkgray, pygame.Rect(windowwidth / 2 - 300, windowheight / 2 - 30 * (len(filelist)+1) - 20, 600, 60 * (len(filelist)+1) + 30))
+        pygame.draw.rect(screen, Colors.darkgray, pygame.Rect(windowwidth / 2 - 300, windowheight / 2 - 30 * (len(filelist)+1) - 20, 600, 60 * (len(filelist)+1) + 40))
         self.submenu = []
 
         filenr = 0
@@ -141,7 +141,7 @@ class Game:
             text = file[0] + " - (" + str(date) + ")"
             self.submenu.append(Button.Selectable(rect, text, file))
             filenr += 1
-        rect = pygame.Rect(windowwidth / 2 - 275, windowheight / 2 + 30 * len(filelist)-30, 550, 50)
+        rect = pygame.Rect(windowwidth / 2 - 275, windowheight / 2 + 30 * len(filelist)-20, 550, 50)
         self.submenu.append(Button.Button(rect, "Load Game", "Load"))
 
     def screenupdate(self):

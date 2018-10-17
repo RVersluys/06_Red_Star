@@ -170,8 +170,9 @@ class Shippart:
                                     self.shipmenutext(self, startwidth, startheight, textrect)
                                     pygame.draw.rect(GameplayConstants.screen, Colors.lightgray, goldrect)
                                     Tools.draw_text(GameplayConstants.screen, "Gold: " + str(Gamedata.player.gold), 35, 1495, 55, "Xolonium")
-                                    buttons[2].active = True
-                                    buttons[2].update()
+                                    if self.upgrades > 0:
+                                        buttons[2].active = True
+                                        buttons[2].update()
                                     if self.upgrades == 5:
                                         pygame.draw.rect(GameplayConstants.screen, Colors.darkgray, (button.rect.left - 3, button.rect.top - 3, button.rect.width + 6, button.rect.height + 6))
                                         button.active = False

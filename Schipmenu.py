@@ -1,6 +1,8 @@
 import pygame
 import os
 import pickle
+import datetime
+
 
 import GameplayConstants
 import Tools
@@ -202,13 +204,26 @@ class Schipmenu:
 
 
     def savegameloop(self):
-        saves = Tools.get_savegames()
-        for x in range(len(saves), 10):
-            saves.append(("EMPTY SLOT", 0))
-        saves.append("Save game")
-        self.generate_submenu(11, 3, saves)
-        running = True
-        while running:
+        pygame.draw.rect(GameplayConstants.screen, Colors.darkgray, pygame.Rect(GameplayConstants.windowwidth / 2 - 300, GameplayConstants.windowheight / 2 - 350, 600, 700))
+        filelist = Tools.get_savegames()
+        savegamebuttons = []
+        filenr = 1
+        for file in filelist:
+            rect = pygame.Rect(GameplayConstants.windowwidth / 2 - 275, GameplayConstants.windowheight / 2 - 330 + 60 * (filenr-1), 550, 50)
+            path = os.path.join(game_folder, "savegames", str(file[0] + file[1]))
+            date = datetime.datetime.fromtimestamp(os.path.getmtime(path)).strftime('%d-%m-%Y %H:%M:%S')
+            text = file[0] + " - (" + str(date) + ")"
+            savegamebuttons.append(Button.Selectable(rect, text, filenr))
+            filenr += 1
+        for emptyslot in range(len(filelist), 10):
+            rect = pygame.Rect(GameplayConstants.windowwidth / 2 - 275, GameplayConstants.windowheight / 2 - 330 + 60 * (emptyslot), 550, 50)
+            text = "EMPTY SLOT"
+            savegamebuttons.append(Button.Selectable(rect, text, filenr))
+            filenr += 1
+        savegamebuttons.append(Button.Button(pygame.Rect(GameplayConstants.windowwidth / 2 - 275, GameplayConstants.windowheight / 2 + 280, 550, 50), "Save game", "Save"))
+        pygame.display.flip()
+        selectedfile = False
+        while True:
             for event in pygame.event.get():
                 mousepos = pygame.mouse.get_pos()
                 if event.type == pygame.QUIT:
@@ -220,26 +235,33 @@ class Schipmenu:
                 elif event.type == pygame.MOUSEBUTTONDOWN:
                     mouse = pygame.mouse.get_pressed()
                     if mouse[0]:
-                        succes = False
-                        count = 0
-                        for rectnr in range(len(self.submenubuttonrects) - 1):
-                            if self.submenubuttonrects[rectnr].collidepoint(mousepos):
-                                self.selection = saves[rectnr]
-                                self.generate_submenu(11, 3, saves, rectnr)
-                                self.selectnr = rectnr
-                                succes = True
-                            count += 1
-                        if self.submenubuttonrects[10].collidepoint(mousepos):
-                            filepath = os.path.join(game_folder, 'savegames', str(self.selectnr) + '.pickle')
-                            pickle_out = open(filepath, "wb")
-                            pickle.dump(Gamedata.player, pickle_out)
-                            Sounds.sounds.soundimplement.play()
-                            return
-                        if not succes:
-                            Sounds.sounds.soundcancel.play()
-                            return
+                        for button in savegamebuttons:
+                            if type(button) is Button.Selectable:
+                                if button.selected:
+                                    button.selected = False
+                                    if button.rect.collidepoint(mousepos):
+                                        selectedfile = False
+                                elif button.rect.collidepoint(mousepos):
+                                    button.selected = True
+                                    selectedfile = button.file
+                            elif button.function == "Save" and button.rect.collidepoint(mousepos):
+                                if selectedfile:
+                                    filepath = os.path.join(game_folder, 'savegames', str(selectedfile) + '.pickle')
+                                    pickle_out = open(filepath, "wb")
+                                    pickle.dump(Gamedata.player, pickle_out)
+                                    Sounds.sounds.soundimplement.play()
+                                else:
+                                    Sounds.sounds.soundfail.play()
+                                return
+                            button.update()
+
+                            #if not succes:
+                            #    Sounds.sounds.soundcancel.play()
+                            #    return
+
                 elif event.type == pygame.MOUSEMOTION:
-                    Tools.refresh_menubutton(self.submenubuttonrects[10], mousepos, "Save game", True)
+                    for button in savegamebuttons:
+                        button.update()
             clock.tick(GameplayConstants.fps)
             pygame.display.flip()
 
