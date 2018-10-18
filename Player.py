@@ -18,7 +18,7 @@ class Player:
         self.weapons = []
         self.shipparts = []
         self.score = 0
-        self.gold = 15000
+        self.gold = 150000
         self.maxarmor = 50
         self.maxshield = 10
         self.maxenergy = 100
@@ -222,6 +222,8 @@ class Weapon(Shippart):
         if self.index == 2:
             self.fireleft = True
             self.ammo = (self.upgrades+1) * 10
+        elif self.index == 4:
+            self.chargeup = 0
 
     def update(self):
         if self.nowcooldown != 0:
@@ -233,6 +235,7 @@ class Weapon(Shippart):
             returnprice += GameplayConstants.shippartprice(self.type, self.index, x)
         Gamedata.player.gold += returnprice
         self.changestats(self.upgrades+1, False)
+
 
     def fireevent(self):
         if self.nowcooldown == 0:
@@ -293,3 +296,16 @@ class Weapon(Shippart):
                         damage = totaldamage/beamhitstotal * beamhits
                         bullet = Projectiles.Laser(adjustment,damage)
                         Gamedata.all_sprites.add(bullet)
+
+                elif self.index == 4:
+                    if self.chargeup < GameplayConstants.shippartslist[self.type][self.index][8] * 15 * (self.upgrades + 1):
+                        self.chargeup += GameplayConstants.shippartslist[self.type][self.index][8] * (self.upgrades + 1)
+
+
+    def plasmashot(self):
+        if self.chargeup:
+            adjustment = -90 + 30 * self.xpos
+            bullet = Projectiles.Plasmabeam(adjustment, self.chargeup)
+            Gamedata.all_sprites.add(bullet)
+            Gamedata.herobullets.add(bullet)
+            self.chargeup = 0

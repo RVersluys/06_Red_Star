@@ -18,7 +18,8 @@ class Imageloading:
         self.projectiles.append([11, 18, pygame.image.load(os.path.join(imgfolder, 'projectiles', 'shockblast.png')).convert_alpha()])
         self.projectiles.append([15, 3])
         self.heroprojectiles = [pygame.image.load(os.path.join(imgfolder, 'projectiles', 'bullet.png')).convert_alpha(),
-                                pygame.image.load(os.path.join(imgfolder, 'projectiles', 'rocket.png')).convert_alpha()]
+                                pygame.image.load(os.path.join(imgfolder, 'projectiles', 'rocket.png')).convert_alpha(),
+                                pygame.image.load(os.path.join(imgfolder, 'projectiles', 'plasma.png')).convert_alpha()]
 
 class Mobbullet(pygame.sprite.Sprite):
     def __init__(self, x, y, movex, movey, angle, type):
@@ -183,8 +184,6 @@ class Laser(pygame.sprite.Sprite):
 class Rocket(pygame.sprite.Sprite):
     def __init__(self, adjustment, damage):
         pygame.sprite.Sprite.__init__(self)
-        self.adjustment = adjustment
-        self.ticks = 0
         self.image = images.heroprojectiles[1]
         self.rect = self.image.get_rect()
         self.rect.top = Gamedata.hero.rect.top
@@ -195,9 +194,9 @@ class Rocket(pygame.sprite.Sprite):
         for part in Gamedata.player.shipparts:
             if part.type == 4 and part.index == 1:
                 self.damage = damage * 1.5
-            succes = True
+                succes = True
         if not succes:
-            damage = 20
+            self.damage = damage
 
     def update(self):
         self.rect.y -= self.movey
@@ -207,5 +206,39 @@ class Rocket(pygame.sprite.Sprite):
     def hit(self, mob):
         self.kill()
         return mob.getdamage(self.damage)
+
+class Plasmabeam(pygame.sprite.Sprite):
+    def __init__(self, adjustment, damage):
+        pygame.sprite.Sprite.__init__(self)
+        width = int(damage ** 0.5 * 9)
+        height = int(damage ** 0.5 * 14)
+        size = (width, height)
+        self.image = pygame.transform.scale(images.heroprojectiles[2], size)
+        self.rect = self.image.get_rect()
+        self.rect.top = Gamedata.hero.rect.top
+        self.rect.centerx = Gamedata.hero.rect.centerx + adjustment
+        self.type = 4
+        self.movey = 16
+        self.damage = damage
+
+    def update(self):
+        self.rect.y -= self.movey
+        self.damage -= 1
+        width = int(self.damage ** 0.5 * 9)
+        height = int(self.damage ** 0.5 * 14)
+        size = (width, height)
+        self.image = pygame.transform.scale(images.heroprojectiles[2], size)
+        x = self.rect.x
+        y = self.rect.y
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+        if not GameplayConstants.extendedscreen.colliderect(self.rect) or self.damage == 0:
+            self.kill()
+
+    def hit(self, mob):
+        self.kill()
+        return mob.getdamage(self.damage)
+
 
 images = Imageloading()

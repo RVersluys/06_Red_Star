@@ -12,19 +12,6 @@ def draw_text(surface, text, size, x, y, font_name, color = Colors.black, bold =
     text_rect.midleft = (x, y)
     surface.blit(text_surface, text_rect)
 
-
-def refresh_menubutton(rect, mousepos, text, stroke):
-    if stroke == True:
-        strokerect = (rect.left -3, rect.top -3, rect.width +6, rect.height +6)
-        pygame.draw.rect(GameplayConstants.screen, Colors.black, strokerect)
-    if rect.collidepoint(mousepos):
-        color = (81, 103, 124)
-    else:
-        color = (150, 150, 150)
-    pygame.draw.rect(GameplayConstants.screen, color, rect)
-
-    draw_text(GameplayConstants.screen, text, 25, rect.left+5, rect.centery, "Xolonium")
-
 def get_savegames():
     count = 0
     filepath = os.path.join(os.path.dirname(__file__), 'savegames')
@@ -38,9 +25,6 @@ def get_savegames():
         if count == 10:
             break
     return filelist
-
-
-
 
 def displayshippart(image, posx, posy, shippartshape = False):
     background = pygame.Rect(posx - 90, posy - 180, 180, 360)

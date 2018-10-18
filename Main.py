@@ -23,6 +23,7 @@ import Sounds
 import Schipmenu
 import Colors
 import Button
+import Optionsmenu
 
 game_folder = os.path.dirname(__file__)
 fps = GameplayConstants.fps
@@ -46,6 +47,7 @@ class Game:
                      Button.Button(pygame.Rect(54, 421, 234, 54), "Hall of Fame", "Hall of Fame"),
                      Button.Button(pygame.Rect(54, 491, 234, 54), "Quit", "Quit")]
         self.submenu = []
+        optionmenu = Optionsmenu.Optionmenu()
         self.choice = -1
         self.filepath = ""
         pygame.display.flip()
@@ -59,6 +61,7 @@ class Game:
                 elif event.type == pygame.MOUSEBUTTONDOWN:
                     mouse = pygame.mouse.get_pressed()
                     if mouse[0]:
+                        optionmenu.click(mousepos)
                         for button in self.menu:
                             if button.rect.collidepoint(mousepos):
                                 if button.function == "Continue":
@@ -77,7 +80,7 @@ class Game:
                                     shipmenu.shipmenuloop()
                                     self.screenupdate()
                                 elif button.function == "Settings":
-                                    pass
+                                    optionmenu.display()
                                 elif button.function == "Load Game":
                                     self.generate_submenu(button)
                                 elif button.function == "Quit":
@@ -106,6 +109,11 @@ class Game:
                         button.update()
                     for button in self.submenu:
                         button.update()
+                    if optionmenu.drag:
+                        optionmenu.draghandling(mousepos)
+                    optionmenu.update()
+                elif event.type == pygame.MOUSEBUTTONUP:
+                    optionmenu.drag = False
             pygame.display.flip()
 
     def generate_submenu(self, selectedbutton):
