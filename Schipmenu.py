@@ -310,7 +310,7 @@ class Schipmenu:
                     else:
                         Gamedata.player.shipfill[yadjusted + stepdown][xadjusted] = item
 
-                        GameplayConstants.screen.blit(self.partimage, (70 + 60 * xadjusted, 530 + 60 * yadjusted))
+                        GameplayConstants.screen.blit(self.partimage, (70 + 60 * xadjusted, 560 + 60 * yadjusted))
                 Gamedata.player.shippartsused.append(item)
                 pygame.mouse.set_visible(True)
                 self.shippartselected = False
@@ -374,7 +374,7 @@ class Schipmenu:
         for shippart in Gamedata.player.shippartsused:
             image = pygame.transform.rotate(GameplayConstants.shippartimages[shippart.type - 1][shippart.index], -shippart.rotations * 90)
             rect = image.get_rect()
-            rect.top = 530 + int(shippart.ypos) * 60
+            rect.top = 560 + int(shippart.ypos) * 60
             rect.left = 70 + int(shippart.xpos) * 60
             GameplayConstants.screen.blit(image, rect)
 
@@ -383,7 +383,7 @@ class Schipmenu:
                 if isinstance(Gamedata.player.shipfill[y][x], int):
                     if Gamedata.player.shipfill[y][x] > 0 and Gamedata.player.shipfill[y][x] <= Gamedata.player.ship + 1:
                         if self.shippartselected == False:
-                            pygame.draw.rect(GameplayConstants.screen, Colors.lightgray, pygame.Rect(70 + x * 60, 530 + y * 60, 57, 57), 2)
+                            pygame.draw.rect(GameplayConstants.screen, Colors.lightgray, pygame.Rect(70 + x * 60, 560 + y * 60, 57, 57), 2)
                         else:
                             freelist[y][x] = True
         if self.shippartselected:  # onderstaande is het inventariseren waar op het schip het geselecteerde object kan worden geplaatst.
@@ -405,16 +405,16 @@ class Schipmenu:
                                 for step in range(width):
                                     if self.shippartshape[stepdown][step] == 1 and self.greenlist[y + stepdown][x + step] == 0:
                                         self.greenlist[y + stepdown][x + step] = 1
-                                        GameplayConstants.screen.blit(s2, (70 + (x + step) * 60, 530 + (y + stepdown) * 60))
-                                        pygame.draw.rect(GameplayConstants.screen, Colors.darkgreen, pygame.Rect(70 + (x + step) * 60, 530 + (y + stepdown) * 60, 57, 57), 2)
+                                        GameplayConstants.screen.blit(s2, (70 + (x + step) * 60, 560 + (y + stepdown) * 60))
+                                        pygame.draw.rect(GameplayConstants.screen, Colors.darkgreen, pygame.Rect(70 + (x + step) * 60, 560 + (y + stepdown) * 60, 57, 57), 2)
                             elif self.greenlist[y + stepdown][x] == 0:
                                 self.greenlist[y + stepdown][x] = 1
-                                GameplayConstants.screen.blit(s2, (70 + x * 60, 530 + (y + stepdown) * 60))
-                                pygame.draw.rect(GameplayConstants.screen, Colors.darkgreen, pygame.Rect(70 + x * 60, 530 + (y + stepdown) * 60, 57, 57), 2)
+                                GameplayConstants.screen.blit(s2, (70 + x * 60, 560 + (y + stepdown) * 60))
+                                pygame.draw.rect(GameplayConstants.screen, Colors.darkgreen, pygame.Rect(70 + x * 60, 560 + (y + stepdown) * 60, 57, 57), 2)
             for x in range(9):
                 for y in range(8):
                     if self.greenlist[y][x] == 0 and Gamedata.player.shipfill[y][x] == 1:
-                        pygame.draw.rect(GameplayConstants.screen, Colors.darkred, pygame.Rect(70 + x * 60, 530 + y * 60, 57, 57), 2)
+                        pygame.draw.rect(GameplayConstants.screen, Colors.darkred, pygame.Rect(70 + x * 60, 560 + y * 60, 57, 57), 2)
 
     def create_menu(self):
         for x in range(len(GameplayConstants.shippartslist[self.menunumber])):

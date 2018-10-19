@@ -34,13 +34,13 @@ anti_matter_drive = [[0,1,0],[1,1,1]]
 
 # locaties waar schiponderdelen kunnen worden geplaatst
 # dit is de layout van het schip. 1 = schip1, 1+2 = schip2 en 1+2+3 = schip 3
-shipdesign = [[0, 0, 0, 0, 0, 0, 0, 0, 0],
+shipdesign = [[0, 0, 0, 3, 0, 3, 0, 0, 0],
+              [0, 0, 0, 3, 1, 3, 0, 0, 0],
               [0, 0, 0, 0, 1, 0, 0, 0, 0],
-              [0, 3, 0, 0, 1, 0, 0, 3, 0],
-              [0, 2, 3, 1, 1, 1, 3, 2, 0],
+              [0, 2, 0, 1, 1, 1, 0, 2, 0],
               [0, 2, 1, 1, 1, 1, 1, 2, 0],
-              [3, 2, 1, 1, 3, 1, 1, 2, 3],
-              [3, 3, 3, 0, 3, 0, 3, 3, 3],
+              [0, 2, 1, 1, 3, 1, 1, 2, 0],
+              [0, 0, 0, 3, 3, 3, 0, 0, 0],
               [0, 0, 0, 0, 0, 0, 0, 0, 0]]
 
 # specificaties en namen van de onderdelen
@@ -50,7 +50,7 @@ shippartslist = [[["Weapons"], ["Engine"], ["Shield"], ["Power"],["Ships"]],
                   ["Flak Cannon", 6, flak_cannon, 10, 21, "Magnatic balista that propels", "projectiles that explode to carpet", "the area with small fragments.", 18, 2],
                   ["Rocket Launcher", 3, rocket_launcher, 0, 10, "Ballistic missile platform with", "limited ammo that shoots missiles", "based on your power source.", 20, 1],
                   ["Laser Cannon", 10, laser_cannon, 50, 54, "High powered laser weapon that", "can blow a hole in even the ", "strongest armor.", 40, 1],
-                  ["Plasma Cannon", 22, laser_cannon, 30, 6, "High powered laser weapon that", "can blow a hole in even the ", "strongest armor.", 12, 3]],
+                  ["Plasma Cannon", 22, plasma_cannon, 30, 6, "High powered laser weapon that", "can blow a hole in even the ", "strongest armor.", 12, 3]],
                  [["Rocket Engine", 1, rocket_engine, 10, 2, "Conventional rocket propulsion ", "is not necessary efficiënt but it", "is flexible."], #engines: name, price, shape, energyuse(second), speedboost
                   ["Ion Thruster", 3, ion_thruster, 20, 5, "Higly efficient propulsion system", "that fires ions at the opposite", "direction."],
                   ["Anti Matter Drive", 15, anti_matter_drive, 50, 9, "Nobody really knows how this", "works, but it sure sounds cool", "and that counts for something!"]],
@@ -60,8 +60,9 @@ shippartslist = [[["Weapons"], ["Engine"], ["Shield"], ["Power"],["Ships"]],
                  [["Solar Panel", 1, solar_panel, 15, 30, "Conventional energy mechanism", "that converts solar energy in large", "batteries."], #power source: name, price, shape, energyregen(second), maxenergyboost
                   ["Fission Reactor", 4, fission_reactor, 65, 75, "Based on nuclear fission, this", "reactor gives the ship massive", "amounts of energy."],
                   ["Fusion Reactor", 12, fusion_reactor, 130, 200, "A stable fussion reactor is", "fueled with water and gives an", "almost limitless supply of energy."]],
-                 [["UE Vanguard", 0, shipdesign, 14, 50, "The first Earth ship made with", "the Alfa technology has immediately", "become the pride of the navy.", (189,590), 16],
-                 ["UE Victorious", 33, shipdesign, 20, 80, "With superior armor and extra", "weapon space, this ship can compete", "with anything the aliëns send to us.", (129,590), 14]]]
+                 [["UE Vanguard", 0, shipdesign, 14, 50, "The first Earth ship made with", "the Alfa technology has immediately", "become the pride of the navy.", (189,620), 16],
+                 ["UE Victorious", 33, shipdesign, 20, 80, "With superior armor and extra", "weapon space, this ship can compete", "with anything the aliëns send to us.", (129,620), 14],
+                  ["UE Vicious", 75, shipdesign, 28, 130, "With superior armor and extra", "weapon space, this ship can compete", "with anything the aliëns send to us.", (129, 500), 11]]]
 
 
 
@@ -93,13 +94,10 @@ def shippartinfo(list, index, upgrade):
     shippartinfo.append("")
     if list == 1:
         if index == 2:
-            succes = False
+            damage = 20
             for part in Gamedata.player.shipparts:
-                if part.type == 4 and part.index == 1:
-                    damage = 30
-                    succes = True
-            if not succes:
-                damage = 20
+                if part.type == 4:
+                    damage = max(damage, 20 + 10 * part.index)
             shippartinfo.append("Damage: " + str(damage))
             shippartinfo.append("Ammo: " + str(10 * (upgrade + 1)))
         else:

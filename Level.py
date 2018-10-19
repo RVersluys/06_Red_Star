@@ -24,6 +24,8 @@ class Level:
             self.musiclist = []
             self.startscore = Gamedata.player.score
             self.startgold = Gamedata.player.gold
+            for missilelauncher in Gamedata.player.missiles:
+                missilelauncher.replenish()
             for enemy in range(300):
                 spawntime = enemy * 50 + 100
                 unittype = random.randint(0, 2)

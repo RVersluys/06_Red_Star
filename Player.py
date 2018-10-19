@@ -18,13 +18,14 @@ class Player:
         self.weapons = []
         self.shipparts = []
         self.score = 0
-        self.gold = 15000
+        self.gold = 150000
         self.maxarmor = 50
         self.maxshield = 10
         self.maxenergy = 100
         self.energyuse = 0 # standaard energieverlies per seconde vanwege energiegebruik schipsonderdelen
         self.energyregen = 20 # basis energieproductie per seconde
         self.shippartsused = []  # list met alle geimplementeerde scheepsonderdelen
+        self.missiles = []
         self.shipfill = deepcopy(GameplayConstants.shipdesign)
         self.levelnumber = 0 # huidige level van het spel
         self.ship = 0
@@ -62,7 +63,6 @@ class Shippart:
         self.xpos = xpos
         self.ypos = ypos
         self.shape = shape
-        #self.shape = GameplayConstants.shippartslist[type][index][2]
         self.type = type
         self.index = index
         self.upgrades = 0
@@ -83,6 +83,9 @@ class Shippart:
             self.upgrades += 1
             self.changestats(1)
             Sounds.sounds.soundimplement.play()
+            if self.type == 4 and self.index == 2:
+                for missilelauncher in missiles:
+                    missilelauncher.replenish()
         else:
             Sounds.sounds.soundfail.play()
 
@@ -221,9 +224,13 @@ class Weapon(Shippart):
         Gamedata.player.gold -= GameplayConstants.shippartprice(self.type, index, 0)
         if self.index == 2:
             self.fireleft = True
-            self.ammo = (self.upgrades+1) * 10
+            self.ammo = 10
+            Gamedata.player.missiles.append(self)
         elif self.index == 4:
             self.chargeup = 0
+
+    def replenish(self):
+        self.ammo = (self.upgrades+1) * 10
 
     def update(self):
         if self.nowcooldown != 0:

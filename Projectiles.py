@@ -190,13 +190,10 @@ class Rocket(pygame.sprite.Sprite):
         self.rect.left = Gamedata.hero.rect.centerx + adjustment
         self.type = 2
         self.movey = 16
-        succes = False
         for part in Gamedata.player.shipparts:
-            if part.type == 4 and part.index == 1:
-                self.damage = damage * 1.5
-                succes = True
-        if not succes:
-            self.damage = damage
+            if part.type == 4:
+                damage = max(damage, 20 + 10 * part.index)
+        self.damage = damage
 
     def update(self):
         self.rect.y -= self.movey
