@@ -95,7 +95,7 @@ class Mob(pygame.sprite.Sprite):
             return self.points
         else:
             maxhp = unitstats.hitpoints[self.imageindex]
-            self.damagestate = int(3-(3/maxhp*self.hp))
+            self.damagestate = max(0,min(2,int(3-(3/maxhp*self.hp))))
             self.image = images.imagehitlist[self.damagestate][self.imageindex]
             self.lasthit = pygame.time.get_ticks()
             self.hit = True
