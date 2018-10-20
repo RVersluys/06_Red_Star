@@ -18,7 +18,7 @@ class Player:
         self.weapons = []
         self.shipparts = []
         self.score = 0
-        self.gold = 150000
+        self.gold = 15000
         self.maxarmor = 50
         self.maxshield = 10
         self.maxenergy = 100

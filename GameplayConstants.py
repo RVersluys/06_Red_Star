@@ -24,13 +24,15 @@ plasma_cannon = [[1,0],[1,0],[1,1],[1,1],[1,0]]
 
 rocket_engine = [[1,], [1,]]
 ion_thruster = [[1, 1], [1, 1]]
-magnatic_shield = [[1, 1]]
+warp_drive = [[1,], [1,], [1,]]
+anti_matter_drive = [[0,1,0],[1,1,1]]
+magnetic_shield = [[1, 1]]
 flux_shield = [[1, 1, 1]]
 barrier_shield = [[0, 1],[1,1]]
 solar_panel = [[1,]]
 fission_reactor = [[1, 1], [0, 1]]
 fusion_reactor = [[0,1,0],[1,1,1]]
-anti_matter_drive = [[0,1,0],[1,1,1]]
+anti_matter_core = [[1,0,1],[1,1,1]]
 
 # locaties waar schiponderdelen kunnen worden geplaatst
 # dit is de layout van het schip. 1 = schip1, 1+2 = schip2 en 1+2+3 = schip 3
@@ -53,18 +55,18 @@ shippartslist = [[["Weapons"], ["Engine"], ["Shield"], ["Power"],["Ships"]],
                   ["Plasma Cannon", 22, plasma_cannon, 30, 6, "High powered laser weapon that", "can blow a hole in even the ", "strongest armor.", 12, 3]],
                  [["Rocket Engine", 1, rocket_engine, 10, 2, "Conventional rocket propulsion ", "is not necessary efficiënt but it", "is flexible."], #engines: name, price, shape, energyuse(second), speedboost
                   ["Ion Thruster", 3, ion_thruster, 20, 5, "Higly efficient propulsion system", "that fires ions at the opposite", "direction."],
+                  ["Warp Drive", 12, warp_drive, 30, 6, "By shrinking the space in front", "of the ship, more distance can be", "covered in shorter time."],
                   ["Anti Matter Drive", 15, anti_matter_drive, 50, 9, "Nobody really knows how this", "works, but it sure sounds cool", "and that counts for something!"]],
-                 [["Magnatic Deflector", 2.5, magnatic_shield, 7, 15, "The use of powerful magnetic", "fields are able to dispurse many", "types of projectiles."], #shields: name,  price, energyuse(second), shape, maxschildboost
+                 [["Magnetic Deflector", 2.5, magnetic_shield, 7, 15, "The use of powerful magnetic", "fields are able to dispurse many", "types of projectiles."], #shields: name,  price, energyuse(second), shape, maxschildboost
                   ["Flux Shield", 5, flux_shield, 12, 30, "This shield filters undesirable", "wavelengths while allowing other", "wavelengths to protect the ship."],
-                  ["Barrier Shield", 10, barrier_shield, 25, 60, "A barrier shield uses magnets", "to surround the ship with", "liquid plasma."]],
+                  ["Barrier Shield", 14, barrier_shield, 25, 60, "A barrier shield uses magnets", "to surround the ship with", "liquid plasma."]],
                  [["Solar Panel", 1, solar_panel, 15, 30, "Conventional energy mechanism", "that converts solar energy in large", "batteries."], #power source: name, price, shape, energyregen(second), maxenergyboost
                   ["Fission Reactor", 4, fission_reactor, 65, 75, "Based on nuclear fission, this", "reactor gives the ship massive", "amounts of energy."],
-                  ["Fusion Reactor", 12, fusion_reactor, 130, 200, "A stable fussion reactor is", "fueled with water and gives an", "almost limitless supply of energy."]],
+                  ["Fusion Reactor", 12, fusion_reactor, 130, 200, "A stable fussion reactor is", "fueled with water and gives an", "almost limitless supply of energy."],
+                  ["Anti Matter Core", 25, anti_matter_core, 250, 500, "Harnessing Antimatter unlocks", "potential beyond imagination", "like this power generator."]],
                  [["UE Vanguard", 0, shipdesign, 14, 50, "The first Earth ship made with", "the Alfa technology has immediately", "become the pride of the navy.", (189,620), 16],
                  ["UE Victorious", 33, shipdesign, 20, 80, "With superior armor and extra", "weapon space, this ship can compete", "with anything the aliëns send to us.", (129,620), 14],
                   ["UE Vicious", 75, shipdesign, 28, 130, "With superior armor and extra", "weapon space, this ship can compete", "with anything the aliëns send to us.", (129, 500), 11]]]
-
-
 
 shippartimages = []
 for catagory in range(1, 6):
