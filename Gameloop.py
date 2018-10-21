@@ -178,7 +178,8 @@ class Gameloop:
                     Button.Button(pygame.Rect(windowwidth / 2 - 275, windowheight / 2 - 55, 550, 50), "Abort mission", "Abort"),
                     Button.Button(pygame.Rect(windowwidth / 2 - 275, windowheight / 2 + 5, 550, 50), "Settings", "Settings"),
                     Button.Button(pygame.Rect(windowwidth / 2 - 275, windowheight / 2 + 65, 550, 50), "Resume", "Resume")]
-        optionmenu = Optionsmenu.Optionmenu()
+        optionmenu = Optionsmenu.Optionmenu((windowwidth / 2 - 275, windowheight / 2 - 160))
+        returnbutton = Button.Button(pygame.Rect(windowwidth / 2 - 275, windowheight / 2 + 110, 550, 50), "Return", "Return", False)
         pygame.display.flip()
 
         while True:
@@ -203,7 +204,10 @@ class Gameloop:
                                     Sounds.sounds.soundclick.play()
                                     return
                                 elif button.function == "Settings":
+                                    pygame.draw.rect(GameplayConstants.screen, Colors.darkgray, pygame.Rect(windowwidth/2-300, windowheight/2-180, 600, 360))
                                     optionmenu.display()
+                                    returnbutton.active = True
+                                    returnbutton.update()
                                     for button in mainmenu:
                                         button.active = False
                                     Sounds.sounds.soundclick.play()
@@ -211,7 +215,13 @@ class Gameloop:
                                     pygame.mouse.set_visible(False)
                                     Sounds.sounds.soundclick.play()
                                     return
-
+                        if returnbutton.rect.collidepoint(mousepos) and returnbutton.active:
+                            optionmenu.hide()
+                            returnbutton.active = False
+                            pygame.draw.rect(GameplayConstants.screen, Colors.darkgray, pygame.Rect(windowwidth / 2 - 300, windowheight / 2 - 180, 600, 360))
+                            for button in mainmenu:
+                                button.active = True
+                                button.update()
                 elif event.type == pygame.MOUSEMOTION:
                     if optionmenu.drag:
                         optionmenu.draghandling(mousepos)
@@ -219,6 +229,7 @@ class Gameloop:
                     for button in mainmenu:
                         button.update()
                     optionmenu.update()
+                    returnbutton.update()
 
                 elif event.type == pygame.MOUSEBUTTONUP:
                     optionmenu.drag = False

@@ -2,8 +2,10 @@ import pygame
 import GameplayConstants
 import math
 import os
+import datetime
 
 import Colors
+import Button
 
 def draw_text(surface, text, size, x, y, font_name, color = Colors.black, bold = True):
     font = pygame.font.Font(pygame.font.match_font(font_name, bold = bold), size)
@@ -25,6 +27,24 @@ def get_savegames():
         if count == 10:
             break
     return filelist
+
+def loadgame():
+    filelist = get_savegames()
+
+    pygame.draw.rect(GameplayConstants.screen, Colors.darkgray, pygame.Rect(GameplayConstants.windowwidth / 2 - 300, GameplayConstants.windowheight / 2 - 30 * (len(filelist)+1) - 20, 600, 60 * (len(filelist)+1) + 40))
+    submenu = []
+
+    filenr = 0
+    for file in filelist:
+        rect = pygame.Rect(GameplayConstants.windowwidth / 2 - 275, GameplayConstants.windowheight / 2 - 30 * (len(filelist)+1) + 60 * filenr, 550, 50)
+        path = os.path.join(GameplayConstants.game_folder, "savegames", str(file[0] + file[1]))
+        date = datetime.datetime.fromtimestamp(os.path.getmtime(path)).strftime('%d-%m-%Y %H:%M:%S')
+        text = file[0] + " - (" + str(date) + ")"
+        submenu.append(Button.Selectable(rect, text, file))
+        filenr += 1
+    rect = pygame.Rect(GameplayConstants.windowwidth / 2 - 275, GameplayConstants.windowheight / 2 + 30 * len(filelist)-20, 550, 50)
+    submenu.append(Button.Button(rect, "Load Game", "Load"))
+    return submenu
 
 def displayshippart(image, posx, posy, shippartshape = False):
     background = pygame.Rect(posx - 90, posy - 180, 180, 360)

@@ -18,7 +18,7 @@ class Player:
         self.weapons = []
         self.shipparts = []
         self.score = 0
-        self.gold = 15000
+        self.gold = 150000
         self.maxarmor = 50
         self.maxshield = 10
         self.maxenergy = 100
@@ -181,6 +181,9 @@ class Shippart:
                                         button.active = False
                                 elif button.function == "Downgrade":
                                     self.downgrade()
+                                    if self.upgrades == 4:
+                                        buttons[1].active = True
+                                        buttons[1].update()
                                     self.shipmenutext(self, startwidth, startheight, textrect)
                                     pygame.draw.rect(GameplayConstants.screen, Colors.lightgray, goldrect)
                                     Tools.draw_text(GameplayConstants.screen, "Gold: " + str(Gamedata.player.gold), 35, 1495, 55, "Xolonium")

@@ -10,21 +10,28 @@ windowwidth = GameplayConstants.windowwidth
 windowheight = GameplayConstants.windowheight
 
 class Optionmenu:
-    def __init__(self):
-        pygame.draw.rect(GameplayConstants.screen, Colors.darkgray, pygame.Rect(windowwidth / 2 - 300, windowheight / 2 - 180, 600, 360))
+    def __init__(self, pos):
+        #pygame.draw.rect(GameplayConstants.screen, Colors.darkgray, pygame.Rect(windowwidth / 2 - 300, windowheight / 2 - 180, 600, 360))
         speed = (GameplayConstants.fps - 30) / 5
-        self.buttons = [Button.Dragbar(pygame.Rect(windowwidth / 2 - 275, windowheight / 2 - 160, 550, 80), "Game speed", 6, speed, False),
-                      Button.Dragbar(pygame.Rect(windowwidth / 2 - 275, windowheight / 2 - 70, 550, 80), "Music volume", 100, GameplayConstants.musicvolume, False),
-                      Button.Dragbar(pygame.Rect(windowwidth / 2 - 275, windowheight / 2 + 20, 550, 80), "Effects volume", 100, GameplayConstants.effectsvolume, False),
-                      Button.Button(pygame.Rect(windowwidth / 2 - 275, windowheight / 2 + 110, 550, 50), "Return", "Return", False)]
+        self.buttons = [Button.Dragbar(pygame.Rect(pos[0], pos[1], 550, 80), "Game speed", 6, speed, False),
+                      Button.Dragbar(pygame.Rect(pos[0], pos[1]+90, 550, 80), "Music volume", 100, GameplayConstants.musicvolume, False),
+                      Button.Dragbar(pygame.Rect(pos[0], pos[1]+180, 550, 80), "Effects volume", 100, GameplayConstants.effectsvolume, False)]
         self.drag = False
-
+        self.pos = pos
+        self.displayed = False
 
     def display(self):
-        pygame.draw.rect(GameplayConstants.screen, Colors.darkgray, pygame.Rect(windowwidth / 2 - 300, windowheight / 2 - 180, 600, 360))
+        #pygame.draw.rect(GameplayConstants.screen, Colors.darkgray, pygame.Rect(self.pos[0]-25, self.pos[1]-25, 600, 360))
         for button in self.buttons:
             button.active = True
             button.update()
+        self.displayed = True
+
+    def hide(self):
+        #pygame.draw.rect(GameplayConstants.screen, Colors.darkgray, pygame.Rect(self.pos[0] - 25, self.pos[1] - 25, 600, 360))
+        for button in self.buttons:
+            button.active = False
+        self.displayed = False
 
     def update(self):
         for button in self.buttons:
@@ -59,11 +66,6 @@ class Optionmenu:
                     self.choice = 2
                     button.update()
                     self.drag = True
-                elif button.function == "Return":
-                    pygame.draw.rect(GameplayConstants.screen, Colors.darkgray, pygame.Rect(windowwidth / 2 - 300, windowheight / 2 - 180, 600, 360))
-                    for button in self.buttons:
-                        button.active = False
-                    return True
         return False
 
     def draghandling(self, mousepos):

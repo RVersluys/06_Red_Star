@@ -1,7 +1,6 @@
 import pygame
 import os
 import pickle
-import datetime
 
 windowwidth = 1920
 windowheight = 1080
@@ -47,7 +46,7 @@ class Game:
                      Button.Button(pygame.Rect(54, 421, 234, 54), "Hall of Fame", "Hall of Fame"),
                      Button.Button(pygame.Rect(54, 491, 234, 54), "Quit", "Quit")]
         self.submenu = []
-        optionmenu = Optionsmenu.Optionmenu()
+        optionmenu = Optionsmenu.Optionmenu((windowwidth / 2 - 275, windowheight / 2 - 130))
         self.choice = -1
         self.filepath = ""
         pygame.display.flip()
@@ -61,9 +60,16 @@ class Game:
                 elif event.type == pygame.MOUSEBUTTONDOWN:
                     mouse = pygame.mouse.get_pressed()
                     if mouse[0]:
-                        optionmenu.click(mousepos)
+                        #optionmenu.click(mousepos)
                         for button in self.menu:
                             if button.rect.collidepoint(mousepos):
+                                if button.function == "Settings":
+                                    if optionmenu.displayed:
+                                        optionmenu.hide()
+                                        self.screenupdate()
+                                    else:
+                                        pygame.draw.rect(screen, Colors.darkgray, pygame.Rect(windowwidth/2-300, windowheight/2-155, 600, 310))
+                                        optionmenu.display()
                                 if button.function == "Continue":
                                     filepath = os.path.join(game_folder, 'savegames', 'auto_save.pickle')
                                     if os.path.isfile(filepath):
@@ -79,12 +85,13 @@ class Game:
                                     Gamedata.player = Player.Player()
                                     shipmenu.shipmenuloop()
                                     self.screenupdate()
-                                elif button.function == "Settings":
-                                    optionmenu.display()
+
                                 elif button.function == "Load Game":
                                     self.generate_submenu(button)
                                 elif button.function == "Quit":
                                     pygame.quit()
+
+                        optionmenu.click(mousepos)
                         for button in self.submenu:
                             if type(button) is Button.Selectable:
                                 if button.rect.collidepoint(mousepos):
@@ -132,25 +139,8 @@ class Game:
             selectedbutton.selected = True
             selectedbutton.update()
             if selectedbutton.function == "Load Game":
-                filelist = Tools.get_savegames()
-                self.loadgame(filelist)
-
-
-    def loadgame(self, filelist):
-        Sounds.sounds.soundclick.play()
-        pygame.draw.rect(screen, Colors.darkgray, pygame.Rect(windowwidth / 2 - 300, windowheight / 2 - 30 * (len(filelist)+1) - 20, 600, 60 * (len(filelist)+1) + 40))
-        self.submenu = []
-
-        filenr = 0
-        for file in filelist:
-            rect = pygame.Rect(windowwidth / 2 - 275, windowheight / 2 - 30 * (len(filelist)+1) + 60 * filenr, 550, 50)
-            path = os.path.join(game_folder, "savegames", str(file[0] + file[1]))
-            date = datetime.datetime.fromtimestamp(os.path.getmtime(path)).strftime('%d-%m-%Y %H:%M:%S')
-            text = file[0] + " - (" + str(date) + ")"
-            self.submenu.append(Button.Selectable(rect, text, file))
-            filenr += 1
-        rect = pygame.Rect(windowwidth / 2 - 275, windowheight / 2 + 30 * len(filelist)-20, 550, 50)
-        self.submenu.append(Button.Button(rect, "Load Game", "Load"))
+                self.submenu = Tools.loadgame()
+                Sounds.sounds.soundclick.play()
 
     def screenupdate(self):
         screen.blit(self.background, dest=(0, 0))

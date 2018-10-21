@@ -113,7 +113,7 @@ class Level:
             self.spawnlist.append([620, 9, warscreenwidth, 200, -4, 0, [(0, 0)], [(100, 3, 0)], 0])
 
             # 1000 ticks: tweede aanval: fighters (verticaal)
-            self.spawnlist.append([1000, 9, 400, 0, 0, 4, [(0,0)], [(100,3,0)],0])
+            self.spawnlist.append([1000, 9, 400, 0, 0, 4, [(0,0)], [(100, 3, 0)],0])
             self.spawnlist.append([1060, 9, 800, 0, 0, 4, [(0, 0)], [(100, 3, 0)], 0])
             self.spawnlist.append([1120, 9, 1200, 0, 0, 4, [(0, 0)], [(100, 3, 0)], 200])
 
