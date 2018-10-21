@@ -20,6 +20,10 @@ class Imageloading:
         self.heroprojectiles = [pygame.image.load(os.path.join(imgfolder, 'projectiles', 'bullet.png')).convert_alpha(),
                                 pygame.image.load(os.path.join(imgfolder, 'projectiles', 'rocket.png')).convert_alpha(),
                                 pygame.image.load(os.path.join(imgfolder, 'projectiles', 'plasma.png')).convert_alpha()]
+        self.plasmadecay = []
+        for x in range(12):
+            name = "Plasma" + str(x+1) + ".png"
+            self.plasmadecay.append(pygame.image.load(os.path.join(imgfolder, 'projectiles', name)).convert_alpha())
 
 class Mobbullet(pygame.sprite.Sprite):
     def __init__(self, x, y, movex, movey, angle, type):
@@ -207,27 +211,39 @@ class Rocket(pygame.sprite.Sprite):
 class Plasmabeam(pygame.sprite.Sprite):
     def __init__(self, x, y, damage, movex):
         pygame.sprite.Sprite.__init__(self)
-        width = int(damage ** 0.5 * 9)
-        height = int(damage ** 0.5 * 14)
-        size = (width, height)
+        dimension = int(damage ** 0.5 * 9)
+        size = (dimension, dimension)
         self.image = pygame.transform.scale(images.heroprojectiles[2], size)
         self.rect = self.image.get_rect()
         self.rect.centery = y
         self.rect.centerx = x
         self.type = 4
-        self.movey = 16
+        self.movey = -6
         self.movex = movex
         self.damage = damage
+        self.ticks = 0
+        self.deadticks = 0
+        self.dead = False
+        self.hitlist = []
 
     def update(self):
+        self.ticks += 1
+        if self.ticks%2 == 0:
+            self.movey += 1
 
         self.rect.y -= self.movey
         self.rect.x += self.movex
         self.damage -= 1
-        width = int(self.damage ** 0.5 * 9)
-        height = int(self.damage ** 0.5 * 14)
-        size = (width, height)
-        self.image = pygame.transform.scale(images.heroprojectiles[2], size)
+        dimension = int(self.damage ** 0.5 * 9)
+        size = (dimension, dimension)
+        if self.dead:
+            if self.deadticks == 12:
+                self.kill()
+                return
+            self.image = pygame.transform.scale(images.plasmadecay[self.deadticks], size)
+            self.deadticks += 1
+        else:
+            self.image = pygame.transform.scale(images.heroprojectiles[2], size)
         x = self.rect.centerx
         y = self.rect.centery
         self.rect = self.image.get_rect()
@@ -237,8 +253,12 @@ class Plasmabeam(pygame.sprite.Sprite):
             self.kill()
 
     def hit(self, mob):
-        self.kill()
-        return mob.getdamage(self.damage)
+        self.dead = True
+        if mob not in self.hitlist:
+            self.hitlist.append(mob)
+            return mob.getdamage(self.damage)
+        else:
+            return 0
 
 
 images = Imageloading()

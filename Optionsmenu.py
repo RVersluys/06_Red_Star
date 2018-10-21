@@ -9,7 +9,6 @@ windowheight = GameplayConstants.windowheight
 
 class Optionmenu:
     def __init__(self, pos):
-        #pygame.draw.rect(GameplayConstants.screen, Colors.darkgray, pygame.Rect(windowwidth / 2 - 300, windowheight / 2 - 180, 600, 360))
         speed = (GameplayConstants.fps - 30) / 5
         self.buttons = [Button.Dragbar(pygame.Rect(pos[0], pos[1], 550, 80), "Game speed", 6, speed, False),
                       Button.Dragbar(pygame.Rect(pos[0], pos[1]+90, 550, 80), "Music volume", 100, GameplayConstants.musicvolume, False),
