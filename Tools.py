@@ -30,10 +30,8 @@ def get_savegames():
 
 def loadgame():
     filelist = get_savegames()
-
     pygame.draw.rect(GameplayConstants.screen, Colors.darkgray, pygame.Rect(GameplayConstants.windowwidth / 2 - 300, GameplayConstants.windowheight / 2 - 30 * (len(filelist)+1) - 20, 600, 60 * (len(filelist)+1) + 40))
     submenu = []
-
     filenr = 0
     for file in filelist:
         rect = pygame.Rect(GameplayConstants.windowwidth / 2 - 275, GameplayConstants.windowheight / 2 - 30 * (len(filelist)+1) + 60 * filenr, 550, 50)

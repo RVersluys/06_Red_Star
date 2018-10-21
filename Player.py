@@ -14,7 +14,7 @@ clock = pygame.time.Clock()
 
 class Player:
     def __init__(self):
-        self.speed = 16
+        self.speed = 18
         self.weapons = []
         self.shipparts = []
         self.score = 0
@@ -83,8 +83,8 @@ class Shippart:
             self.upgrades += 1
             self.changestats(1)
             Sounds.sounds.soundimplement.play()
-            if self.type == 4 and self.index == 2:
-                for missilelauncher in missiles:
+            if self.type == 1 and self.index == 2:
+                for missilelauncher in Gamedata.player.missiles:
                     missilelauncher.replenish()
         else:
             Sounds.sounds.soundfail.play()

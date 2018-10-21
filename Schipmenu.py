@@ -148,6 +148,7 @@ class Schipmenu:
                                             filepath = os.path.join(game_folder, 'savegames', 'auto_save.pickle')
                                             pickle_out = open(filepath, "wb")
                                             pickle.dump(Gamedata.player, pickle_out)
+                                            Gamedata.halloffame.addscore("Player", Gamedata.player.score)
                                         self.resetscreen()
                                     elif button.function == "Back":
                                         Sounds.sounds.soundcancel.play()

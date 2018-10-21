@@ -1,7 +1,5 @@
 import pygame
 
-
-import Colors
 import Button
 import GameplayConstants
 import Sounds
@@ -21,14 +19,12 @@ class Optionmenu:
         self.displayed = False
 
     def display(self):
-        #pygame.draw.rect(GameplayConstants.screen, Colors.darkgray, pygame.Rect(self.pos[0]-25, self.pos[1]-25, 600, 360))
         for button in self.buttons:
             button.active = True
             button.update()
         self.displayed = True
 
     def hide(self):
-        #pygame.draw.rect(GameplayConstants.screen, Colors.darkgray, pygame.Rect(self.pos[0] - 25, self.pos[1] - 25, 600, 360))
         for button in self.buttons:
             button.active = False
         self.displayed = False

@@ -36,7 +36,7 @@ anti_matter_core = [[1,0,1],[1,1,1]]
 
 # locaties waar schiponderdelen kunnen worden geplaatst
 # dit is de layout van het schip. 1 = schip1, 1+2 = schip2 en 1+2+3 = schip 3
-shipdesign = [[0, 0, 0, 3, 3, 3, 0, 0, 0],
+shipdesign = [[0, 0, 0, 3, 0, 3, 0, 0, 0],
               [0, 0, 0, 3, 1, 3, 0, 0, 0],
               [0, 0, 0, 0, 1, 0, 0, 0, 0],
               [0, 2, 0, 1, 1, 1, 0, 2, 0],

@@ -23,6 +23,7 @@ import Schipmenu
 import Colors
 import Button
 import Optionsmenu
+import HallOfFame
 
 game_folder = os.path.dirname(__file__)
 fps = GameplayConstants.fps
@@ -34,6 +35,7 @@ class Game:
         pygame.mixer.music.load(os.path.join(game_folder, 'sounds', 'music', 'Hymne.mp3'))
         pygame.mixer.music.set_volume(GameplayConstants.musicvolume/100)
         pygame.mixer.music.play(loops=-1)
+        Gamedata.halloffame = HallOfFame.HallOfFame()
 
     def menuloop(self):
         running = True
@@ -49,6 +51,8 @@ class Game:
         optionmenu = Optionsmenu.Optionmenu((windowwidth / 2 - 275, windowheight / 2 - 130))
         self.choice = -1
         self.filepath = ""
+        self.halloffameselected = False
+        self.loadgameselected = False
         pygame.display.flip()
         while running:
             # keep loop running at the right speed
@@ -62,36 +66,83 @@ class Game:
                     if mouse[0]:
                         #optionmenu.click(mousepos)
                         for button in self.menu:
-                            if button.rect.collidepoint(mousepos):
-                                if button.function == "Settings":
+                            if button.function == "Settings":
+                                if button.rect.collidepoint(mousepos):
+                                    if self.loadgameselected:
+                                        self.submenu = []
+                                        self.loadgameselected = False
                                     if optionmenu.displayed:
                                         optionmenu.hide()
                                         self.screenupdate()
+                                        Sounds.sounds.soundcancel.play()
                                     else:
-                                        pygame.draw.rect(screen, Colors.darkgray, pygame.Rect(windowwidth/2-300, windowheight/2-155, 600, 310))
-                                        optionmenu.display()
-                                if button.function == "Continue":
-                                    filepath = os.path.join(game_folder, 'savegames', 'auto_save.pickle')
-                                    if os.path.isfile(filepath):
-                                        Sounds.sounds.soundclick.play()
-                                        pickle_in = open(filepath, "rb")
-                                        Gamedata.player = pickle.load(pickle_in)
-                                        shipmenu.shipmenuloop()
                                         self.screenupdate()
-                                    else:
-                                        Sounds.sounds.soundfail.play()
-                                elif button.function == "New Game":
+                                        pygame.draw.rect(screen, Colors.darkgray, pygame.Rect(windowwidth / 2 - 300, windowheight / 2 - 155, 600, 310))
+                                        optionmenu.display()
+                                        Sounds.sounds.soundclick.play()
+                            elif button.function == "Continue" and button.rect.collidepoint(mousepos):
+                                filepath = os.path.join(game_folder, 'savegames', 'auto_save.pickle')
+                                if os.path.isfile(filepath):
                                     Sounds.sounds.soundclick.play()
-                                    Gamedata.player = Player.Player()
+                                    pickle_in = open(filepath, "rb")
+                                    Gamedata.player = pickle.load(pickle_in)
                                     shipmenu.shipmenuloop()
                                     self.screenupdate()
-
-                                elif button.function == "Load Game":
-                                    self.generate_submenu(button)
-                                elif button.function == "Quit":
-                                    pygame.quit()
-
-                        optionmenu.click(mousepos)
+                                else:
+                                    Sounds.sounds.soundfail.play()
+                            elif button.function == "Hall of Fame":
+                                if button.rect.collidepoint(mousepos):
+                                    if optionmenu.displayed:
+                                        optionmenu.hide()
+                                    elif self.loadgameselected:
+                                        self.submenu = []
+                                        self.loadgameselected = False
+                                    if self.halloffameselected:
+                                        self.screenupdate()
+                                        self.halloffameselected = False
+                                        Sounds.sounds.soundcancel.play()
+                                    else:
+                                        self.screenupdate()
+                                        self.halloffameselected = True
+                                        filepath = os.path.join(game_folder, 'savegames', 'HOF.pickle')
+                                        Sounds.sounds.soundclick.play()
+                                        if os.path.isfile(filepath):
+                                            pickle_in = open(filepath, "rb")
+                                            Gamedata.halloffame = pickle.load(pickle_in)
+                                        else:
+                                            Gamedata.halloffame.display()
+                                elif self.halloffameselected:
+                                    self.halloffameselected = False
+                            elif button.function == "New Game" and button.rect.collidepoint(mousepos):
+                                Sounds.sounds.soundclick.play()
+                                filepath = os.path.join(game_folder, 'gamefiles', 'new_game.pickle')
+                                if os.path.isfile(filepath):
+                                    pickle_in = open(filepath, "rb")
+                                    Gamedata.player = pickle.load(pickle_in)
+                                    shipmenu.shipmenuloop()
+                                    self.screenupdate()
+                                else:
+                                    Gamedata.player = Player.Player()
+                                shipmenu.shipmenuloop()
+                                self.screenupdate()
+                            elif button.function == "Load Game":
+                                if button.rect.collidepoint(mousepos):
+                                    if optionmenu.displayed:
+                                        optionmenu.hide()
+                                    if self.loadgameselected:
+                                        self.loadgameselected = False
+                                        self.submenu = []
+                                        self.screenupdate()
+                                        Sounds.sounds.soundcancel.play()
+                                    else:
+                                        self.screenupdate()
+                                        Sounds.sounds.soundclick.play()
+                                        self.loadgameselected = True
+                                        self.submenu = Tools.loadgame()
+                            elif button.function == "Quit" and button.rect.collidepoint(mousepos):
+                                pygame.quit()
+                        if optionmenu.displayed:
+                            optionmenu.click(mousepos)
                         for button in self.submenu:
                             if type(button) is Button.Selectable:
                                 if button.rect.collidepoint(mousepos):
@@ -122,25 +173,6 @@ class Game:
                 elif event.type == pygame.MOUSEBUTTONUP:
                     optionmenu.drag = False
             pygame.display.flip()
-
-    def generate_submenu(self, selectedbutton):
-        screen.blit(self.background, dest=(0, 0))
-        for button in self.menu:
-            if button != selectedbutton:
-                button.selected = False
-            button.update()
-        if selectedbutton.selected == True:
-            selectedbutton.selected = False
-            self.submenu = []
-            selectedbutton.update()
-            Sounds.sounds.soundcancel.play()
-        else:
-            Sounds.sounds.soundclick.play()
-            selectedbutton.selected = True
-            selectedbutton.update()
-            if selectedbutton.function == "Load Game":
-                self.submenu = Tools.loadgame()
-                Sounds.sounds.soundclick.play()
 
     def screenupdate(self):
         screen.blit(self.background, dest=(0, 0))
