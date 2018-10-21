@@ -205,31 +205,34 @@ class Rocket(pygame.sprite.Sprite):
         return mob.getdamage(self.damage)
 
 class Plasmabeam(pygame.sprite.Sprite):
-    def __init__(self, adjustment, damage):
+    def __init__(self, x, y, damage, movex):
         pygame.sprite.Sprite.__init__(self)
         width = int(damage ** 0.5 * 9)
         height = int(damage ** 0.5 * 14)
         size = (width, height)
         self.image = pygame.transform.scale(images.heroprojectiles[2], size)
         self.rect = self.image.get_rect()
-        self.rect.top = Gamedata.hero.rect.top
-        self.rect.centerx = Gamedata.hero.rect.centerx + adjustment
+        self.rect.centery = y
+        self.rect.centerx = x
         self.type = 4
         self.movey = 16
+        self.movex = movex
         self.damage = damage
 
     def update(self):
+
         self.rect.y -= self.movey
+        self.rect.x += self.movex
         self.damage -= 1
         width = int(self.damage ** 0.5 * 9)
         height = int(self.damage ** 0.5 * 14)
         size = (width, height)
         self.image = pygame.transform.scale(images.heroprojectiles[2], size)
-        x = self.rect.x
-        y = self.rect.y
+        x = self.rect.centerx
+        y = self.rect.centery
         self.rect = self.image.get_rect()
-        self.rect.x = x
-        self.rect.y = y
+        self.rect.centerx = x
+        self.rect.centery = y
         if not GameplayConstants.extendedscreen.colliderect(self.rect) or self.damage == 0:
             self.kill()
 

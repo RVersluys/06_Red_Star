@@ -18,7 +18,7 @@ class Player:
         self.weapons = []
         self.shipparts = []
         self.score = 0
-        self.gold = 150000
+        self.gold = 15000
         self.maxarmor = 50
         self.maxshield = 10
         self.maxenergy = 100
@@ -308,14 +308,25 @@ class Weapon(Shippart):
                         Gamedata.all_sprites.add(bullet)
 
                 elif self.index == 4:
-                    if self.chargeup < GameplayConstants.shippartslist[self.type][self.index][8] * 15 * (self.upgrades + 1):
-                        self.chargeup += GameplayConstants.shippartslist[self.type][self.index][8] * (self.upgrades + 1)
+                    if self.chargeup < GameplayConstants.shippartslist[self.type][self.index][8] * 15:
+                        self.chargeup += GameplayConstants.shippartslist[self.type][self.index][8]
 
 
     def plasmashot(self):
         if self.chargeup:
-            adjustment = -90 + 30 * self.xpos
-            bullet = Projectiles.Plasmabeam(adjustment, self.chargeup)
-            Gamedata.all_sprites.add(bullet)
-            Gamedata.herobullets.add(bullet)
+            bullets = self.upgrades + 1
+            for bullet in range(bullets):
+                x = Gamedata.hero.rect.centerx - bullets / 2 * 20 + bullet * 20 + 10 + (-120 + 30 * self.xpos)
+                y = Gamedata.hero.rect.centery - ((bullets - 1) * bullet - bullet ** 2) * 5
+                if bullet < bullets / 2 - 1:
+                    movey = -1
+                elif bullet > bullets / 2:
+                    movey = 1
+                else:
+                    movey = 0
+
+                #adjustment = -90 + 30 * self.xpos
+                bullet = Projectiles.Plasmabeam(x, y, self.chargeup, movey)
+                Gamedata.all_sprites.add(bullet)
+                Gamedata.herobullets.add(bullet)
             self.chargeup = 0

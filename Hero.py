@@ -40,15 +40,16 @@ class Hero(pygame.sprite.Sprite):
         self.energy = Gamedata.player.maxenergy
         self.shieldrefresh = 200
         self.lastshieldhit = 0
+        self.speed = max(0, Gamedata.player.speed)
 
     def movement(self, event):
         muisafstand = (event.rel[0]**2 + event.rel[1]**2)**0.5
-        if muisafstand < Gamedata.player.speed:
+        if muisafstand < self.speed:
             self.movex = event.rel[0]
             self.movey = event.rel[1]
         else:
-            self.movex = Gamedata.player.speed * (event.rel[0]/muisafstand)
-            self.movey = Gamedata.player.speed * (event.rel[1]/muisafstand)
+            self.movex = self.speed * (event.rel[0]/muisafstand)
+            self.movey = self.speed * (event.rel[1]/muisafstand)
 
         if self.movex > 0:
             self.angle = min(10,self.angle + 1, int(5 + self.movex/2))
