@@ -12,7 +12,7 @@ warscreenwidth = 1440
 class Level:
     def __init__(self, levelnumber):
         if levelnumber == 0:
-            mobslist = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
+            mobslist = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]
             Mobs.images.load_level(mobslist)
             self.end = False
             self.succes = False
@@ -97,15 +97,15 @@ class Level:
             self.textlist.append([100, "Level 1: Jupiter", 30, (0,150,0), (160,40), (warscreenwidth/2,100), (800,50)])
             self.textlist.append([150, "WARNING: ASTERIOD STORM DETECTED", 30, (200, 0, 0), (100, 40), (warscreenwidth / 2, 150), (warscreenwidth, 50)])
             self.textlist.append([200, "WARNING: ENEMY SHIPS DETECTED", 30, (200, 0, 0), (100, 40), (warscreenwidth / 2, 200),(warscreenwidth, 50)])
+            self.textlist.append([18300, "WARNING: LARGE ENEMY SHIP DETECTED", 30, (200, 0, 0), (100, 40), (warscreenwidth / 2, 100),(warscreenwidth, 50)])
+            self.textlist.append([18600, "SCANNING...", 30, (255, 255, 255), (100, 40), (warscreenwidth / 2, 50), (warscreenwidth, 100)])
+            self.textlist.append([18800, "SCORCH COMMAND SHIP: HEXAPOD", 30, (255, 255, 255), (100, 40), (warscreenwidth / 2, 100),(warscreenwidth, 50)])
 
             self.propslist.append([5000, 0, 900, 1, (540,767)])
             self.propslist.append([5500, 1, 600, 2, (675, 675)])
             self.propslist.append([9000, 2, 200, 2, (518, 520)])
             self.propslist.append([12000, 3, 800, 1, (240, 97)])
 
-
-            # Cruiser komt in scherm, opend vuur. stopt vuur, straved weg.
-          #  self.spawnlist.append([50, 13, warscreenwidth/2, 0, 0, 5, [(0, 0), (60,3,0,0), (240,2)], [((20,70,240), 4, 0, 5, 20), (4,5, 330), (4,5, 30)], 0])
 
             # 500 ticks: eerste aanval: fighters (horizontaal naar links)
             self.spawnlist.append([500, 9, warscreenwidth, 200, -4, 0, [(0, 0)], [(100, 3, 0)],0])
@@ -239,6 +239,51 @@ class Level:
             self.spawnlist.append([13200, 15, 500,  0, 0,2, [(0, 0)], [(100, 1, 0)], 250])
             self.spawnlist.append([13300, 15, 200,  0, 0,2, [(0, 0)], [(100, 1, 0)], 250])
 
+            # 13500 ticks: eenentwintigste aanval: destroyer (verticaal)
+            self.spawnlist.append([13500, 14, warscreenwidth/2, 0, 0, 2, [(0, 0)], [(100, 4, 0,3,15)], 350])
+
+            # 13900 ticks: tweeentwintigste aanval: fighters (driveby)
+            # en vultures (horizontaal naar rechts)
+            # en marauders (move, stop, charge, retreat)
+            # en cruiser (verticaal)
+            # en destroyers (verticaal)
+            self.spawnlist.append([13900, 9, 1400, 0, -2, 2, [(0,0)], [(100,3,0)],0])
+            self.spawnlist.append([13930, 9, 50, 0, 2, 2, [(0,0)], [(100,3,0)],0])
+            self.spawnlist.append([13960, 9, 400, 0, 2, 2, [(0, 0)], [(100, 3, 0)], 0])
+            self.spawnlist.append([13990, 9, 1300, 0, -2, 2, [(0, 0)], [(100, 3, 0)], 0])
+            self.spawnlist.append([14020, 9, 160, 0, 2, 2, [(0, 0)], [(100, 3, 0)], 0])
+            self.spawnlist.append([14050, 9, 800, 0, -2, 2, [(0, 0)], [(100, 3, 0)], 0])
+            self.spawnlist.append([14300, 15, 0, 200, 2, 0, [(0, 0)], [(100, 1, 0)], 0])
+            self.spawnlist.append([14400, 15, 0, 175, 2, 0, [(0, 0)], [(100, 1, 0)], 0])
+            self.spawnlist.append([14500, 15, 0, 150, 2, 0, [(0, 0)], [(100, 1, 0)], 0])
+            self.spawnlist.append([14600, 15, 0, 125, 2, 0, [(0, 0)], [(100, 1, 0)], 250])
+            self.spawnlist.append([14900, 11, 100, 0, 0, 4, [(0, 0), (40, 3, 0, 0), (100, 4), (178, 3, 0, -7)], [(100, 2, 0), [3, 5, -1]],0])
+            self.spawnlist.append([15200, 11, warscreenwidth/2, 0, 0, 4, [(0, 0), (40, 3, 0, 0), (100, 4), (178, 3, 0, -7)], [(100, 2, 0), [3, 5, -1]],300])
+            self.spawnlist.append([15600, 10, 850, 0, 0, 1, [(0, 0), (0, 0)], [(40, 2, 0)], 500])
+            self.spawnlist.append([16000, 14, 300, 0, 0, 2, [(0, 0)], [(100, 4, 0, 3, 15)], 0])
+            self.spawnlist.append([16300, 14, 1000, 0, 0, 2, [(0, 0)], [(100, 4, 0, 3, 15)], 350])
+
+            # 16700 ticks: drieentwintigste aanval: fighters (verticaal)
+            self.spawnlist.append([16700, 9, 700, 0, 0, 2, [(0, 0)], [(100, 3, 0)], 0])
+            self.spawnlist.append([16750, 9, 700, 0, 0, 2, [(0, 0)], [(100, 3, 0)], 0])
+            self.spawnlist.append([16750, 9, 600, 0, 0, 2, [(0, 0)], [(100, 3, 0)], 0])
+            self.spawnlist.append([16750, 9, 800, 0, 0, 2, [(0, 0)], [(100, 3, 0)], 0])
+            self.spawnlist.append([16800, 9, 700, 0, 0, 2, [(0, 0)], [(100, 3, 0)], 200])
+            self.spawnlist.append([16800, 9, 600, 0, 0, 2, [(0, 0)], [(100, 3, 0)], 0])
+            self.spawnlist.append([16800, 9, 800, 0, 0, 2, [(0, 0)], [(100, 3, 0)], 0])
+            self.spawnlist.append([16800, 9, 500, 0, 0, 2, [(0, 0)], [(100, 3, 0)], 0])
+            self.spawnlist.append([16800, 9, 900, 0, 0, 2, [(0, 0)], [(100, 3, 0)], 0])
+
+            # 17300 ticks: vierentwintigste aanval: vultures (move, strafe)
+            # en destroyer (naar rechts)
+            self.spawnlist.append([17300, 15, 750, 0, 0, 2, [(0, 0), (40, 2)], [(100, 1, 0)], 0])
+            self.spawnlist.append([17400, 15, 500, 0, 0, 2, [(0, 0), (40, 2)], [(100, 1, 0)], 0])
+            self.spawnlist.append([17500, 15, 1000, 0, 0, 2, [(0, 0), (40, 2)], [(100, 1, 0)], 0])
+            self.spawnlist.append([17600, 15, 500, 0, 0, 2, [(0, 0), (40, 2)], [(100, 1, 0)], 250])
+            self.spawnlist.append([17650, 14, 250, 0, 0, 2, [(0, 0)], [(100, 4, 0, 3, 15)], 350])
+
+            # 18300 ticks: aankondiging + eindbaas: Hexapod (zigzag)
+            self.spawnlist.append([19000, 12, 320, 0, 0, 6, [(0, 0), (60, 3, 0, 0), (150, 1)], [(100, 4, 0, 6, 15), (60, 1, 1)], 1000])
 
 
 
@@ -310,7 +355,7 @@ class Level:
            # self.spawnlist.append([5200, 12, 320, 0, 0, 6, [(0, 0), (60, 3,0,0), (150,1)], [(100, 4, 0, 6, 15), (60,1,1)], 1000])
 
             #level end
-            self.spawnlist.append([18000, -1])
+            self.spawnlist.append([30000, -1])
 
             ###################################################################################################
             #lijst wordt gesorteerd om op volgorde uit te kunnen voeren.
