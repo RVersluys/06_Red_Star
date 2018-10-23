@@ -16,7 +16,7 @@ warscreenheight = 1080
 class Unitstats:
     def __init__(self):
         self.deathsound = [0,0,0,2,2,2,5,5,5,3,6,4,9,7,8,4,9]
-        self.hitpoints = [10,10,10,30,30,30,60,60,60,40,350,140,1000,200, 230, 80,80]
+        self.hitpoints = [10,10,10,30,30,30,60,60,60,40,350,140,1500,200, 230, 80,80]
         self.gold = [0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 800, 400, 2500, 400, 1500, 200,10]
         self.pointvalue = [50,50,50,100,100,100,200,200,200,400,1500,800,5000, 2000, 2500, 500,100]
         self.explosion = [4,4,4,1,1,1,9,9,9,10,11,9,11,10,11,10,10]
@@ -213,7 +213,10 @@ class Mob(pygame.sprite.Sprite):
             movex = 0
             movey = -Projectiles.images.projectiles[program[2]][0]
             angle = 180
-            change = ((self.ticks % program[0]) % 6) * 30 - 45
+            if isinstance(program[0], tuple):
+                change = ((self.ticks % program[0][0]) % 6) * 30 - 45
+            else:
+                change = ((self.ticks % program[0]) % 6) * 30 - 45
             bullet = Projectiles.Mobbullet(self.rect.centerx + change, self.rect.centery, movex, movey, angle, program[2])
             Gamedata.mobbullets.add(bullet)
             Gamedata.all_sprites.add(bullet)
