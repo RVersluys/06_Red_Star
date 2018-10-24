@@ -39,8 +39,8 @@ imgfolder = os.path.join(os.path.dirname(__file__), 'img')
 class Images:
     def __init__(self, propslist):
         self.powerup = []
-        for picture in range(1, 11):
-            name = "gold{}.png".format(picture)
+        for picture in range(12):
+            name = "0{}.png".format(picture)
             self.powerup.append(pygame.image.load(os.path.join(imgfolder, "Powerup", name)).convert_alpha())
 
         self.bgprops = []
@@ -55,15 +55,16 @@ class Powerup(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         self.speed = speed
         self.gold = gold
-        self.image = Gamedata.bgimages.powerup[0]
+        succes = False
+        for picnr in range(12,-1,-1):
+            if 5*(4+picnr)**2 < self.gold and succes == False:
+                self.image = Gamedata.bgimages.powerup[picnr]
+                succes = True
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
-        self.ticks = 0
 
     def update(self):
-        self.ticks += 1
-        self.image = Gamedata.bgimages.powerup[self.ticks%10]
         self.rect.y = self.rect.y + self.speed
         if self.rect.y > 1080:
             self.kill()
