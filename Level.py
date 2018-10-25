@@ -91,7 +91,9 @@ class Level:
             #liedje starten is simpel: ticks + naam. Zorg dat de file staat in de musicfolder.
             #False = start direct, onderbreek huidige muziek, True betekend: speel af na huidige nummer.
             self.musiclist.append([0, '04. Cry.flac', False])
-            self.musiclist.append([0, '07. Final Frontier.flac', True])
+         #   self.musiclist.append([0, '07. Final Frontier.flac', True])
+            self.musiclist.append([18400, 'Stars of the Night.mp3', False])
+
 
             # 0 ticks: aankondiging level text
             self.textlist.append([100, "Level 1: Jupiter", 30, (0,150,0), (160,40), (warscreenwidth/2,100), (800,50)])
