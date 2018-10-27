@@ -143,7 +143,7 @@ class Schipmenu:
                                         return
                                     elif button.function == "Launch":
                                         Sounds.sounds.soundclick.play()
-                                        succes = Gameloop.Gameloop(Gamedata.player.levelnumber)
+                                        succes = Gameloop.Gameloop()
                                         if succes:
                                             filepath = os.path.join(game_folder, 'savegames', 'auto_save.pickle')
                                             pickle_out = open(filepath, "wb")

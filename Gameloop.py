@@ -25,9 +25,9 @@ screen = GameplayConstants.screen
 """Hier staat de loop waarin elk level wordt uitgevoerd. De mobs en overige zaken die tevoorschijn komen staan in een lijst in 'Level'."""
 
 class Gameloop:
-    def __init__(self, levelnumber):
+    def __init__(self):
         # levelinit
-        self.level = Level.Level(levelnumber)
+        self.level = Level.Level()
         Gamedata.hero = Hero.Hero()
         Gamedata.all_sprites.add(Gamedata.hero)
         pygame.mouse.set_visible(False)
@@ -100,6 +100,7 @@ class Gameloop:
                     endleveltime = pygame.time.get_ticks()  # starter tick
                     if self.level.succes:
                         text = Gametext.Text("Mission Accomplished", 35, (100,255,100), (120,30), (warscreenwidth/2, windowheight/2), (800,100))
+                        Gamedata.player.levelnumber += 1
                     else:
                         text = Gametext.Text("Mission Failed", 35, (200, 0, 0), (120,30), (warscreenwidth/2, windowheight/2), (800, 100))
                     Gamedata.background.add(text)
