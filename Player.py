@@ -325,8 +325,6 @@ class Weapon(Shippart):
                     movey = 1
                 else:
                     movey = 0
-
-                #adjustment = -90 + 30 * self.xpos
                 bullet = Projectiles.Plasmabeam(x, y, self.chargeup, movey)
                 Gamedata.all_sprites.add(bullet)
                 Gamedata.herobullets.add(bullet)

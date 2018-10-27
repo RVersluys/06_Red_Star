@@ -1,12 +1,12 @@
 import pygame
 import os
 import math
+import random
 
 import Projectiles
 import Gamedata
 import Tools
 import GameplayConstants
-import Sounds
 import Explosions
 import Backgroundprops
 
@@ -15,11 +15,11 @@ warscreenwidth = 1440
 warscreenheight = 1080
 class Unitstats:
     def __init__(self):
-        self.deathsound = [0,0,0,2,2,2,5,5,5,3,6,4,9,7,8,4,9]
-        self.hitpoints = [10,10,10,30,30,30,60,60,60,40,350,140,1500,200, 230, 80,80]
-        self.gold = [0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 800, 400, 2500, 400, 1500, 200,10]
-        self.pointvalue = [50,50,50,100,100,100,200,200,200,400,1500,800,5000, 2000, 2500, 500,100]
-        self.explosion = [4,4,4,1,1,1,9,9,9,10,11,9,11,10,11,10,10]
+
+        self.hitpoints = [10,10,10,30,30,30,60,60,60,40,350,140,1500,200, 230, 80, 400]
+        self.gold = [0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 800, 400, 2500, 400, 500, 200, 600]
+        self.pointvalue = [50,50,50,100,100,100,200,200,200,400,1500,800,5000, 800, 1000, 500,1800]
+        self.explosion = [4,4,4,7,7,7,[8,9,10],[8,9,10],[8,9,10],9,[11,9,10,8],10,[11,11,11,10,10,10],10,11,7,[9,9,10,10]]
 
 class Mobsloading:
     def __init__(self):
@@ -70,35 +70,48 @@ class Mob(pygame.sprite.Sprite):
         self.hp = unitstats.hitpoints[unitindex]
         self.points = unitstats.pointvalue[unitindex]
         self.worth = unitstats.gold[unitindex]
-        self.deathsound = unitstats.deathsound[unitindex]
         self.powerup = powerup
         #gedrag
         self.ticks = 0
         self.programlist = programlist
         self.wprogramlist = wprogramlist
         self.hit = False
+        self.dead = False
 
     def getdamage(self, amount):
-        if amount == 0:
-            return 0
-        self.hp -= amount
-        if self.hp <= 0:
-            self.kill()
-            explosion = Explosions.Explosion(self.rect.centerx, self.rect.centery, unitstats.explosion[self.imageindex])
-            Gamedata.all_sprites.add(explosion)
-            if self.powerup >= 1:
-                powerup = Backgroundprops.Powerup(self.rect.centerx, self.rect.centery, 1, self.powerup)
-                Gamedata.powerups.add(powerup)
-                Gamedata.all_sprites.add(powerup)
-            Sounds.sounds.explosions[self.deathsound].play()
-            Gamedata.player.gold += self.worth
-            return self.points
+        if not self.dead:
+            if amount == 0:
+                return 0
+            self.hp -= amount
+            if self.hp <= 0:
+                self.kill()
+                self.dead = True
+
+                if isinstance(unitstats.explosion[self.imageindex], list):
+                    print(unitstats.explosion[self.imageindex])
+                    explosionlist = unitstats.explosion[self.imageindex].copy()
+                    x = self.rect.x + random.randint(0, self.rect.width)
+                    y = self.rect.y + random.randint(0, self.rect.height)
+                    explosion = Explosions.Explosion(x, y, explosionlist[0], explosionlist, self.rect)
+                    Gamedata.all_sprites.add(explosion)
+                else:
+                    explosion = Explosions.Explosion(self.rect.centerx, self.rect.centery, unitstats.explosion[self.imageindex])
+                    Gamedata.all_sprites.add(explosion)
+                if self.powerup >= 1:
+                    powerup = Backgroundprops.Powerup(self.rect.centerx, self.rect.centery, 1, self.powerup)
+                    Gamedata.powerups.add(powerup)
+                    Gamedata.all_sprites.add(powerup)
+
+                Gamedata.player.gold += self.worth
+                return self.points
+            else:
+                maxhp = unitstats.hitpoints[self.imageindex]
+                self.damagestate = max(0,min(2,int(3-(3/maxhp*self.hp))))
+                self.image = images.imagehitlist[self.damagestate][self.imageindex]
+                self.lasthit = pygame.time.get_ticks()
+                self.hit = True
+                return 0
         else:
-            maxhp = unitstats.hitpoints[self.imageindex]
-            self.damagestate = max(0,min(2,int(3-(3/maxhp*self.hp))))
-            self.image = images.imagehitlist[self.damagestate][self.imageindex]
-            self.lasthit = pygame.time.get_ticks()
-            self.hit = True
             return 0
 
     def update(self):

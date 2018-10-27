@@ -13,7 +13,7 @@ warscreenwidth = 1440
 fps = 60
 musicvolume = 100
 effectsvolume = 100
-extendedscreen = pygame.Rect(-10,-10,windowwidth+20,windowheight+20)
+extendedscreen = pygame.Rect(-100,-100,windowwidth+200,windowheight+200)
 
 # de vorm van elk shippart: tuples zijn verticale lijnen. 1 is dat er iets zit.
 kinetic_weapon = [[1,], [1,], [1,]]
