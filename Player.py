@@ -35,6 +35,7 @@ class Player:
         shipparts = copy(self.shippartsused)
         for item in shipparts:
             self.removepart(item)
+        self.shipfill = deepcopy(GameplayConstants.shipdesign)
         self.gold += GameplayConstants.shippartslist[5][self.ship][1] * 900
         self.gold -= GameplayConstants.shippartslist[5][shipnr][1] * 900
         self.ship = shipnr

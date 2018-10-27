@@ -88,7 +88,7 @@ class Schipmenu:
                             self.placeshippart(mousepos)
                         else:
                             x = int((mousepos[0] - 69) / 60)
-                            y = int((mousepos[1] - 529) / 60)
+                            y = int((mousepos[1] - 559) / 60)
                             if x >= 0 and x < 9 and y >= 0 and y < 8:
                                 if not isinstance(Gamedata.player.shipfill[y][x], int):
                                     Sounds.sounds.soundclick.play()
@@ -267,10 +267,12 @@ class Schipmenu:
 
     def placeshippart(self, mousepos):
         x = int((mousepos[0] - 69) / 60)
-        y = int((mousepos[1] - 529) / 60)
+        y = int((mousepos[1] - 559) / 60)
         height = len(self.shippartshape)
         width = len(self.shippartshape[0])
-        if x >= 0 and x <= 9 - width and y >= 0 and y <= 8 - height:  # past het object in het schipdisplay
+        print(x)
+        print(y)
+        if x >= 0 and x <= 9 - width and y >= 0 and y <= 9 - height:  # past het object in het schipdisplay
             # in dit gedeelte wordt gekeken waar de hoek van het object zit.
             if width % 2 == 1:
                 xadjusted = int(x - (width - 1) / 2)
