@@ -80,11 +80,13 @@ class Gameloop:
                 hits = pygame.sprite.spritecollide(Gamedata.hero, Gamedata.mobbullets, False, pygame.sprite.collide_circle)
                 for bullet in hits:  # collision player - mobbullets
                     if Gamedata.hero.getdamage(bullet.damage, bullet):
+                        self.level.succes = False
                         self.level.abort = True
                     bullet.hit()
                 hits = pygame.sprite.spritecollide(Gamedata.hero, Gamedata.mobs, False, pygame.sprite.collide_circle)
                 for mob in hits:  # collision player - mobs
                     if Gamedata.hero.getdamage(4, mob):
+                        self.level.succes = False
                         self.level.abort = True
 
                     Gamedata.player.score += mob.getdamage(4)

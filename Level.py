@@ -350,9 +350,6 @@ class Level:
         if len(self.spawnlist) > 0:
             if self.spawnlist[0][0] == self.ticks:
                 if self.spawnlist[0][1] == -1:
-                    print(len(Gamedata.mobs))
-                    print(len(Gamedata.powerups))
-
                     self.end = True
                     self.succes = True
                     return
