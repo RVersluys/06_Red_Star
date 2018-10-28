@@ -20,7 +20,7 @@ clock = pygame.time.Clock()
 class Schipmenu:
     def __init__(self):
         # laden images
-        self.hangarpic = pygame.image.load(os.path.join(game_folder, "img", "hangar.jpg")).convert()
+        self.hangarpic = pygame.image.load(os.path.join(game_folder, "img", "hangar.png")).convert()
         self.energymeter = pygame.image.load(os.path.join(game_folder, "img", "Parts", "energymeter.png")).convert()
 
         # deze variabelen houden bij waar de speler is in het menu.
@@ -44,7 +44,7 @@ class Schipmenu:
         self.shipimage = GameplayConstants.shipimages[Gamedata.player.ship]
         for x in range(1,4):
             self.menu[x].active = True
-        levelinforect = pygame.Rect(660, 50, 600, 400)
+        levelinforect = pygame.Rect(600, 50, 720, 400)
         self.levelinfo = Missioninformation.Missioninfo(levelinforect)
         self.resetscreen()
 
@@ -135,7 +135,7 @@ class Schipmenu:
                                             self.menu[4].text = "Rotate"
                                             self.menu[4].function = "Rotate"
                                             self.menu[4].active = True #activeer rotateknop
-                                        pygame.draw.rect(GameplayConstants.screen, Colors.lightgray, pygame.Rect(1515, 550, 320, 260))
+                                        #pygame.draw.rect(GameplayConstants.screen, Colors.lightgray, pygame.Rect(1515, 550, 320, 260))
                                         text = GameplayConstants.shippartinfo(self.menunumber, self.shippartdisplayed, 0)
                                         for line in range(len(text)):
                                             Tools.draw_text(GameplayConstants.screen, text[line], 15, 1525, 563 + 20 * line, "Xolonium")
@@ -327,14 +327,14 @@ class Schipmenu:
 
     def resetscreen(self):
         GameplayConstants.screen.blit(self.hangarpic, dest=(0, 0))
-        pygame.draw.rect(GameplayConstants.screen, Colors.black, self.shippartmenurect)
+        #pygame.draw.rect(GameplayConstants.screen, Colors.black, self.shippartmenurect)
         self.create_menu()
         self.shipoverview()
         if self.menunumber > 0 and self.shippartdisplayed >= 0:
-            pygame.draw.rect(GameplayConstants.screen, Colors.lightgray, pygame.Rect(1515, 550, 320, 260))
+            #pygame.draw.rect(GameplayConstants.screen, Colors.lightgray, pygame.Rect(1515, 550, 320, 260))
             text = GameplayConstants.shippartinfo(self.menunumber, self.shippartdisplayed, 0)
             for line in range(len(text)):
-                Tools.draw_text(GameplayConstants.screen, text[line], 15, 1525, 563 + 20 * line, "Xolonium")
+                Tools.draw_text(GameplayConstants.screen, text[line], 13, 1555, 575 + 17 * line, "Xolonium", Colors.white)
         self.levelinfo.update()
 
 
@@ -346,7 +346,7 @@ class Schipmenu:
 
         text = GameplayConstants.heroshipinfo(maxuse)
         for line in range(len(text)):
-            Tools.draw_text(GameplayConstants.screen, text[line], 15, 650, 545 + 20 * line, "Xolonium")
+            Tools.draw_text(GameplayConstants.screen, text[line], 15, 660, 560 + 20 * line, "Xolonium", Colors.white)
 
         if Gamedata.player.energyuse == maxuse and Gamedata.player.energyregen >= Gamedata.player.energyuse:
             energybalance = 1
@@ -354,7 +354,7 @@ class Schipmenu:
             energybalance = 0
         else:
             energybalance = max(0, min(1, (Gamedata.player.energyregen - Gamedata.player.energyuse) / (maxuse - Gamedata.player.energyuse)))
-        pygame.draw.rect(GameplayConstants.screen, Colors.black, pygame.Rect(604, 572 + (432 * (1 - energybalance)), 40, 6))  # indicator op energymeter
+        #pygame.draw.rect(GameplayConstants.screen, Colors.black, pygame.Rect(604, 572 + (432 * (1 - energybalance)), 40, 6))  # indicator op energymeter
 
 
     def shipoverview(self):
@@ -364,12 +364,12 @@ class Schipmenu:
         Tools.draw_text(GameplayConstants.screen, "Gold: " + str(gold), 35, 1495, 55, "Xolonium")
 
         background = pygame.Rect(70, 530, 537, 477)
-        pygame.draw.rect(GameplayConstants.screen, Colors.blackgray, background)
+        #pygame.draw.rect(GameplayConstants.screen, Colors.blackgray, background)
         GameplayConstants.screen.blit(self.shipimage, dest= GameplayConstants.shippartslist[5][Gamedata.player.ship][8])
         GameplayConstants.screen.blit(self.energymeter, dest=(607, 530))
 
         textrect = pygame.Rect(640, 530, 240, 477)
-        pygame.draw.rect(GameplayConstants.screen, Colors.lightgray, textrect)
+        #pygame.draw.rect(GameplayConstants.screen, Colors.lightgray, textrect)
         self.shipinfo()
 
         s2 = pygame.Surface((60, 60))
@@ -429,13 +429,13 @@ class Schipmenu:
             self.submenu[x].active = True
             self.submenu[x].text = GameplayConstants.shippartslist[self.menunumber][x][0]
             self.submenu[x].update()
-        pygame.draw.rect(GameplayConstants.screen, Colors.blackgray, pygame.Rect(900, 530, 950, 477))
+        #pygame.draw.rect(GameplayConstants.screen, Colors.blackgray, pygame.Rect(900, 530, 950, 477))
         for button in self.submenu:
             button.update()
         for button in self.menu:
             button.update()
         self.shippartrect = pygame.Rect(1335, 550, 180, 360)
-        pygame.draw.rect(GameplayConstants.screen, Colors.black, self.shippartrect)
+        #pygame.draw.rect(GameplayConstants.screen, Colors.black, self.shippartrect)
         if self.shippartdisplayed != -1 and self.menunumber != 5:
             Tools.displayshippart(self.partimage, 1427, 730, self.shippartshape)
         elif self.shippartdisplayed != -1 and self.menunumber == 5:

@@ -45,10 +45,10 @@ def loadgame():
     return submenu
 
 def displayshippart(image, posx, posy, shippartshape = False):
-    background = pygame.Rect(posx - 90, posy - 180, 180, 360)
+    #background = pygame.Rect(posx - 90, posy - 180, 180, 360)
     rect = image.get_rect()
     rect.center = (posx, posy)
-    pygame.draw.rect(GameplayConstants.screen, Colors.black, background)
+    #pygame.draw.rect(GameplayConstants.screen, Colors.black, background)
     GameplayConstants.screen.blit(image, rect)
     if shippartshape:
         for height in range(len(shippartshape)):

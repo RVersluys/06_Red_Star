@@ -9,15 +9,15 @@ class Missioninfo:
         self.level = Gamedata.player.levelnumber
         rect.height = 45+20*len(missioninfo[self.level])
         self.rect = rect
-        self.outline = pygame.Rect(self.rect.x-5,self.rect.y-5,self.rect.width+10,self.rect.height+10)
+        #self.outline = pygame.Rect(self.rect.x-5,self.rect.y-5,self.rect.width+10,self.rect.height+10)
 
 
     def update(self):
-        pygame.draw.rect(GameplayConstants.screen, Colors.black, self.outline)
-        pygame.draw.rect(GameplayConstants.screen, Colors.lightgray, self.rect)
-        Tools.draw_text(GameplayConstants.screen, "Mission details", 25, self.rect.x + 190, self.rect.y + 15, "Xolonium")
+        #pygame.draw.rect(GameplayConstants.screen, Colors.black, self.outline)
+        #pygame.draw.rect(GameplayConstants.screen, Colors.lightgray, self.rect)
+        Tools.draw_text(GameplayConstants.screen, "Mission details", 25, self.rect.x + 250, self.rect.y + 15, "Xolonium", Colors.white)
         for line in range(len(missioninfo[self.level])):
-            Tools.draw_text(GameplayConstants.screen, missioninfo[self.level][line], 17, self.rect.x + 5, self.rect.y + 45 + 20 * line, "Xolonium")
+            Tools.draw_text(GameplayConstants.screen, missioninfo[self.level][line], 20, self.rect.x + 5, self.rect.y + 60 + 25 * line, "Xolonium", Colors.white)
 
 
 
