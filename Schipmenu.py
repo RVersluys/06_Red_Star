@@ -12,6 +12,7 @@ import Sounds
 import Gameloop
 import Colors
 import Button
+import Missioninformation
 
 game_folder = os.path.dirname(__file__)
 clock = pygame.time.Clock()
@@ -43,7 +44,10 @@ class Schipmenu:
         self.shipimage = GameplayConstants.shipimages[Gamedata.player.ship]
         for x in range(1,4):
             self.menu[x].active = True
+        levelinforect = pygame.Rect(660, 50, 600, 400)
+        self.levelinfo = Missioninformation.Missioninfo(levelinforect)
         self.resetscreen()
+
 
 
         while True:
@@ -331,6 +335,7 @@ class Schipmenu:
             text = GameplayConstants.shippartinfo(self.menunumber, self.shippartdisplayed, 0)
             for line in range(len(text)):
                 Tools.draw_text(GameplayConstants.screen, text[line], 15, 1525, 563 + 20 * line, "Xolonium")
+        self.levelinfo.update()
 
 
     def shipinfo(self):

@@ -303,59 +303,46 @@ class Level:
         ###################################################################################################
 
     def level_2(self):
+        Gamedata.bgimages = Backgroundprops.Images([])
+
+        self.textlist.append([100, "Approaching Scorch base, heavy resistance ahead...", 30, (200, 0, 0), (150, 40), (warscreenwidth / 2, 100), (warscreenwidth, 50)])
+
+        self.spawnlist.append([350, 9, 420, 0, 0, 3, [(0, 0), (40, 2)], [(50, 3, 0)], 0])
+        self.spawnlist.append([400, 9, 720, 0, 0, 3, [(0, 0), (40, 2)], [(50, 3, 0)], 0])
+        self.spawnlist.append([450, 9, 1020, 0, 0, 3, [(0, 0), (40, 2)], [(50, 3, 0)], 0])
+        self.spawnlist.append([500, 9, 420, 0, 0, 3, [(0, 0), (40, 2)], [(50, 3, 0)], 0])
+        self.spawnlist.append([550, 9, 720, 0, 0, 3, [(0, 0), (40, 2)], [(50, 3, 0)], 0])
+        self.spawnlist.append([600, 9, 1020, 0, 0, 3, [(0, 0), (40, 2)], [(50, 3, 0)], 0])
+        self.spawnlist.append([650, 9, 420, 0, 0, 3, [(0, 0), (40, 2)], [(50, 3, 0)],0])
+        self.spawnlist.append([700, 9, 720, 0, 0, 3, [(0, 0), (40, 2)], [(50, 3, 0)], 0])
+        self.spawnlist.append([750, 9, 1020, 0, 0, 3, [(0, 0), (40, 2)], [(50, 3, 0)], 0])
+        self.spawnlist.append([800, 9, 420, 0, 0, 3, [(0, 0), (40, 2)], [(50, 3, 0)], 0])
+        self.spawnlist.append([850, 9, 720, 0, 0, 3, [(0, 0), (40, 2)], [(50, 3, 0)], 0])
+        self.spawnlist.append([900, 9, 1020, 0, 0, 3, [(0, 0), (40, 2)], [(50, 3, 0)], 0])
+
         #Deze vliegtuigen vliegen horizontaal
-        self.spawnlist.append([250, 9, warscreenwidth, 200, -4, 0, [(0,0)], [(60,1,0)],200])
-        self.spawnlist.append([325, 9, 0, 350, 4, 0, [(0,0)], [(60,1,0)],200])
-        self.spawnlist.append([400, 9, warscreenwidth, 500, -4, 0, [(0,0)], [(60,1,0)],200])
-        self.spawnlist.append([475, 9, 0, 650, 4, 0, [(0,0)], [(60,1,0)],200])
+        self.spawnlist.append([1100, 14, 300, 0, 3, 1, [(0, 0), (300, 3, 0, 4)], [(60, 4, 1, 3, 15)], 0])
+        self.spawnlist.append([1100, 14, 1140, 0, -3, 1, [(0, 0), (300, 3, 0, 4)], [(60, 4, 1, 3, 15)], 0])
+        self.spawnlist.append([1300, 14, 150, 0, 3, 1, [(0, 0), (300, 3, 0, 4)], [(60, 4, 1, 3, 15)], 500])
+        self.spawnlist.append([1300, 14, 1290, 0, -3, 1, [(0, 0), (300, 3, 0, 4)], [(60, 4, 1, 3, 15)], 500])
 
-        #deze vliegen verticaal naar beneden
-        self.spawnlist.append([650, 9, 320, 0, 0, 7, [(0,0)], [(60,1,0)],0])
-        self.spawnlist.append([700, 9, 620, 0, 0, 7, [(0,0)], [(60,1,0)],0])
-        self.spawnlist.append([750, 9, 820, 0, 0, 7, [(0,0)], [(60,1,0)],0])
-        self.spawnlist.append([800, 9, 1120, 0, 0, 7, [(0, 0)], [(60,1,0)],0])
+        self.spawnlist.append([1650, 16, 0, 500, 10, -1, [(0, 0), (90,3,0,3), (130,2 )], [(25, 3, 1)], 1100])
+        self.spawnlist.append([1750, 16, warscreenwidth, 500, -10, -1, [(0, 0), (90,3,0,-3), (130,2)], [(25, 3, 1)], 1100])
 
-        #deze vliegen 40 ticks verticaal, waarna ze na 40 ticks gaan strafen
-        self.spawnlist.append([1050, 9, 420, 0, 0, 9, [(0,0),(40,2)], [(60,1,0)],0])
-        self.spawnlist.append([1125, 9, 720, 0, 0, 9, [(0,0),(40,2)], [(60,1,0)],0])
-        self.spawnlist.append([1200, 9, 1020, 0, 0, 9, [(0,0),(40,2)], [(60,1,0)],0])
+        self.spawnlist.append([2100, 11, 100, 0, 0, 4, [(0, 0), (40, 3, 0, 0), (100, 4), (178, 3, 0, -7)], [(100, 2, 0), [3, 5, -1]], 300])
+        self.spawnlist.append([2200, 11, 1340, 0, 0, 4, [(0, 0), (40, 3, 0, 0), (100, 4), (178, 3, 0, -7)], [(100, 2, 0), [3, 5, -1]], 300])
+        self.spawnlist.append([2300, 11, 720, 0, 0, 4, [(0, 0), (40, 3, 0, 0), (100, 4), (178, 3, 0, -7)], [(100, 2, 0), [3, 5, -1]], 300])
 
-        #deze cruiser begint recht, maar gaat na 250 ticks zigzaggen.
-        self.spawnlist.append([1450, 10, 300, 0, 0, 1, [(0, 0), (250, 1)], [(40,2,0)],0])
 
-        #vliegtuigen kunnen ook schuin.
-        self.spawnlist.append([2050, 9, 0, 0, 5, 5, [(0,0)], [(60,1,0)],0])
-        self.spawnlist.append([2100, 9, 1440, 0, -5, 5, [(0,0)], [(60,1,0)],0])
-        self.spawnlist.append([2150, 9, 200, 0, 5, 5, [(0,0)], [(60,1,0)],0])
-        self.spawnlist.append([2200, 9, 1240, 0, -5, 5, [(0,0)], [(60,1,0)],0])
+        self.spawnlist.append([2600, 15, 1440, 300, -5, 0, [(0, 0), (300, 3, 0, 1)], [(100, 1, 0)], 0])
+        self.spawnlist.append([2650, 15, 0, 300, 5, 0, [(0, 0), (250, 3, 0, 1)], [(100, 1, 0)], 0])
+        self.spawnlist.append([2700, 15, 1440, 300, -5, 0, [(0, 0), (200, 3, 0, 1)], [(100, 1, 0)], 0])
+        self.spawnlist.append([2750, 15, 0, 300, 5, 0, [(0, 0), (150, 3, 0, 1)], [(100, 1, 0)], 0])
+        self.spawnlist.append([2800, 15, 1440, 300, -5, 0, [(0, 0), (100, 3, 0, 1)], [(100, 1, 0)], 0])
+        self.spawnlist.append([2850, 15, 0, 300, 5, 0, [(0, 0), (50, 3, 0, 1),], [(100, 1, 0)], 0])
+        self.spawnlist.append([2700, 10, 400, 1080, 0, -6, [(0, 0), (80, 3, 0, 1), (200,1)], [(25, 1, 0)], 900])
 
-        #deze cruiser komt snel binnen, remt af en gaat dan zigzaggen, na 8 seconden (480 ticks) strafed die het scherm uit.
-        self.spawnlist.append([2450, 10, 300, 0, 0, 5, [(0, 0), (60, 3,0,0), (150,1), (480,2)], [(40,2,0)],800])
 
-        #nog een paar verticaal vliegende tegenstanders
-        self.spawnlist.append([2900, 9, 320, 0, 0, 7, [(0,0)], [(60,1,0)],200])
-        self.spawnlist.append([2900, 9, 620, 0, 0, 7, [(0,0)], [(60,1,0)],200])
-        self.spawnlist.append([3000, 9, 820, 0, 0, 7, [(0,0)], [(60,1,0)],200])
-        self.spawnlist.append([3000, 9, 1120, 0, 0, 7, [(0,0)], [(60,1,0)],200])
-
-        #bulltype unit die charged: komt scherm in, remt af, charged. Na charge gaat die naar achteren uit scherm.
-        self.spawnlist.append([3200, 11, 320, 0, 0, 7, [(0,0), (40,3,0,0),(100,4),(178,3,0,-7)], [(100,3,1)],400])
-        self.spawnlist.append([3300, 11, 320, 0, 0, 7, [(0, 0), (40, 3, 0, 0), (100, 4), (178, 3, 0, -7)], [(100, 3, 1)],400])
-
-        #je kunt een schip ook meerdere wapensystemen geven, zoals aimed en forward
-        self.spawnlist.append([3700, 10, 300, 0, 0, 5, [(0, 0), (60, 3, 0, 0), (150, 1), (480, 2)], [(10, 3, 0),[100,1,1]],800])
-
-        #deze charged naar vooraf bepaalde locaties. Elke charge duurt 78 ticks. Het laatste programma is een strafe weg.
-        self.spawnlist.append([4100, 11, 320, 0, 0, 7, [(0,0), (40,3,0,0),(100,4,1000,1000), (178,4,1300,300), (256,4,100,100), (334,2)], [(100,3,1)],400])
-
-        #deze vliegen verticaal naar beneden met een voorwaarts zwaarder schot
-        self.spawnlist.append([4600, 9, 320, 0, 0, 7, [(0,0)], [(50,3,1)],0])
-        self.spawnlist.append([4620, 9, 620, 0, 0, 7, [(0,0)], [(50,3,1)],0])
-        self.spawnlist.append([4640, 9, 820, 0, 0, 7, [(0,0)], [(50,3,1)],0])
-        self.spawnlist.append([4660, 9, 1120, 0, 0, 7, [(0, 0)], [(50,3,1)],0])
-
-        #deze eindbaas swingt een beetje heen en weer en schiet een cluster schot van 6 bullets met 10 graden ruimte tussen de bullets
-        self.spawnlist.append([5200, 12, 320, 0, 0, 6, [(0, 0), (60, 3,0,0), (150,1)], [(100, 4, 0, 6, 15), (60,1,1)], 1000])
 
         self.spawnlist.append([5500, -1])
 
@@ -363,9 +350,6 @@ class Level:
         if len(self.spawnlist) > 0:
             if self.spawnlist[0][0] == self.ticks:
                 if self.spawnlist[0][1] == -1:
-                    print(len(Gamedata.mobs))
-                    print(len(Gamedata.powerups))
-
                     self.end = True
                     self.succes = True
                     return
