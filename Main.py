@@ -48,7 +48,7 @@ class Game:
                      Button.Button(pygame.Rect(54, 421, 234, 54), "Hall of Fame", "Hall of Fame"),
                      Button.Button(pygame.Rect(54, 491, 234, 54), "Quit", "Quit")]
         self.submenu = []
-        optionmenu = Optionsmenu.Optionmenu((windowwidth / 2 - 275, windowheight / 2 - 130))
+        self.optionmenu = Optionsmenu.Optionmenu((windowwidth / 2 - 275, windowheight / 2 - 130))
         self.choice = -1
         self.filepath = ""
         self.halloffameselected = False
@@ -71,14 +71,13 @@ class Game:
                                     if self.loadgameselected:
                                         self.submenu = []
                                         self.loadgameselected = False
-                                    if optionmenu.displayed:
-                                        optionmenu.hide()
+                                    if self.optionmenu.displayed:
                                         self.screenupdate()
                                         Sounds.sounds.soundcancel.play()
                                     else:
                                         self.screenupdate()
                                         pygame.draw.rect(screen, Colors.darkgray, pygame.Rect(windowwidth / 2 - 300, windowheight / 2 - 155, 600, 310))
-                                        optionmenu.display()
+                                        self.optionmenu.display()
                                         Sounds.sounds.soundclick.play()
                             elif button.function == "Continue" and button.rect.collidepoint(mousepos):
                                 filepath = os.path.join(game_folder, 'savegames', 'auto_save.pickle')
@@ -92,8 +91,8 @@ class Game:
                                     Sounds.sounds.soundfail.play()
                             elif button.function == "Hall of Fame":
                                 if button.rect.collidepoint(mousepos):
-                                    if optionmenu.displayed:
-                                        optionmenu.hide()
+                                    if self.optionmenu.displayed:
+                                        self.optionmenu.hide()
                                     elif self.loadgameselected:
                                         self.submenu = []
                                         self.loadgameselected = False
@@ -127,13 +126,12 @@ class Game:
                                 self.screenupdate()
                             elif button.function == "Load Game":
                                 if button.rect.collidepoint(mousepos):
-                                    if optionmenu.displayed:
-                                        optionmenu.hide()
+                                    if self.optionmenu.displayed:
+                                        self.optionmenu.hide()
                                     if self.loadgameselected:
-                                        self.loadgameselected = False
-                                        self.submenu = []
                                         self.screenupdate()
                                         Sounds.sounds.soundcancel.play()
+                                        self.loadgameselected = False
                                     else:
                                         self.screenupdate()
                                         Sounds.sounds.soundclick.play()
@@ -141,8 +139,8 @@ class Game:
                                         self.submenu = Tools.loadgame()
                             elif button.function == "Quit" and button.rect.collidepoint(mousepos):
                                 pygame.quit()
-                        if optionmenu.displayed:
-                            optionmenu.click(mousepos)
+                        if self.optionmenu.displayed:
+                            self.optionmenu.click(mousepos)
                         for button in self.submenu:
                             if type(button) is Button.Selectable:
                                 if button.rect.collidepoint(mousepos):
@@ -154,6 +152,7 @@ class Game:
                                         self.filepath = False
                                 else:
                                     button.selected = False
+                                button.update()
                             else:
                                 if button.function == "Load" and button.rect.collidepoint(mousepos):
                                     if self.filepath != "":
@@ -161,20 +160,22 @@ class Game:
                                         Gamedata.player = pickle.load(pickle_in)
                                         shipmenu.shipmenuloop()
                                         self.screenupdate()
-                            button.update()
+
                 elif event.type == pygame.MOUSEMOTION:
                     for button in self.menu:
                         button.update()
                     for button in self.submenu:
                         button.update()
-                    if optionmenu.drag:
-                        optionmenu.draghandling(mousepos)
-                    optionmenu.update()
+                    if self.optionmenu.drag:
+                        self.optionmenu.draghandling(mousepos)
+                        self.optionmenu.update()
                 elif event.type == pygame.MOUSEBUTTONUP:
-                    optionmenu.drag = False
+                    self.optionmenu.drag = False
             pygame.display.flip()
 
     def screenupdate(self):
+        self.optionmenu.hide()
+        self.submenu = []
         screen.blit(self.background, dest=(0, 0))
         for button in self.menu:
             button.update()

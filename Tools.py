@@ -75,7 +75,10 @@ def getmovement(rect1, rect2, speed):
     distancex = -(rect1.centerx - rect2.centerx)
     distancey = rect1.centery - rect2.centery
     distance = (distancex ** 2 + distancey ** 2) ** .5
-    move = []
-    move.append(speed / distance * distancex)
-    move.append(speed / distance * distancey)
+    if distance == 0:
+        move = [0,-speed]
+    else:
+        move = []
+        move.append(speed / distance * distancex)
+        move.append(speed / distance * distancey)
     return move

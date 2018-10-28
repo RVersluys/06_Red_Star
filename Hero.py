@@ -99,7 +99,9 @@ class Hero(pygame.sprite.Sprite):
                 explosion = Explosions.Explosion(self.rect.centerx, self.rect.centery,12)
                 Gamedata.all_sprites.add(explosion)
                 return True
-        elif pygame.time.get_ticks() - self.lastshieldhit > self.shieldrefresh:
+        else:
+            self.shield -= amount
+        if pygame.time.get_ticks() - self.lastshieldhit > self.shieldrefresh:
             self.lastshieldhit = pygame.time.get_ticks()
             angle = Tools.getangle(self.rect,source.rect)
             angle += 90
@@ -107,7 +109,6 @@ class Hero(pygame.sprite.Sprite):
             m = Shieldhit(angle)
             Gamedata.all_sprites.add(m)
             Sounds.sounds.shieldhitsound.play()
-            self.shield -= amount
         return False
 
 class Shieldhit(pygame.sprite.Sprite):
