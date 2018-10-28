@@ -57,7 +57,7 @@ class Powerup(pygame.sprite.Sprite):
         self.gold = gold
         succes = False
         for picnr in range(12,-1,-1):
-            if 5*(4+picnr)**2 < self.gold and succes == False:
+            if 8*(3+picnr)**2 < self.gold and succes == False:
                 self.image = Gamedata.bgimages.powerup[picnr]
                 succes = True
         self.rect = self.image.get_rect()
