@@ -64,7 +64,6 @@ class Game:
                 elif event.type == pygame.MOUSEBUTTONDOWN:
                     mouse = pygame.mouse.get_pressed()
                     if mouse[0]:
-                        #optionmenu.click(mousepos)
                         for button in self.menu:
                             if button.function == "Settings":
                                 if button.rect.collidepoint(mousepos):
@@ -118,8 +117,6 @@ class Game:
                                 if os.path.isfile(filepath):
                                     pickle_in = open(filepath, "rb")
                                     Gamedata.player = pickle.load(pickle_in)
-                                    shipmenu.shipmenuloop()
-                                    self.screenupdate()
                                 else:
                                     Gamedata.player = Player.Player()
                                 shipmenu.shipmenuloop()

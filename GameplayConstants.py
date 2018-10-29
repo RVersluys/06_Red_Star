@@ -64,9 +64,9 @@ shippartslist = [[["Weapons"], ["Engine"], ["Shield"], ["Power"],["Ships"]],
                   ["Fission Reactor", 4, fission_reactor, 65, 75, "Based on nuclear fission, this", "reactor gives the ship massive", "amounts of energy."],
                   ["Fusion Reactor", 9, fusion_reactor, 130, 200, "A stable fussion reactor is", "fueled with water and gives an", "almost limitless supply of energy."],
                   ["Anti Matter Core", 20, anti_matter_core, 250, 500, "Harnessing Antimatter unlocks", "potential beyond imagination", "like this power generator."]],
-                 [["UE Vanguard", 0, shipdesign, 14, 50, "The first Earth ship made with", "the Alfa technology has immediately", "become the pride of the navy.", (189,620), 16],
-                 ["UE Victorious", 33, shipdesign, 20, 80, "With superior armor and extra", "weapon space, this ship can compete", "with anything the aliëns send to us.", (129,620), 14],
-                  ["UE Vicious", 75, shipdesign, 28, 130, "With superior armor and extra", "weapon space, this ship can compete", "with anything the aliëns send to us.", (129, 500), 11]]]
+                 [["UE Vanguard", 0, shipdesign, 14, 50, "The first Earth ship made with", "the Alfa technology has immediately", "become the pride of the navy.", (189,620), 20],
+                 ["UE Victorious", 33, shipdesign, 20, 80, "With superior armor and extra", "weapon space, this ship can compete", "with anything the aliëns send to us.", (129,620), 17],
+                  ["UE Vicious", 75, shipdesign, 28, 130, "With superior armor and extra", "weapon space, this ship can compete", "with anything the aliëns send to us.", (129, 500), 14]]]
 
 shippartimages = []
 for catagory in range(1, 6):
@@ -83,16 +83,14 @@ def shippartinfo(list, index, upgrade):
     price = shippartprice(list, index, upgrade)
     shippartinfo = []
     if upgrade == 0:
-        shippartinfo.append("Price: " + str(price))
         shippartinfo.append(shippartslist[list][index][0])
+        shippartinfo.append("Price: " + str(price))
     else:
         shippartinfo.append("Current level: " + str(upgrade))
         shippartinfo.append("Cost to upgrade: " + str(price))
         upgrade -= 1
     for info in range(5,8):
         shippartinfo.append(shippartslist[list][index][info])
-    #shippartinfo.append(shippartslist[list][index][6])
-    #shippartinfo.append(shippartslist[list][index][7])
     shippartinfo.append("")
     if list == 1:
         if index == 2:

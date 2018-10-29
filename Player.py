@@ -14,7 +14,7 @@ clock = pygame.time.Clock()
 
 class Player:
     def __init__(self):
-        self.speed = 18
+        self.speed = 20
         self.weapons = []
         self.shipparts = []
         self.score = 0

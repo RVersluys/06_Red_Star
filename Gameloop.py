@@ -74,7 +74,6 @@ class Gameloop:
             hits = pygame.sprite.groupcollide(Gamedata.mobs, Gamedata.herobullets, False, False)
             for mob in hits:  # collision herobullets - mobs
                 for bullet in hits[mob]:
-                    #Gamedata.player.score += mob.getdamage(bullet.damage)
                     Gamedata.player.score += bullet.hit(mob)
             if Gamedata.hero.alive == True:
                 hits = pygame.sprite.spritecollide(Gamedata.hero, Gamedata.mobbullets, False, pygame.sprite.collide_circle)

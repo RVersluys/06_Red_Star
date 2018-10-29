@@ -135,7 +135,6 @@ class Schipmenu:
                                             self.menu[4].text = "Rotate"
                                             self.menu[4].function = "Rotate"
                                             self.menu[4].active = True #activeer rotateknop
-                                        #pygame.draw.rect(GameplayConstants.screen, Colors.lightgray, pygame.Rect(1515, 550, 320, 260))
                                         text = GameplayConstants.shippartinfo(self.menunumber, self.shippartdisplayed, 0)
                                         for line in range(len(text)):
                                             Tools.draw_text(GameplayConstants.screen, text[line], 15, 1525, 563 + 20 * line, "Xolonium")
@@ -153,6 +152,7 @@ class Schipmenu:
                                             pickle_out = open(filepath, "wb")
                                             pickle.dump(Gamedata.player, pickle_out)
                                             Gamedata.halloffame.addscore("Player", Gamedata.player.score)
+                                            self.levelinfo = Missioninformation.Missioninfo(levelinforect)
                                         self.resetscreen()
                                     elif button.function == "Back":
                                         Sounds.sounds.soundcancel.play()
@@ -161,14 +161,14 @@ class Schipmenu:
                                         self.shippartselected = False
                                         self.menu[0].active = False
                                         self.menu[4].active = False
-                                        self.create_menu()
+                                        self.resetscreen()
                                     elif button.function == "Save Game":
                                         self.savegameloop()
                                         self.resetscreen()
                                     elif button.function == "Rotate":
                                         self.shippartshape = self.rotateshippart(self.shippartshape)
                                         self.partimage = pygame.transform.rotate(GameplayConstants.shippartimages[self.menunumber - 1][self.shippartdisplayed], -self.rotations * 90)
-                                        Tools.displayshippart(self.partimage, 1427, 730, self.shippartshape)
+                                        self.resetscreen()
                                     elif button.function == "Buy":
                                         self.menu[4].active = False
                                         Gamedata.player.changeship(self.shippartdisplayed)
@@ -258,10 +258,6 @@ class Schipmenu:
                                 return
                             button.update()
 
-                            #if not succes:
-                            #    Sounds.sounds.soundcancel.play()
-                            #    return
-
                 elif event.type == pygame.MOUSEMOTION:
                     for button in savegamebuttons:
                         button.update()
@@ -274,8 +270,6 @@ class Schipmenu:
         y = int((mousepos[1] - 559) / 60)
         height = len(self.shippartshape)
         width = len(self.shippartshape[0])
-        print(x)
-        print(y)
         if x >= 0 and x <= 9 - width and y >= 0 and y <= 9 - height:  # past het object in het schipdisplay
             # in dit gedeelte wordt gekeken waar de hoek van het object zit.
             if width % 2 == 1:
@@ -327,11 +321,9 @@ class Schipmenu:
 
     def resetscreen(self):
         GameplayConstants.screen.blit(self.hangarpic, dest=(0, 0))
-        #pygame.draw.rect(GameplayConstants.screen, Colors.black, self.shippartmenurect)
         self.create_menu()
         self.shipoverview()
         if self.menunumber > 0 and self.shippartdisplayed >= 0:
-            #pygame.draw.rect(GameplayConstants.screen, Colors.lightgray, pygame.Rect(1515, 550, 320, 260))
             text = GameplayConstants.shippartinfo(self.menunumber, self.shippartdisplayed, 0)
             for line in range(len(text)):
                 Tools.draw_text(GameplayConstants.screen, text[line], 13, 1555, 575 + 17 * line, "Xolonium", Colors.white)
@@ -354,7 +346,7 @@ class Schipmenu:
             energybalance = 0
         else:
             energybalance = max(0, min(1, (Gamedata.player.energyregen - Gamedata.player.energyuse) / (maxuse - Gamedata.player.energyuse)))
-        #pygame.draw.rect(GameplayConstants.screen, Colors.black, pygame.Rect(604, 572 + (432 * (1 - energybalance)), 40, 6))  # indicator op energymeter
+        pygame.draw.rect(GameplayConstants.screen, Colors.black, pygame.Rect(604, 572 + (432 * (1 - energybalance)), 40, 6))  # indicator op energymeter
 
 
     def shipoverview(self):
@@ -362,16 +354,9 @@ class Schipmenu:
         gold = Gamedata.player.gold
         pygame.draw.rect(GameplayConstants.screen, Colors.lightgray, goldrect)
         Tools.draw_text(GameplayConstants.screen, "Gold: " + str(gold), 35, 1495, 55, "Xolonium")
-
-        background = pygame.Rect(70, 530, 537, 477)
-        #pygame.draw.rect(GameplayConstants.screen, Colors.blackgray, background)
         GameplayConstants.screen.blit(self.shipimage, dest= GameplayConstants.shippartslist[5][Gamedata.player.ship][8])
         GameplayConstants.screen.blit(self.energymeter, dest=(607, 530))
-
-        textrect = pygame.Rect(640, 530, 240, 477)
-        #pygame.draw.rect(GameplayConstants.screen, Colors.lightgray, textrect)
         self.shipinfo()
-
         s2 = pygame.Surface((60, 60))
         s2.set_alpha(50)
         s2.fill(Colors.darkgreen)
@@ -429,13 +414,11 @@ class Schipmenu:
             self.submenu[x].active = True
             self.submenu[x].text = GameplayConstants.shippartslist[self.menunumber][x][0]
             self.submenu[x].update()
-        #pygame.draw.rect(GameplayConstants.screen, Colors.blackgray, pygame.Rect(900, 530, 950, 477))
         for button in self.submenu:
             button.update()
         for button in self.menu:
             button.update()
         self.shippartrect = pygame.Rect(1335, 550, 180, 360)
-        #pygame.draw.rect(GameplayConstants.screen, Colors.black, self.shippartrect)
         if self.shippartdisplayed != -1 and self.menunumber != 5:
             Tools.displayshippart(self.partimage, 1427, 730, self.shippartshape)
         elif self.shippartdisplayed != -1 and self.menunumber == 5:

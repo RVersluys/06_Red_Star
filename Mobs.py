@@ -19,7 +19,7 @@ class Unitstats:
         self.hitpoints = [10,10,10,30,30,30,60,60,60,40,350,140,1500,200, 230, 80, 500]
         self.gold = [0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 800, 400, 2500, 400, 500, 200, 600]
         self.pointvalue = [50,50,50,100,100,100,200,200,200,400,1500,800,5000, 800, 1000, 500,1800]
-        self.explosion = [4,4,4,7,7,7,[8,9,10],[8,9,10],[8,9,10],9,[11,9,10,8],10,[11,11,11,10,10,10],10,11,7,[9,9,10,10]]
+        self.explosion = [4,4,4,7,7,7,[8,9,10],[8,9,10],[8,9,10],8,[11,9,10,8],10,[11,11,11,10,10,10],10,11,9,[9,9,10,10]]
 
 class Mobsloading:
     def __init__(self):
@@ -88,7 +88,6 @@ class Mob(pygame.sprite.Sprite):
                 self.dead = True
 
                 if isinstance(unitstats.explosion[self.imageindex], list):
-                    print(unitstats.explosion[self.imageindex])
                     explosionlist = unitstats.explosion[self.imageindex].copy()
                     x = self.rect.x + random.randint(0, self.rect.width)
                     y = self.rect.y + random.randint(0, self.rect.height)
