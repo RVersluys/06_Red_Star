@@ -87,18 +87,13 @@ class Level:
 
     def level_1(self):
         Gamedata.bgimages = Backgroundprops.Images([0, 1, 2, 3])
-        for enemy in range(300):
-            spawntime = enemy * 50 + 100
-            unittype = random.randint(0, 2)
-            variant = random.randint(0, 2)
-            speedx = random.randint(-3, 3)
-            speedy = random.randint(6, 9)
-            startx = random.randint(int(max(0, -(windowheight / speedy * speedx))), int(min(warscreenwidth, warscreenwidth - (warscreenwidth / speedy * speedx))))
-            starty = 0
-            programlist = [(0, 0)]
-            weaponprogramlist = [(0, 0)]
-            self.spawnlist.append([spawntime, unittype * 3 + variant, startx, starty, speedx, speedy, programlist, weaponprogramlist, 0])
 
+        # dooreenvoudige manier om meteorstorm in te voegen.
+        # eerste staat voor de startticks, wanneer komt de eerste meteor
+        # tweede getal staat voor increment: hoeveel ticks zitten er tussen elke meteor
+        # derde getal is het aantal meteoren dat de storm duurt.
+        # meerdere meteorstorms per level is mogelijk.
+        self.meteorstorm(100, 50, 300)
 
         self.spawnlist.append([10, 14, 500, 0, 0, 1, [(0, 0)], [(100, 3, 0)], 0])
 
@@ -411,3 +406,15 @@ class Level:
         self.ticks += 1
         return
 
+    def meteorstorm(self, startticks, incrementticks, number):
+        for meteor in range(number):
+            spawntime = meteor * incrementticks + startticks
+            unittype = random.randint(0, 2)
+            variant = random.randint(0, 2)
+            speedx = random.randint(-3, 3)
+            speedy = random.randint(6, 9)
+            startx = random.randint(int(max(0, -(windowheight / speedy * speedx))), int(min(warscreenwidth, warscreenwidth - (warscreenwidth / speedy * speedx))))
+            starty = 0
+            programlist = [(0, 0)]
+            weaponprogramlist = [(0, 0)]
+            self.spawnlist.append([spawntime, unittype * 3 + variant, startx, starty, speedx, speedy, programlist, weaponprogramlist, 0])
