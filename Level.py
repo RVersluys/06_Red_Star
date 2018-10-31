@@ -27,7 +27,7 @@ class Level:
         for x in range(200):
             star = Backgroundprops.Star(True)
             Gamedata.stars.add(star)
-        mobslist = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
+        mobslist = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,17,18,19]
         Mobs.images.load_level(mobslist)
         if Gamedata.player.levelnumber == 0:
             self.level_1()
@@ -98,6 +98,9 @@ class Level:
             programlist = [(0, 0)]
             weaponprogramlist = [(0, 0)]
             self.spawnlist.append([spawntime, unittype * 3 + variant, startx, starty, speedx, speedy, programlist, weaponprogramlist, 0])
+
+
+        self.spawnlist.append([10, 14, 500, 0, 0, 1, [(0, 0)], [(100, 3, 0)], 0])
 
         # liedje starten is simpel: ticks + naam. Zorg dat de file staat in de musicfolder.
         # False = start direct, onderbreek huidige muziek, True betekend: speel af na huidige nummer.
@@ -200,7 +203,7 @@ class Level:
         # 8800 ticks: vijftiende aanval: cruiser (move, slower)
         # en fighters (move, slower)
         self.spawnlist.append([8800, 9, 800, 0, 0, 2, [(0, 0), (180, 3, 0, 1), (0, 0), (0, 0, 0, 0)], [(100, 3, 0)], 0])
-        self.spawnlist.append([8860, 10, 800, 0, 0, 1, [(0, 0), (250, 3, 0, 1), (0, 0), (0, 0, 0, 0)], [(100, 2, 0)], 500])
+        self.spawnlist.append([8860, 10, 800, 0, 0, 1, [(0, 0)], [(100, 2, 0)], 500])
         self.spawnlist.append([8890, 9, 600, 0, 0, 2, [(0, 0), (80, 3, 0, 1), (0, 0), (0, 0, 0, 0)], [(100, 3, 0)], 0])
         self.spawnlist.append([8910, 9, 1000, 0, 0, 2, [(0, 0), (80, 3, 0, 1), (0, 0), (0, 0, 0, 0)], [(100, 3, 0)], 0])
         self.spawnlist.append([8940, 9, 600, 0, 0, 2, [(0, 0), (150, 3, 0, 1), (0, 0), (0, 0, 0, 0)], [(100, 3, 0)], 0])
@@ -247,7 +250,7 @@ class Level:
         self.spawnlist.append([13300, 15, 200, 0, 0, 2, [(0, 0)], [(100, 1, 0)], 250])
 
         # 13500 ticks: eenentwintigste aanval: destroyer (verticaal)
-        self.spawnlist.append([13500, 14, warscreenwidth / 2, 0, 0, 2, [(0, 0)], [(100, 4, 0, 3, 15)], 350])
+        self.spawnlist.append([13500, 14, warscreenwidth / 2, 0, 0, 2, [(0, 0)], [(100, 4, 1, 3, 15)], 350])
 
         # 13900 ticks: tweeentwintigste aanval: fighters (driveby)
         # en vultures (horizontaal naar rechts)
@@ -267,8 +270,8 @@ class Level:
         self.spawnlist.append([14900, 11, 100, 0, 0, 4, [(0, 0), (40, 3, 0, 0), (100, 4), (178, 3, 0, -7)], [(100, 2, 0), [3, 5, -1]], 0])
         self.spawnlist.append([15200, 11, warscreenwidth / 2, 0, 0, 4, [(0, 0), (40, 3, 0, 0), (100, 4), (178, 3, 0, -7)], [(100, 2, 0), [3, 5, -1]], 300])
         self.spawnlist.append([15600, 10, 850, 0, 0, 1, [(0, 0), (0, 0)], [(40, 2, 0)], 500])
-        self.spawnlist.append([16000, 14, 300, 0, 0, 2, [(0, 0)], [(100, 4, 0, 3, 15)], 0])
-        self.spawnlist.append([16300, 14, 1000, 0, 0, 2, [(0, 0)], [(100, 4, 0, 3, 15)], 350])
+        self.spawnlist.append([16000, 14, 300, 0, 0, 2, [(0, 0)], [(100, 4, 1, 3, 15)], 0])
+        self.spawnlist.append([16300, 14, 1000, 0, 0, 2, [(0, 0)], [(100, 4, 1, 3, 15)], 350])
 
         # 16700 ticks: drieentwintigste aanval: fighters (verticaal)
         self.spawnlist.append([16700, 9, 700, 0, 0, 2, [(0, 0)], [(100, 3, 0)], 0])
@@ -287,7 +290,7 @@ class Level:
         self.spawnlist.append([17400, 15, 500, 0, 0, 2, [(0, 0), (40, 2)], [(100, 1, 0)], 0])
         self.spawnlist.append([17500, 15, 1000, 0, 0, 2, [(0, 0), (40, 2)], [(100, 1, 0)], 0])
         self.spawnlist.append([17600, 15, 500, 0, 0, 2, [(0, 0), (40, 2)], [(100, 1, 0)], 250])
-        self.spawnlist.append([17650, 14, 250, 0, 0, 2, [(0, 0)], [(100, 4, 0, 3, 15)], 350])
+        self.spawnlist.append([17650, 14, 250, 0, 0, 2, [(0, 0)], [(100, 4, 1, 3, 15)], 350])
 
         self.textlist.append([18300, "WARNING: LARGE ENEMY SHIP DETECTED", 30, (200, 0, 0), (100, 40), (warscreenwidth / 2, 100), (warscreenwidth, 50)])
         self.textlist.append([18600, "SCANNING...", 30, (255, 255, 255), (100, 40), (warscreenwidth / 2, 50), (warscreenwidth, 100)])
@@ -322,9 +325,7 @@ class Level:
         self.spawnlist.append([900, 9, 1020, 0, 0, 3, [(0, 0), (40, 2)], [(50, 3, 0)], 0])
 
         # Shit get's real met lancers en destroyers.
-        self.spawnlist.append([1100, 14, 300, 0, 3, 1, [(0, 0), (300, 3, 0, 4)], [(60, 4, 1, 3, 15)], 0])
-        self.spawnlist.append([1100, 14, 1140, 0, -3, 1, [(0, 0), (300, 3, 0, 4)], [(60, 4, 1, 3, 15)], 0])
-        self.spawnlist.append([1300, 14, 150, 0, 3, 1, [(0, 0), (300, 3, 0, 4)], [(60, 4, 1, 3, 15)], 500])
+        self.spawnlist.append([1300, 14, 150, 0, 3, 1, [(0, 0), (300, 3, 0, 4)], [(60, 4, 1, 3, 15)], 0])
         self.spawnlist.append([1300, 14, 1290, 0, -3, 1, [(0, 0), (300, 3, 0, 4)], [(60, 4, 1, 3, 15)], 500])
         self.spawnlist.append([1650, 16, 0, 500, 10, -1, [(0, 0), (90,3,0,-2), (160,2)], [((25,0,100), 3, 1), ((60,100,99999), 4, 1, 4, 15)], 1100])
         self.spawnlist.append([1750, 16, warscreenwidth, 500, -10, -1, [(0, 0), (90,3,0,-2), (160,2)], [((25,0,100), 3, 1), ((60,100,99999), 4, 1, 4, 15)], 1100])
@@ -340,20 +341,15 @@ class Level:
         self.spawnlist.append([2750, 15, 0, 300, 5, 0, [(0, 0), (150, 3, 0, 1)], [(100, 1, 0)], 0])
         self.spawnlist.append([2800, 15, 1440, 300, -5, 0, [(0, 0), (100, 3, 0, 1)], [(100, 1, 0)], 0])
         self.spawnlist.append([2850, 15, 0, 300, 5, 0, [(0, 0), (50, 3, 0, 1),], [(100, 1, 0)], 0])
-        self.spawnlist.append([2700, 10, 400, 1080, 0, -6, [(0, 0), (80, 3, 0, 1), (200,1)], [(25, 1, 0)], 900])
+        self.spawnlist.append([2700, 10, 400, 1080, 0, -6, [(0, 0), (80, 3, 0, 1), (200,1)], [(100, 2, 0)], 900])
 
         # zware wave met vultures en lancers
-        self.spawnlist.append([3200, 16, 0, 150, 10, -1, [(0, 0), (10,3,0,1)], [((25,0,100), 3, 1), ((60,100,99999), 4, 1, 4, 15)], 1100])
-        self.spawnlist.append([3200, 16, warscreenwidth, 150, -10, -1, [(0, 0), (10,3,0,1)], [((25,0,100), 3, 1), ((60,100,99999), 4, 1, 4, 15)], 1100])
-        self.spawnlist.append([3300, 15, 1240, 0, 0, 2, [(0, 0), (300, 3, 0, 1)], [(100, 1, 0)], 0])
-        self.spawnlist.append([3300, 15, 200, 0, 0, 2, [(0, 0), (250, 3, 0, 1)], [(100, 1, 0)], 0])
-        self.spawnlist.append([3400, 15, 1040, 0, 0, 2, [(0, 0), (200, 3, 0, 1)], [(100, 1, 0)], 0])
-        self.spawnlist.append([3400, 15, 400, 0, 0, 2, [(0, 0), (150, 3, 0, 1)], [(100, 1, 0)], 0])
+        self.spawnlist.append([3300, 16, 0, 150, 10, -1, [(0, 0), (10,3,0,1)], [((25,0,100), 3, 1), ((60,100,99999), 4, 1, 4, 15)], 1100])
+        self.spawnlist.append([3300, 16, warscreenwidth, 150, -10, -1, [(0, 0), (10,3,0,1)], [((25,0,100), 3, 1), ((60,100,99999), 4, 1, 4, 15)], 1100])
+        self.spawnlist.append([3400, 15, 1240, 0, 0, 2, [(0, 0), (300, 3, 0, 1)], [(100, 1, 0)], 0])
+        self.spawnlist.append([3400, 15, 200, 0, 0, 2, [(0, 0), (250, 3, 0, 1)], [(100, 1, 0)], 0])
 
         # Fighters als kanonvoer
-        self.spawnlist.append([4020, 9, 720, 0, 0, 3, [(0, 0), (40, 2)], [(50, 3, 0)], 75])
-        self.spawnlist.append([4050, 9, 1020, 0, 0, 3, [(0, 0), (40, 2)], [(50, 3, 0)], 75])
-        self.spawnlist.append([4080, 9, 420, 0, 0, 3, [(0, 0), (40, 2)], [(50, 3, 0)],75])
         self.spawnlist.append([4110, 9, 720, 0, 0, 3, [(0, 0), (40, 2)], [(50, 3, 0)], 75])
         self.spawnlist.append([4140, 9, 1020, 0, 0, 3, [(0, 0), (40, 2)], [(50, 3, 0)], 75])
         self.spawnlist.append([4170, 9, 420, 0, 0, 3, [(0, 0), (40, 2)], [(50, 3, 0)], 75])
@@ -375,6 +371,9 @@ class Level:
         self.spawnlist.append([4650, 9, 720, 0, 0, 3, [(0, 0), (40, 2)], [(50, 3, 0)], 75])
         self.spawnlist.append([4680, 9, 1020, 0, 0, 3, [(0, 0), (40, 2)], [(50, 3, 0)], 75])
         self.spawnlist.append([4710, 9, 420, 0, 0, 3, [(0, 0), (40, 2)], [(50, 3, 0)], 75])
+        self.spawnlist.append([4750, 9, 720, 0, 0, 3, [(0, 0), (40, 2)], [(50, 3, 0)], 75])
+        self.spawnlist.append([4780, 9, 1020, 0, 0, 3, [(0, 0), (40, 2)], [(50, 3, 0)], 75])
+        self.spawnlist.append([4810, 9, 420, 0, 0, 3, [(0, 0), (40, 2)], [(50, 3, 0)],75])
 
         self.spawnlist.append([5500, -1])
 

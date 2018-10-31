@@ -295,6 +295,7 @@ class Weapon(Shippart):
                 elif self.index == 3:
                     Sounds.sounds.lasersound.play()
                     totaldamage = (self.upgrades + 1) * GameplayConstants.shippartslist[self.type][self.index][8]
+
                     beams = 3 + self.upgrades * 2
                     beamhitstotal = (self.upgrades + 2) ** 2
                     beamhits = 0
@@ -303,7 +304,7 @@ class Weapon(Shippart):
                             beamhits += 1
                         else:
                             beamhits -= 1
-                        adjustment = x*3 - beams *1.5
+                        adjustment = x*3 - beams *1.5 + -120 + 30 * self.xpos
                         damage = totaldamage/beamhitstotal * beamhits
                         bullet = Projectiles.Laser(adjustment,damage)
                         Gamedata.all_sprites.add(bullet)

@@ -32,7 +32,7 @@ class Schipmenu:
 
         # menuknoppen
         self.menu = [Button.Button(pygame.Rect(920, 935, 400, 50), "Back", "Back", False),
-                     Button.Button(pygame.Rect(1535, 935, 300, 60), "Launch", "Launch", False),
+                     Button.Button(pygame.Rect(1535, 935, 300, 60), "Launch", "Launch", False, Button.buttonlaunch),
                      Button.Button(pygame.Rect(30, 30, 400, 50), "Quit", "Quit", False),
                      Button.Button(pygame.Rect(30, 90, 400, 50), "Save Game", "Save Game", False),
                      Button.Button(pygame.Rect(1335, 910, 180, 50), "Rotate", "Rotate", False)]
