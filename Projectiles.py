@@ -22,7 +22,7 @@ class Imageloading:
         self.projectiles.append([13, 25, images])
         self.projectiles.append([15, 3])
         self.heroprojectiles = [pygame.image.load(os.path.join(imgfolder, 'projectiles', 'bullet.png')).convert_alpha(),
-                                pygame.image.load(os.path.join(imgfolder, 'projectiles', 'rocket.png')).convert_alpha(),
+                                pygame.transform.scale(pygame.image.load(os.path.join(imgfolder, 'projectiles', 'rocket.png')).convert_alpha(), (8, 49)),
                                 pygame.image.load(os.path.join(imgfolder, 'projectiles', 'plasma.png')).convert_alpha()]
         self.plasmadecay = []
         for x in range(12):
@@ -204,20 +204,29 @@ class Rocket(pygame.sprite.Sprite):
         self.rect.top = Gamedata.hero.rect.top
         self.rect.left = Gamedata.hero.rect.centerx + adjustment
         self.type = 2
-        self.movey = 16
+        self.movey = 5
         damage = GameplayConstants.shippartslist[1][self.type][8]
         for part in Gamedata.player.shippartsused:
             if part.type == 4:
                 damage = max(damage, GameplayConstants.shippartslist[1][self.type][8] + GameplayConstants.shippartslist[1][self.type][11] * part.index)
         self.damage = damage
+        self.ticks = 0
 
     def update(self):
         self.rect.y -= self.movey
         if not GameplayConstants.extendedscreen.colliderect(self.rect):
             self.kill()
+        self.ticks += 1
+        if self.ticks % 2 == 0:
+            self.movey += 1
+        if self.ticks % 3 == 0:
+            explosion = Explosions.Explosion(self.rect.centerx, self.rect.bottom, 14)
+            Gamedata.all_sprites.add(explosion)
 
     def hit(self, mob):
         self.kill()
+        explosion = Explosions.Explosion(self.rect.centerx, self.rect.bottom, 13)
+        Gamedata.all_sprites.add(explosion)
         return mob.getdamage(self.damage)
 
 class Plasmabeam(pygame.sprite.Sprite):

@@ -59,7 +59,7 @@ shippartslist = [[["Weapons"], ["Engine"], ["Shield"], ["Power"],["Ships"]],
                   ["Anti Matter Drive", 11, anti_matter_drive, 50, 9, "Nobody really knows how this", "works, but it sure sounds cool", "and that counts for something!"]],
                  [["Magnetic Deflector", 2.5, magnetic_shield, 7, 15, "The use of powerful magnetic", "fields are able to dispurse many", "types of projectiles."], #shields: name,  price, energyuse(second), shape, maxschildboost
                   ["Flux Shield", 5, flux_shield, 12, 30, "This shield filters undesirable", "wavelengths while allowing other", "wavelengths to protect the ship."],
-                  ["Barrier Shield", 10, barrier_shield, 25, 60, "A barrier shield uses magnets", "to surround the ship with", "liquid plasma."]],
+                  ["Barrier Shield", 10, barrier_shield, 25, 50, "A barrier shield uses magnets", "to surround the ship with", "liquid plasma."]],
                  [["Solar Panel", 1, solar_panel, 15, 30, "Conventional energy mechanism", "that converts solar energy in large", "batteries."], #power source: name, price, shape, energyregen(second), maxenergyboost
                   ["Fission Reactor", 4, fission_reactor, 65, 75, "Based on nuclear fission, this", "reactor gives the ship massive", "amounts of energy."],
                   ["Fusion Reactor", 9, fusion_reactor, 130, 200, "A stable fussion reactor is", "fueled with water and gives an", "almost limitless supply of energy."],
@@ -102,7 +102,7 @@ def shippartinfo(list, index, upgrade):
             shippartinfo.append("Ammo: " + str(shippartslist[list][index][10] * (upgrade + 1)))
         else:
             shippartinfo.append("Damage: " + str(shippartslist[list][index][8] * (upgrade + 1)))
-        shippartinfo.append("Cooldown: " + str(shippartslist[list][index][4]) + " ms")
+        shippartinfo.append("Cooldown: " + str(shippartslist[list][index][4]*22) + " ms")
         shippartinfo.append("Energy per shot: " + str(shippartslist[list][index][3]*(upgrade+1)))
         shippartinfo.append("Speed: -" + str(shippartslist[list][index][9] * (upgrade + 1)))
     elif list == 2:

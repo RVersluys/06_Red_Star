@@ -10,9 +10,9 @@ De explosie sprites worden hier ook gemannaged."""
 
 imgfolder = os.path.join(os.path.dirname(__file__), 'img')
 explosions = []
-explosionsize = [(128,128),(128,128),(128,128),(128,128),(64,64),(128, 128), (64, 64), (128, 128), (256, 256), (256, 256),(192,192),(384,384),(256,256),(64,64),(32,32),(128,128),(128,128)]
+explosionsize = [(128,128),(128,128),(128,128),(128,128),(64,64),(128, 128), (64, 64), (128, 128), (256, 256), (256, 256),(192,192),(384,384),(256,256),(64,64),(16,16),(128,128),(128,128)]
 explosionticks = [24,24,24,24,24,32,32,32,32,32,24,64,64,16,24,16,16]
-sound = [4,1,2,3,0,4,1,4,5,7,6,9,8,2,1,2,2]
+sound = [4,1,2,3,0,4,1,4,5,7,6,9,8,2,-1,2,2]
 for explosion in range(1, 12):
     list = []
     for picture in range(explosionticks[explosion-1]):
@@ -42,7 +42,8 @@ class Explosion(pygame.sprite.Sprite):
         self.type = type
         self.list = list
         self.rectship = rect
-        Sounds.sounds.explosions[sound[self.type]].play()
+        if sound[self.type] >= 0:
+            Sounds.sounds.explosions[sound[self.type]].play()
 
 
     def update(self):
