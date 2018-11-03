@@ -46,6 +46,8 @@ class Player:
         self.shippartsused.remove(part)
         if part.type == 1:
             self.weapons.remove(part)
+            if part.index == 2:
+                self.missiles.remove(part)
         x = part.xpos
         y = part.ypos
         height = len(part.shape)
@@ -228,13 +230,13 @@ class Weapon(Shippart):
         Gamedata.player.gold -= GameplayConstants.shippartprice(self.type, index, 0)
         if self.index == 2:
             self.fireleft = True
-            self.ammo = 10
+            self.ammo = 20
             Gamedata.player.missiles.append(self)
         elif self.index == 4:
             self.chargeup = 0
 
     def replenish(self):
-        self.ammo = (self.upgrades+1) * 10
+        self.ammo = (self.upgrades+1) * 20
 
     def update(self):
         if self.nowcooldown != 0:
@@ -282,12 +284,11 @@ class Weapon(Shippart):
                     if self.ammo > 0:
                         adjustment = -90 + 30 * self.xpos
                         if self.fireleft:
-                            adjustment += 5
+                            adjustment += 10
                         else:
-                            adjustment -= 5
+                            adjustment -= 10
                         self.fireleft = not self.fireleft
-                        damage = GameplayConstants.shippartslist[self.type][self.index][8]
-                        bullet = Projectiles.Rocket(adjustment, damage)
+                        bullet = Projectiles.Rocket(adjustment)
                         Gamedata.all_sprites.add(bullet)
                         Gamedata.herobullets.add(bullet)
                         self.ammo -= 1

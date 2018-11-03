@@ -81,8 +81,8 @@ class Schipmenu:
                             self.resetscreen()
                         else:  # verwijder een schipdeel in het schip met de rechter muisknop
                             x = int((mousepos[0] - 69) / 60)
-                            y = int((mousepos[1] - 529) / 60)
-                            if x >= 0 and x <= 9 and y >= 0 and y <= 8:
+                            y = int((mousepos[1] - 559) / 60)
+                            if x >= 0 and x <= 9 and y >= 0 and y <= 9:
                                 if not isinstance(Gamedata.player.shipfill[y][x], int):
                                     Sounds.sounds.soundremove.play()
                                     Gamedata.player.removepart(Gamedata.player.shipfill[y][x])
@@ -93,7 +93,7 @@ class Schipmenu:
                         else:
                             x = int((mousepos[0] - 69) / 60)
                             y = int((mousepos[1] - 559) / 60)
-                            if x >= 0 and x < 9 and y >= 0 and y < 8:
+                            if x >= 0 and x < 9 and y >= 0 and y < 9:
                                 if not isinstance(Gamedata.player.shipfill[y][x], int):
                                     Sounds.sounds.soundclick.play()
                                     Gamedata.player.shipfill[y][x].itemmenu()
@@ -310,13 +310,13 @@ class Schipmenu:
                                 Gamedata.player.shipfill[yadjusted + stepdown][xadjusted + step] = item
                     else:
                         Gamedata.player.shipfill[yadjusted + stepdown][xadjusted] = item
-
-                        GameplayConstants.screen.blit(self.partimage, (70 + 60 * xadjusted, 560 + 60 * yadjusted))
+                        #GameplayConstants.screen.blit(self.partimage, (70 + 60 * xadjusted, 560 + 60 * yadjusted))
                 Gamedata.player.shippartsused.append(item)
                 pygame.mouse.set_visible(True)
                 self.shippartselected = False
-                self.shipoverview()
+                #self.shipoverview()
                 Sounds.sounds.soundimplement.play()
+                self.resetscreen()
 
 
     def resetscreen(self):

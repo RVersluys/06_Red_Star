@@ -11,8 +11,8 @@ windowwidth = 1920
 windowheight = 1080
 warscreenwidth = 1440
 fps = 60
-musicvolume = 100
-effectsvolume = 100
+musicvolume = 15
+effectsvolume = 25
 extendedscreen = pygame.Rect(-100,-100,windowwidth+200,windowheight+200)
 
 # de vorm van elk shippart: tuples zijn verticale lijnen. 1 is dat er iets zit.
@@ -48,10 +48,10 @@ shipdesign = [[0, 0, 0, 3, 0, 3, 0, 0, 0],
 # specificaties en namen van de onderdelen
 # prijs is keer duizend voor aanschaf. Upgrades: upgrade 1: *2250, upgrade 2: *4000, upgrade 3: *6259, upgrade 4: *9000
 shippartslist = [[["Weapons"], ["Engine"], ["Shield"], ["Power"],["Ships"]],
-                 [["Kinetic Weapon", 1.5, kinetic_weapon, 6, 12, "A large cannon that shoots", "depleted uranium projectiles", "at high rate.", 5, 1], #wapens: 0=name, 1=price, 2=shape, 3=energyuse(shot), 4=cooldown(ticks), 5-7=description, 8=damage, 9=speedreduction
+                 [["Kinetic Weapon", 1.5, kinetic_weapon, 6, 12, "A large cannon that shoots", "depleted uranium projectiles", "at high rate.", 5, 1], #wapens: 0=name, 1=price, 2=shape, 3=energyuse(shot), 4=cooldown(ticks), 5-7=description, 8=damage, 9=speedreduction, 10=ammo, 11 = damageboost from powersource
                   ["Flak Cannon", 6, flak_cannon, 10, 21, "Magnatic balista that propels", "projectiles that explode to carpet", "the area with small fragments.", 18, 2],
-                  ["Rocket Launcher", 3, rocket_launcher, 0, 10, "Ballistic missile platform with", "limited ammo that shoots missiles", "based on your power source.", 20, 1],
-                  ["Laser Cannon", 10, laser_cannon, 50, 54, "High powered laser weapon that", "can blow a hole in even the ", "strongest armor.", 40, 1],
+                  ["Rocket Launcher", 3, rocket_launcher, 0, 10, "Ballistic missile platform with", "limited ammo that shoots missiles", "based on your power source.", 25, 1, 20, 15],
+                  ["Laser Cannon", 10, laser_cannon, 50, 54, "High powered laser weapon that", "can blow a hole in even the ", "strongest armor.", 45, 1],
                   ["Plasma Cannon", 22, plasma_cannon, 15, 6, "High powered laser weapon that", "can blow a hole in even the ", "strongest armor.", 15, 3]],
                  [["Rocket Engine", 1, rocket_engine, 10, 2, "Conventional rocket propulsion ", "is not necessary efficiënt but it", "is flexible."], #engines: name, price, shape, energyuse(second), speedboost
                   ["Ion Thruster", 3, ion_thruster, 20, 5, "Higly efficient propulsion system", "that fires ions at the opposite", "direction."],
@@ -94,12 +94,12 @@ def shippartinfo(list, index, upgrade):
     shippartinfo.append("")
     if list == 1:
         if index == 2:
-            damage = 20
-            for part in Gamedata.player.shipparts:
+            damage = shippartslist[list][index][8]
+            for part in Gamedata.player.shippartsused:
                 if part.type == 4:
-                    damage = max(damage, 20 + 10 * part.index)
+                    damage = max(damage, shippartslist[list][index][8] + shippartslist[list][index][11] * part.index)
             shippartinfo.append("Damage: " + str(damage))
-            shippartinfo.append("Ammo: " + str(10 * (upgrade + 1)))
+            shippartinfo.append("Ammo: " + str(shippartslist[list][index][10] * (upgrade + 1)))
         else:
             shippartinfo.append("Damage: " + str(shippartslist[list][index][8] * (upgrade + 1)))
         shippartinfo.append("Cooldown: " + str(shippartslist[list][index][4]) + " ms")

@@ -110,6 +110,8 @@ class Level:
         self.propslist.append([9000, 2, 200, 2, (518, 520)])
         self.propslist.append([12000, 3, 800, 1, (240, 97)])
 
+        self.spawnlist.append([200, 14, 300, 0, 0, 2, [(0, 0)], [(100, 4, 2, 4, 20)], 0])
+
         # 500 ticks: eerste aanval: fighters (horizontaal naar links)
         self.spawnlist.append([500, 9, warscreenwidth, 200, -4, 0, [(0, 0)], [(100, 3, 0)], 0])
         self.spawnlist.append([560, 9, warscreenwidth, 200, -4, 0, [(0, 0)], [(100, 3, 0)], 200])
@@ -386,7 +388,7 @@ class Level:
 
 
 
-        self.spawnlist.append([10000, -1])
+        self.spawnlist.append([6500, -1])
 
     def spawning(self):
         if len(self.spawnlist) > 0:

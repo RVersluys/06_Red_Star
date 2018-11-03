@@ -16,6 +16,10 @@ class Imageloading:
         #speed, damage, plaatje
         self.projectiles.append([15, 6, pygame.image.load(os.path.join(imgfolder, 'projectiles', 'beam.png')).convert_alpha()])
         self.projectiles.append([11, 18, pygame.image.load(os.path.join(imgfolder, 'projectiles', 'shockblast.png')).convert_alpha()])
+        images = []
+        for x in range(8):
+            images.append(pygame.image.load(os.path.join(imgfolder, 'projectiles', 'boomerang' + str(x) + '.png')).convert_alpha())
+        self.projectiles.append([13, 25, images])
         self.projectiles.append([15, 3])
         self.heroprojectiles = [pygame.image.load(os.path.join(imgfolder, 'projectiles', 'bullet.png')).convert_alpha(),
                                 pygame.image.load(os.path.join(imgfolder, 'projectiles', 'rocket.png')).convert_alpha(),
@@ -28,7 +32,11 @@ class Imageloading:
 class Mobbullet(pygame.sprite.Sprite):
     def __init__(self, x, y, movex, movey, angle, type):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.transform.rotate(images.projectiles[type][2], angle)
+        if type != 2:
+            self.image = pygame.transform.rotate(images.projectiles[type][2], angle)
+        else:
+            self.image = images.projectiles[type][2][0]
+            self.ticks = 0
         self.rect = self.image.get_rect()
         self.rect.centerx = x
         self.rect.centery = y
@@ -42,6 +50,9 @@ class Mobbullet(pygame.sprite.Sprite):
         self.rect.y -= self.movey
         if not GameplayConstants.extendedscreen.contains(self.rect):
             self.kill()
+        if self.type == 2:
+            self.ticks += 1
+            self.image = images.projectiles[self.type][2][self.ticks % 8]
 
     def hit(self):
         self.kill()
@@ -186,7 +197,7 @@ class Laser(pygame.sprite.Sprite):
         pass
 
 class Rocket(pygame.sprite.Sprite):
-    def __init__(self, adjustment, damage):
+    def __init__(self, adjustment):
         pygame.sprite.Sprite.__init__(self)
         self.image = images.heroprojectiles[1]
         self.rect = self.image.get_rect()
@@ -194,9 +205,10 @@ class Rocket(pygame.sprite.Sprite):
         self.rect.left = Gamedata.hero.rect.centerx + adjustment
         self.type = 2
         self.movey = 16
-        for part in Gamedata.player.shipparts:
+        damage = GameplayConstants.shippartslist[1][self.type][8]
+        for part in Gamedata.player.shippartsused:
             if part.type == 4:
-                damage = max(damage, 20 + 10 * part.index)
+                damage = max(damage, GameplayConstants.shippartslist[1][self.type][8] + GameplayConstants.shippartslist[1][self.type][11] * part.index)
         self.damage = damage
 
     def update(self):

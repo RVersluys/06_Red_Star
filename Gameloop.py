@@ -1,4 +1,5 @@
 import pygame
+import os
 
 windowwidth = 1920
 windowheight = 1080
@@ -39,6 +40,7 @@ class Gameloop:
         # pygame.display.update()
         running = True
         endlevelbool = False
+        self.missilepic = pygame.transform.rotate(pygame.image.load(os.path.join(os.path.dirname(__file__), 'img', 'projectiles', 'rocket.png')).convert_alpha(),270)
 
         while running:
             # Eventcheck
@@ -133,12 +135,6 @@ class Gameloop:
         Tools.draw_text(screen, "Armor", 35, 1482, 963, "Xolonium")
 
         # statusbars
-        barfill = [Gamedata.hero.energy, Gamedata.hero.shield, Gamedata.hero.armor]
-        startx = 1474
-        starty = 820
-        barheight = 40
-        barwidth = 413
-        spacing = 80
         fills = []
         fills.append(pygame.Rect(self.barrects[0].left + 3, self.barrects[0].top + 3,Gamedata.hero.energy / Gamedata.player.maxenergy * 413, 36))
         if Gamedata.player.maxshield:
@@ -146,8 +142,16 @@ class Gameloop:
         else:
             fills.append(pygame.Rect(0, 0, 0, 0))
         fills.append(pygame.Rect(self.barrects[2].left + 3, self.barrects[2].top + 3,Gamedata.hero.armor / Gamedata.player.maxarmor * 413, 36))
+        if Gamedata.player.missiles:
+            ammo = 0
+            for weapon in Gamedata.player.missiles:
+                ammo += weapon.ammo
+            pygame.draw.rect(screen, Colors.black, pygame.Rect(1455, 210, 450, 60))
+            pygame.draw.rect(screen, Colors.lightgray, pygame.Rect(1458, 213, 444, 54))
+            Tools.draw_text(screen, ": " + str(ammo), 35, 1580, 240, "Xolonium")
+            screen.blit(self.missilepic, dest=(1472, 233))
+
         for barnr in range(3):
-            fill = pygame.Rect(startx + 3, starty + 3 + barnr * spacing, (barwidth - 6) / 100 * barfill[barnr], barheight - 6)
             pygame.draw.rect(screen, Colors.black, self.barrects[barnr])
             pygame.draw.rect(screen, Colors.colorbars[barnr], fills[barnr])
         # score
