@@ -93,7 +93,7 @@ class Level:
         # tweede getal staat voor increment: hoeveel ticks zitten er tussen elke meteor
         # derde getal is het aantal meteoren dat de storm duurt.
         # meerdere meteorstorms per level is mogelijk.
-        self.meteorstorm(100, 50, 400)
+        self.meteorstorm(100, 50, 300)
 
         # liedje starten is simpel: ticks + naam. Zorg dat de file staat in de musicfolder.
         # False = start direct, onderbreek huidige muziek, True betekend: speel af na huidige nummer.
@@ -245,7 +245,7 @@ class Level:
         self.spawnlist.append([13300, 15, 200, 0, 0, 2, [(0, 0)], [(100, 1, 0)], 250])
 
         # 13500 ticks: eenentwintigste aanval: destroyer (verticaal)
-        self.spawnlist.append([13500, 14, warscreenwidth / 2, 0, 0, 2, [(0, 0)], [(100, 4, 1, 4, 20)], 350])
+        self.spawnlist.append([13500, 14, warscreenwidth / 2, 0, 0, 2, [(0, 0)], [(100, 4, 0, 4, 20)], 350])
 
         # 13900 ticks: tweeentwintigste aanval: fighters (driveby)
         # en vultures (horizontaal naar rechts)
@@ -265,8 +265,8 @@ class Level:
         self.spawnlist.append([14900, 11, 100, 0, 0, 4, [(0, 0), (40, 3, 0, 0), (100, 4), (178, 3, 0, -7)], [(100, 2, 0)], 0])
         self.spawnlist.append([15200, 11, warscreenwidth / 2, 0, 0, 4, [(0, 0), (40, 3, 0, 0), (100, 4), (178, 3, 0, -7)], [(100, 2, 0)],300])
         self.spawnlist.append([15600, 10, 850, 0, 0, 1, [(0, 0), (0, 0)], [(40, 2, 0)], 500])
-        self.spawnlist.append([16000, 14, 300, 0, 0, 2, [(0, 0)], [(100, 4, 1, 4, 20)], 0])
-        self.spawnlist.append([16300, 14, 1000, 0, 0, 2, [(0, 0)], [(100, 4, 1, 4, 20)], 350])
+        self.spawnlist.append([16000, 14, 300, 0, 0, 2, [(0, 0)], [(100, 4, 0, 4, 20)], 0])
+        self.spawnlist.append([16300, 14, 1000, 0, 0, 2, [(0, 0)], [(100, 4, 0, 4, 20)], 350])
 
         # 16700 ticks: drieentwintigste aanval: fighters (verticaal)
         self.spawnlist.append([16700, 9, 700, 0, 0, 2, [(0, 0)], [(100, 3, 0)], 0])
@@ -285,7 +285,7 @@ class Level:
         self.spawnlist.append([17400, 15, 500, 0, 0, 2, [(0, 0), (40, 2)], [(100, 1, 0)], 0])
         self.spawnlist.append([17500, 15, 1000, 0, 0, 2, [(0, 0), (40, 2)], [(100, 1, 0)], 0])
         self.spawnlist.append([17600, 15, 500, 0, 0, 2, [(0, 0), (40, 2)], [(100, 1, 0)], 250])
-        self.spawnlist.append([17650, 14, 250, 0, 0, 2, [(0, 0)], [(100, 4, 1, 4, 20)], 350])
+        self.spawnlist.append([17650, 14, 250, 0, 0, 2, [(0, 0)], [(100, 4, 0, 4, 20)], 350])
 
         self.textlist.append([18300, "WARNING: LARGE ENEMY SHIP DETECTED", 30, (200, 0, 0), (100, 40), (warscreenwidth / 2, 100),(warscreenwidth, 50)])
         self.textlist.append([18600, "SCANNING...", 30, (255, 255, 255), (100, 40), (warscreenwidth / 2, 50), (warscreenwidth, 100)])
@@ -323,8 +323,8 @@ class Level:
         self.spawnlist.append([900, 9, 1020, 0, 0, 3, [(0, 0), (40, 2)], [(50, 3, 0)], 0])
 
         # Shit get's real met lancers en destroyers.
-        self.spawnlist.append([1300, 14, 150, 0, 3, 1, [(0, 0), (300, 3, 0, 4)], [(100, 4, 1, 4, 20)], 0])
-        self.spawnlist.append([1300, 14, 1290, 0, -3, 1, [(0, 0), (300, 3, 0, 4)], [(100, 4, 1, 4, 20)], 500])
+        self.spawnlist.append([1300, 14, 150, 0, 3, 1, [(0, 0), (300, 3, 0, 4)], [(100, 4, 0, 4, 20)], 0])
+        self.spawnlist.append([1300, 14, 1290, 0, -3, 1, [(0, 0), (300, 3, 0, 4)], [(100, 4, 0, 4, 20)], 500])
         self.spawnlist.append([1650, 16, 0, 500, 10, -1, [(0, 0), (90,3,0,-2), (160,2)], [((25,0,100), 3, 1), ((60,100,99999), 4, 1, 4, 15)], 1100])
         self.spawnlist.append([1750, 16, warscreenwidth, 500, -10, -1, [(0, 0), (90,3,0,-2), (160,2)], [((25,0,100), 3, 1), ((60,100,99999), 4, 1, 4, 15)], 1100])
 
@@ -382,9 +382,26 @@ class Level:
         # en destroyers (naar rechts)
         self.spawnlist.append([5800, 11, 1200, 1080, 0, -6, [(0, 0), (80, 3, 0, 1), (100, 4), (178, 3, 0, -7)], [(100, 2, 0)], 300])
         self.spawnlist.append([6000, 11, 300, 1080, 0, -6, [(0, 0), (80, 3, 0, 1), (100, 4), (178, 3, 0, -7)], [(100, 2, 0)], 300])
-        self.spawnlist.append([6030, 14, 0, 200, 2, 0, [(0, 0),], [(100, 4, 1, 4, 20)], 0])
-        self.spawnlist.append([6180, 14, 0, 200, 2, 0, [(0, 0), ], [(100, 4, 1, 4, 20)], 0])
-        self.spawnlist.append([6330, 14, 0, 200, 2, 0, [(0, 0), ], [(100, 4, 1, 4, 20)], 0])
+        self.spawnlist.append([6030, 14, 0, 200, 2, 0, [(0, 0),], [(100, 4, 0, 4, 20)], 0])
+        self.spawnlist.append([6180, 14, 0, 200, 2, 0, [(0, 0), ], [(100, 4, 0, 4, 20)], 0])
+        self.spawnlist.append([6330, 14, 0, 200, 2, 0, [(0, 0), ], [(100, 4, 0, 4, 20)], 0])
+
+        # legertje fighters en vultures
+        self.spawnlist.append([6500, 9, 200, 0, 0, 3, [(0, 0), (40, 2)], [(50, 3, 0)], 0])
+        self.spawnlist.append([6550, 9, 800, 0, 0, 3, [(0, 0), (40, 2)], [(50, 3, 0)], 0])
+        self.spawnlist.append([6600, 9, 1000, 0, 0, 3, [(0, 0), (40, 2)], [(50, 3, 0)], 0])
+        self.spawnlist.append([6650, 15, 500, 0, 0, 2, [(0, 0), (50, 2), ], [(100, 1, 0)], 0])
+        self.spawnlist.append([6700, 9, 400, 0, 0, 3, [(0, 0), (40, 2)], [(50, 3, 0)], 0])
+        self.spawnlist.append([6750, 9, 700, 0, 0, 3, [(0, 0), (40, 2)], [(50, 3, 0)], 0])
+        self.spawnlist.append([6800, 9, 1000, 0, 0, 3, [(0, 0), (40, 2)], [(50, 3, 0)], 0])
+        self.spawnlist.append([6850, 15, 200, 0, 0, 2, [(0, 0), (50, 2), ], [(100, 1, 0)], 0])
+        self.spawnlist.append([6900, 9, 400, 0, 0, 3, [(0, 0), (40, 2)], [(50, 3, 0)],0])
+        self.spawnlist.append([6950, 9, 1000, 0, 0, 3, [(0, 0), (40, 2)], [(50, 3, 0)], 0])
+        self.spawnlist.append([7000, 9, 700, 0, 0, 3, [(0, 0), (40, 2)], [(50, 3, 0)], 0])
+        self.spawnlist.append([7050, 15, 1000, 0, 0, 2, [(0, 0), (50, 2), ], [(100, 1, 0)], 0])
+        self.spawnlist.append([7100, 9, 200, 0, 0, 3, [(0, 0), (40, 2)], [(50, 3, 0)], 0])
+        self.spawnlist.append([7150, 9, 500, 0, 0, 3, [(0, 0), (40, 2)], [(50, 3, 0)], 0])
+        self.spawnlist.append([7200, 9, 700, 0, 0, 3, [(0, 0), (40, 2)], [(50, 3, 0)], 0])
 
 
 
