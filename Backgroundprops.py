@@ -48,18 +48,14 @@ class Images:
             name = "bgprop_{}.png".format(picture)
             self.bgprops.append(pygame.image.load(os.path.join(imgfolder, "bgprops", name)).convert_alpha())
 
-
+gemprofit = [0,50,100,200,300,400,500,650,800,1000,1200,1400,1600]
 
 class Powerup(pygame.sprite.Sprite):
-    def __init__(self, x, y, speed, gold):
+    def __init__(self, x, y, speed, type):
         pygame.sprite.Sprite.__init__(self)
         self.speed = speed
-        self.gold = gold
-        succes = False
-        for picnr in range(12,-1,-1):
-            if 8*(3+picnr)**2 < self.gold and succes == False:
-                self.image = Gamedata.bgimages.powerup[picnr]
-                succes = True
+        self.gold = gemprofit[type]
+        self.image = Gamedata.bgimages.powerup[type-1]
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
