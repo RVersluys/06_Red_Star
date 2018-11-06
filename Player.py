@@ -230,13 +230,13 @@ class Weapon(Shippart):
         Gamedata.player.gold -= GameplayConstants.shippartprice(self.type, index, 0)
         if self.index == 2:
             self.fireleft = True
-            self.ammo = 20
+            self.ammo = GameplayConstants.shippartslist[self.type][index][10]
             Gamedata.player.missiles.append(self)
         elif self.index == 4:
             self.chargeup = 0
 
     def replenish(self):
-        self.ammo = (self.upgrades+1) * 20
+        self.ammo = (self.upgrades+1) * GameplayConstants.shippartslist[self.type][self.index][10]
 
     def update(self):
         if self.nowcooldown != 0:
@@ -282,7 +282,7 @@ class Weapon(Shippart):
 
                 elif self.index == 2:
                     if self.ammo > 0:
-                        adjustment = -90 + 30 * self.xpos
+                        adjustment = -120 + 30 * self.xpos
                         if self.fireleft:
                             adjustment += 10
                         else:

@@ -362,7 +362,7 @@ class Level:
         self.spawnlist.append([2750, vulture, 0, 300, 5, 0, [(0, 0), (150, 3, 0, 1)], [(100, 1, 0)], 0])
         self.spawnlist.append([2800, vulture, 1440, 300, -5, 0, [(0, 0), (100, 3, 0, 1)], [(100, 1, 0)], 0])
         self.spawnlist.append([2850, vulture, 0, 300, 5, 0, [(0, 0), (50, 3, 0, 1),], [(100, 1, 0)], 0])
-        self.spawnlist.append([2700, cruiser, 400, 1080, 0, -6, [(0, 0), (80, 3, 0, 1), (200,1)], [(100, 2, 0)], 7])
+        self.spawnlist.append([2700, cruiser, 400, 1355, 0, -6, [(0, 0), (130, 3, 0, 1), (250,1)], [(100, 2, 0)], 7])
 
         # zware wave met vultures en lancers
         self.spawnlist.append([3300, lancer, 0, 150, 10, -1, [(0, 0), (10,3,0,1)], [((25,0,100), 3, 1), ((60,100,99999), 4, 1, 4, 15)], 9])
@@ -403,8 +403,8 @@ class Level:
 
         # marauders die van onder komen en daarna chargen
         # en destroyers (naar rechts)
-        self.spawnlist.append([5800, marauders, 1200, 1080, 0, -6, [(0, 0), (80, 3, 0, 1), (100, 4), (178, 3, 0, -7)], [(100, 2, 0)], 5])
-        self.spawnlist.append([6000, marauders, 300, 1080, 0, -6, [(0, 0), (80, 3, 0, 1), (100, 4), (178, 3, 0, -7)], [(100, 2, 0)], 5])
+        self.spawnlist.append([5800, marauders, 1200, 1273, 0, -6, [(0, 0), (120, 3, 0, 1), (140, 4), (218, 3, 0, -7)], [(100, 2, 0)], 5])
+        self.spawnlist.append([6000, marauders, 300, 1273, 0, -6, [(0, 0), (120, 3, 0, 1), (140, 4), (218, 3, 0, -7)], [(100, 2, 0)], 5])
         self.spawnlist.append([6030, destroyer, 0, 200, 2, 0, [(0, 0),], [(100, 4, 0, 4, 20)], 0])
         self.spawnlist.append([6180, destroyer, 0, 200, 2, 0, [(0, 0), ], [(100, 4, 0, 4, 20)], 0])
         self.spawnlist.append([6330, destroyer, 0, 200, 2, 0, [(0, 0), ], [(100, 4, 0, 4, 20)], 0])
