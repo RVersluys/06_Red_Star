@@ -18,6 +18,9 @@ destroyer = 14
 vulture = 15
 lancer = 16
 dominator = 13
+chimera1 = 20
+chimera2 = 21
+chimera3 = 22
 
 straightLine = 0
 zigzag = 1
@@ -586,8 +589,16 @@ class Level:
         self.spawnlist.append([17725, marauder, warscreenwidth/2, 0, 0, 4, [(0, 0), (40, 3, 0, 0), (100, 4), (178, 3, 0, -7)], [(100, 2, 0)], 5])
         self.spawnlist.append([17750, marauder, warscreenwidth/2+300, 0, 0, 4, [(0, 0), (40, 3, 0, 0), (100, 4), (178, 3, 0, -7)], [(100, 2, 0)], 5])
 
+        self.textlist.append([18000, "Reaching destination...", 30, (0, 150, 0), (100, 40), (warscreenwidth / 2, 100),(warscreenwidth, 50)])
+        self.textlist.append([18200, "SCANNING...", 30, (255, 255, 255), (100, 40), (warscreenwidth / 2, 50), (warscreenwidth, 100)])
+        self.textlist.append([18400, "WARNING: LARGE ENEMY SHIP DETECTED", 30, (200, 0, 0), (100, 40), (warscreenwidth / 2, 100),(warscreenwidth, 50)])
+        self.textlist.append([18700, "SCORCH COMMAND SHIP: CHIMERA", 30, (255, 255, 255), (100, 40), (warscreenwidth / 2, 100),(warscreenwidth, 50)])
 
-        self.spawnlist.append([19000, -1])
+        # Command Ship: Chimera
+        # hoofdbaas die uit 3 delen bestaat
+
+
+        self.spawnlist.append([20000, -1])
 
     def spawning(self):
         if len(self.spawnlist) > 0:
