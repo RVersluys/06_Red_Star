@@ -15,12 +15,12 @@ class Imageloading:
         self.projectiles = []
         #speed, damage, plaatje
         self.projectiles.append([15, 6, pygame.image.load(os.path.join(imgfolder, 'projectiles', 'beam.png')).convert_alpha()])
-        self.projectiles.append([11, 18, pygame.image.load(os.path.join(imgfolder, 'projectiles', 'shockblast.png')).convert_alpha()])
+        self.projectiles.append([11, 15, pygame.image.load(os.path.join(imgfolder, 'projectiles', 'shockblast.png')).convert_alpha()])
         images = []
         for x in range(8):
             images.append(pygame.image.load(os.path.join(imgfolder, 'projectiles', 'boomerang' + str(x) + '.png')).convert_alpha())
         self.projectiles.append([13, 25, images])
-        self.projectiles.append([15, 3])
+        self.projectiles.append([15, 2])
         self.heroprojectiles = [pygame.image.load(os.path.join(imgfolder, 'projectiles', 'bullet.png')).convert_alpha(),
                                 pygame.transform.scale(pygame.image.load(os.path.join(imgfolder, 'projectiles', 'rocket.png')).convert_alpha(), (8, 49)),
                                 pygame.image.load(os.path.join(imgfolder, 'projectiles', 'plasma.png')).convert_alpha()]

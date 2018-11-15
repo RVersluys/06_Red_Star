@@ -38,7 +38,6 @@ flameThrower = 5
 
 class Level:
     def __init__(self):
-
         self.end = False
         self.succes = False
         self.abort = False
@@ -54,7 +53,7 @@ class Level:
         for x in range(200):
             star = Backgroundprops.Star(True)
             Gamedata.stars.add(star)
-        mobslist = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,17,18,19]
+        mobslist = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,17,18,19,20,21,22,23]
         Mobs.images.load_level(mobslist)
         if Gamedata.player.levelnumber == 0:
             self.level_1()
@@ -137,7 +136,8 @@ class Level:
         self.propslist.append([9000, 2, 200, 2, (518, 520)])
         self.propslist.append([12000, 3, 800, 1, (240, 97)])
 
-        self.spawnlist.append([200, 14, 300, 0, 0, 2, [(0, 0)], [(100, 4, 2, 4, 20)], 0])
+        self.spawnlist.append([200, 23, 300, 0, 0, 2, [(0, 0)], [(4,5,30), (4,5,330), (100, machineGun, 2), (35, aimedShot, 1)], 0])
+
 
         # 500 ticks: eerste aanval: fighters (horizontaal naar links)
         self.spawnlist.append([500, fighter, warscreenwidth, 200, -4, 0, [(0, straightLine)], [(100, forwardShot, 0)], 0])
@@ -224,12 +224,12 @@ class Level:
 
         # 8800 ticks: vijftiende aanval: cruiser (move, slower)
         # en fighters (move, slower)
-        self.spawnlist.append([8800, fighter, 800, 0, 0, 2, [(0, 0), (100, 3, 0, 1), (0, 0), (0, 0, 0, 0)], [(100, 3, 0)], 0])
-        self.spawnlist.append([8860, cruiser, 800, 0, 0, 1, [(0, 0), (250, 3, 0, 1), (0, 0), (0, 0, 0, 0)], [(100, 2, 0)], 6])
-        self.spawnlist.append([8890, fighter, 600, 0, 0, 2, [(0, 0), (90, 3, 0, 1), (0, 0), (0, 0, 0, 0)], [(100, 3, 0)], 0])
-        self.spawnlist.append([8910, fighter, 1000, 0, 0, 2, [(0, 0), (90, 3, 0, 1), (0, 0), (0, 0, 0, 0)], [(100, 3, 0)], 0])
-        self.spawnlist.append([8940, fighter, 600, 0, 0, 2, [(0, 0), (30, 3, 0, 1), (0, 0), (0, 0, 0, 0)], [(100, 3, 0)], 0])
-        self.spawnlist.append([8950, fighter, 1000, 0, 0, 2, [(0, 0), (30, 3, 0, 1), (0, 0), (0, 0, 0, 0)], [(100, 3, 0)], 0])
+        self.spawnlist.append([8800, fighter, 800, 0, 0, 2, [(0, 0), (100, 3, 0, 1)], [(100, 3, 0)], 0])
+        self.spawnlist.append([8860, cruiser, 800, 0, 0, 1, [(0, 0), (250, 3, 0, 1)], [(100, 2, 0)], 6])
+        self.spawnlist.append([8890, fighter, 600, 0, 0, 2, [(0, 0), (90, 3, 0, 1)], [(100, 3, 0)], 0])
+        self.spawnlist.append([8910, fighter, 1000, 0, 0, 2, [(0, 0), (90, 3, 0, 1)], [(100, 3, 0)], 0])
+        self.spawnlist.append([8940, fighter, 600, 0, 0, 2, [(0, 0), (30, 3, 0, 1)], [(100, 3, 0)], 0])
+        self.spawnlist.append([8950, fighter, 1000, 0, 0, 2, [(0, 0), (30, 3, 0, 1)], [(100, 3, 0)], 0])
 
         # 9500 ticks: zestiende aanval: fighters (move, strafe)
         # en vultures (horizontaal naar links)
@@ -597,8 +597,12 @@ class Level:
         # Command Ship: Chimera
         # hoofdbaas die uit 3 delen bestaat
 
-
-        self.spawnlist.append([20000, -1])
+        self.spawnlist.append([19000, 12, 320, 0, 0, 6,
+                               [(0, 0), (60, 3, 0, 0), (150, 1), (600, 4), (756, 1), (1226, 4), (1382, 1), (1832, 4),
+                                (1988, 1)],
+                               [((50, 50, 620), 4, 0, 6, 15), ((20, 776, 1226), 1, 1), ((50, 1382, 1832), 4, 0, 6, 15),
+                                ((50, 1988, 99999), 2, 0), ((100, 2100, 99999), 4, 0, 6, 20)], 10])
+        self.spawnlist.append([19000, -1])
 
     def spawning(self):
         if len(self.spawnlist) > 0:
