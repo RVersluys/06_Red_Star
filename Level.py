@@ -17,6 +17,7 @@ tyrant = 12
 destroyer = 14
 vulture = 15
 lancer = 16
+scorchbase = 17
 dominator = 13
 chimera1 = 20
 chimera2 = 21
@@ -279,6 +280,7 @@ class Level:
         self.textlist.append([100, "Level 2: Scorch base", 30, (0, 150, 0), (160, 40), (warscreenwidth / 2, 100), (800, 50)])
         self.textlist.append([200, "Approaching Scorch base, heavy resistance ahead...", 30, (200, 0, 0), (150, 40), (warscreenwidth / 2, 150), (warscreenwidth, 50)])
 
+
         #Goede oude fighters kapot knallen.
         self.spawnlist.append([350, fighter, 420, 0, 0, 2, [(0, 0), (40, 2)], [(100, 3, 0)], 0])
         self.spawnlist.append([400, fighter, 720, 0, 0, 2, [(0, 0), (40, 2)], [(100, 3, 0)], 0])
@@ -292,6 +294,8 @@ class Level:
         self.spawnlist.append([800, fighter, 420, 0, 0, 2, [(0, 0), (40, 2)], [(100, 3, 0)], 0])
         self.spawnlist.append([850, fighter, 720, 0, 0, 2, [(0, 0), (40, 2)], [(100, 3, 0)], 0])
         self.spawnlist.append([900, fighter, 1020, 0, 0, 2, [(0, 0), (40, 2)], [(100, 3, 0)], 0])
+
+        self.spawnlist.append([950, scorchbase, 200, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 2])
 
         self.spawnlist.append([1000, fighter, -50, 200, 5, 0, [(0, straightLine), (30, changeDirection, 0, 1)], [(100, forwardShot, 0)], 0])
         self.spawnlist.append([1025, fighter, 1500, 170, -5, 0, [(0, straightLine), (30, changeDirection, 0, 1)], [(100, forwardShot, 0)],0])
@@ -320,27 +324,27 @@ class Level:
 
         # Shit get's real met lancers en destroyers.
         self.spawnlist.append([2200, destroyer, 150, 0, 3, 1, [(0, 0), (300, 3, 0, 4)], [(100, 4, 0, 4, 20)], 5])
-        #self.spawnlist.append([1300, destroyer, 1290, 0, -3, 1, [(0, 0), (300, 3, 0, 4)], [(100, 4, 0, 4, 20)], 5])
-       # self.spawnlist.append([1650, lancer, 0, 500, 10, -1, [(0, 0), (90,3,0,-2), (160,2)], [((25,0,100), 3, 1), ((60,100,99999), 4, 1, 4, 15)], 9])
         self.spawnlist.append([2650, lancer, warscreenwidth, 500, -10, -1, [(0, 0), (90,3,0,-2), (160,2)], [((25,0,100), 3, 1), ((60,100,99999), 4, 1, 4, 15)], 9])
+
+        self.spawnlist.append([2500, scorchbase, warscreenwidth/2, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 3])
 
         # Marauders
         self.spawnlist.append([3000, marauder, 100, 0, 0, 3, [(0, 0), (40, 3, 0, 0), (100, 4), (178, 3, 0, -7)], [(100, 2, 0)], 5])
         self.spawnlist.append([3200, marauder, 1340, 0, 0, 3, [(0, 0), (40, 3, 0, 0), (100, 4), (178, 3, 0, -7)], [(100, 2, 0)], 6])
 
+        self.spawnlist.append([3100, scorchbase, 1000, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 4])
+
         # Vultures en een cruiser die van de onderkant komt.
         self.spawnlist.append([3500, vulture, 1440, 300, -5, 0, [(0, 0), (300, 3, 0, 1)], [(100, 1, 0)], 0])
         self.spawnlist.append([3550, vulture, 0, 300, 5, 0, [(0, 0), (250, 3, 0, 1)], [(100, 1, 0)], 0])
         self.spawnlist.append([3600, vulture, 1440, 300, -5, 0, [(0, 0), (200, 3, 0, 1)], [(100, 1, 0)], 0])
-        self.spawnlist.append([3600, cruiser, 400, 1355, 0, -6, [(0, 0), (130, 3, 0, 1), (250, 1)], [(100, 2, 0)], 7])
+        self.spawnlist.append([3600, cruiser, 400, 1355, 0, -6, [(0, 0), (130, 3, 0, 1), (250, 1)], [(150, 2, 0)], 7])
         self.spawnlist.append([3650, vulture, 0, 300, 5, 0, [(0, 0), (150, 3, 0, 1)], [(100, 1, 0)], 0])
         self.spawnlist.append([3700, vulture, 1440, 300, -5, 0, [(0, 0), (100, 3, 0, 1)], [(100, 1, 0)], 0])
         self.spawnlist.append([3750, vulture, 0, 300, 5, 0, [(0, 0), (50, 3, 0, 1),], [(100, 1, 0)], 0])
 
-
         # zware wave met vultures en lancers
         self.spawnlist.append([4200, lancer, 0, 150, 10, -1, [(0, 0), (10,3,0,1)], [((25,0,100), 3, 1), ((60,100,99999), 4, 1, 4, 15)], 9])
-        #self.spawnlist.append([3300, lancer, warscreenwidth, 150, -10, -1, [(0, 0), (10,3,0,1)], [((25,0,100), 3, 1), ((60,100,99999), 4, 1, 4, 15)], 9])
         self.spawnlist.append([4300, vulture, 1240, 0, 0, 2, [(0, 0), (300, 3, 0, 1)], [(100, 1, 0)], 0])
         self.spawnlist.append([4300, vulture, 200, 0, 0, 2, [(0, 0), (250, 3, 0, 1)], [(100, 1, 0)], 0])
 
@@ -375,10 +379,12 @@ class Level:
         self.spawnlist.append([5900, cruiser, 1100, 0, 0, 1, [(0, 0), (200, 1)], [(150, 2, 0)], 6])
         self.spawnlist.append([6100, cruiser, warscreenwidth/2, 0, 0, 1, [(0, 0), (200, 1)], [(40, 2, 0)], 7])
 
+        self.spawnlist.append([6500, scorchbase, 1200, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 5])
+
         # destroyers (naar rechts)
-        self.spawnlist.append([6800, destroyer, 0, 200, 2, 0, [(0, 0),], [(100, 4, 0, 4, 20)], 4])
-        self.spawnlist.append([6950, destroyer, 0, 200, 2, 0, [(0, 0), ], [(100, 4, 0, 4, 20)], 5])
-        self.spawnlist.append([7100, destroyer, 0, 200, 2, 0, [(0, 0), ], [(100, 4, 0, 4, 20)], 6])
+        self.spawnlist.append([6800, destroyer, -50, 200, 2, 0, [(0, 0),], [(100, 4, 0, 4, 20)], 4])
+        self.spawnlist.append([6950, destroyer, -50, 200, 2, 0, [(0, 0), ], [(100, 4, 0, 4, 20)], 5])
+        self.spawnlist.append([7100, destroyer, -50, 200, 2, 0, [(0, 0), ], [(100, 4, 0, 4, 20)], 6])
 
         # legertje fighters en vultures
         self.spawnlist.append([7700, fighter, 200, 0, 0, 2, [(0, 0), (40, strafe)], [(100, 3, 0)], 0])
@@ -400,6 +406,8 @@ class Level:
         # lancers die rechts en links in het scherm schieten en daarna weer weg gaan
         self.spawnlist.append([8800, lancer, warscreenwidth, 100, -15, 0, [ (100, changeDirection, 0,10), (50, changeDirection,10,0 ) ],[((25, aimedShot, 100), 3, 1), ((60, 100, 99999), 4, 1, 4, 15)], 9])
         self.spawnlist.append([9100, lancer, 0, 150, 15, 0, [(100, changeDirection, 0, 10), (50, changeDirection, -10, 0)],[((25, aimedShot, 100), 3, 1), ((60, 100, 99999), 4, 1, 4, 15)], 9])
+
+        self.spawnlist.append([9900, scorchbase, 300, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 6])
 
         # dominator
         # en fighters
@@ -437,98 +445,6 @@ class Level:
         self.spawnlist.append([11800, destroyer, 200, 1355, 0, -7, [(0, 0), (120, 3, 0, 2), (250, zigzag)], [(100, 4,0,4, 20)], 5])
         self.spawnlist.append([11800, destroyer, 1200, 1355, 0, -7, [(0, 0), (120, 3, 0, 2), (250, zigzag)], [(100, 4, 0, 4, 20)], 5])
 
-        # legio vultures
-      #  self.spawnlist.append([12300, vulture, 1600, 1000, -1, -1, [(0,0), (0,0)], [(100, aimedShot, 0)], 0])
-      #  self.spawnlist.append([12350, vulture, -50, 1000, 1, -1, [(0, 0), (0, 0)], [(100, aimedShot, 0)], 0])
-      #  self.spawnlist.append([12400, vulture, 1600, 1000, -1, -1, [(0, 0), (0, 0)], [(100, aimedShot, 0)], 0])
-      #  self.spawnlist.append([12400, vulture, 1600, 800, -1, -1, [(0, 0), (0, 0)], [(100, aimedShot, 0)], 0])
-      #  self.spawnlist.append([12450, vulture, -50, 1000, 1, -1, [(0, 0), (0, 0)], [(100, aimedShot, 0)], 0])
-      #  self.spawnlist.append([12450, vulture, -50, 800, 1, -1, [(0, 0), (0, 0)], [(100, aimedShot, 0)], 0])
-      #  self.spawnlist.append([12500, vulture, 1600, 1000, -1, -1, [(0, 0), (0, 0)], [(100, aimedShot, 0)], 0])
-      #  self.spawnlist.append([12500, vulture, 1600, 800, -1, -1, [(0, 0), (0, 0)], [(100, aimedShot, 0)], 0])
-      #  self.spawnlist.append([12550, vulture, -50, 1000, 1, -1, [(0, 0), (0, 0)], [(100, aimedShot, 0)], 0])
-      #  self.spawnlist.append([12550, vulture, -50, 800, 1, -1, [(0, 0), (0, 0)], [(100, aimedShot, 0)], 0])
-
-        # legio fighters
-        # en een marauder
-      #  self.spawnlist.append([12900, fighter, 1300, 0, 0, 2, [(0, 1), (0, 0)], [(100, forwardShot, 0)], 0])
-      #  self.spawnlist.append([12950, fighter, 1300, 0, 0, 2, [(0, 1), (0, 0)], [(100, forwardShot, 0)], 0])
-      #  self.spawnlist.append([12975, fighter, 1000, 0, 0, 2, [(0, 1), (0, 0)], [(100, forwardShot, 0)], 0])
-      #  self.spawnlist.append([13000, fighter, 1300, 0, 0, 2, [(0, 1), (0, 0)], [(100, forwardShot, 0)], 0])
-      #  self.spawnlist.append([13025, fighter, 1000, 0, 0, 2, [(0, 1), (0, 0)], [(100, forwardShot, 0)], 0])
-      #  self.spawnlist.append([13050, fighter, 1300, 0, 0, 2, [(0, 1), (0, 0)], [(100, forwardShot, 0)], 0])
-      #  self.spawnlist.append([13075, fighter, 1000, 0, 0, 2, [(0, 1), (0, 0)], [(100, forwardShot, 0)], 0])
-      #  self.spawnlist.append([13100, fighter, 1300, 0, 0, 2, [(0, 1), (0, 0)], [(100, forwardShot, 0)], 0])
-      #  self.spawnlist.append([13125, fighter, 1000, 0, 0, 2, [(0, 1), (0, 0)], [(100, forwardShot, 0)], 0])
-      #  self.spawnlist.append([13150, fighter, 1300, 0, 0, 2, [(0, 1), (0, 0)], [(100, forwardShot, 0)], 0])
-      #  self.spawnlist.append([13175, fighter, 1000, 0, 0, 2, [(0, 1), (0, 0)], [(100, forwardShot, 0)], 0])
-      #  self.spawnlist.append([13200, fighter, 1300, 0, 0, 2, [(0, 1), (0, 0)], [(100, forwardShot, 0)], 0])
-      #  self.spawnlist.append([13225, fighter, 1000, 0, 0, 2, [(0, 1), (0, 0)], [(100, forwardShot, 0)], 0])
-      #  self.spawnlist.append([13250, fighter, 1300, 0, 0, 2, [(0, 1), (0, 0)], [(100, forwardShot, 0)], 0])
-      #  self.spawnlist.append([13350, marauder, 350, 0, 0, 3, [(0, 0), (40, 3, 0, 0), (100, 4), (178, 3, 0, -7)], [(100, 2, 0)], 5])
-
-        # korte zware wave met lancer en dominators
-      #  self.spawnlist.append([13500, lancer, 1150, 0, 0, 1, [(0, 0), (100, strafe)],[((25, aimedShot, 100), 3, 1), ((60, 100, 99999), 4, 1, 4, 15)], 9])
-      #  self.spawnlist.append([13600, dominator, -100, 200, 0, 2, [(0, 0), (50, zigzag)], [(80, machineGun, 0), (100, aimedShot, 1)], 5])
-      #  self.spawnlist.append([13700, dominator, 1200, 0, 0, 2, [(0, 0), (50, zigzag)], [(80, machineGun, 0), (100, aimedShot, 1)], 5])
-
-        # "muur" van cruisers
-      #  self.spawnlist.append([14000, cruiser, 500, 0, 0, 1, [(0, 0), (0, 0)], [(100, 2, 0)], 6])
-      #  self.spawnlist.append([14000, cruiser, 800, 0, 0, 2, [(0, 0), (0, 0)], [(100, 2, 0)], 6])
-      #  self.spawnlist.append([14000, cruiser, 1100, 0, 0, 1, [(0, 0), (0, 0)], [(100, 2, 0)], 6])
-
-        # paniekende fighters en vultures en een 'loose formation'
-      #  self.spawnlist.append([14400, fighter, -50, 200, 5, 0, [(0, straightLine), (30, changeDirection, 0, 1)], [(100, forwardShot, 0)], 0])
-      #  self.spawnlist.append([14425, fighter, 1500, 170, -5, 0, [(0, straightLine), (30, changeDirection, 0, 1)], [(100, forwardShot, 0)],0])
-      #  self.spawnlist.append([14450, fighter, -50, 200, 5, 0, [(0, straightLine), (60, changeDirection, 0, 1)], [(100, forwardShot, 0)], 0])
-      #  self.spawnlist.append([14475, fighter, 1500, 170, -5, 0, [(0, straightLine), (60, changeDirection, 0, 1)], [(100, forwardShot, 0)],0])
-      #  self.spawnlist.append([14500, fighter, 1500, 200, 5, 0, [(0, straightLine), (60, changeDirection, 0, 1)], [(100, forwardShot, 0)],0])
-      #  self.spawnlist.append([14500, vulture, 1500, 50, -3, 0, [(0, straightLine), (120, changeDirection, 0, 1)], [(100, aimedShot, 0)],2])
-      #  self.spawnlist.append([14525, fighter, 1500, 170, -5, 0, [(0, straightLine), (90, changeDirection, 0, 1)], [(100, forwardShot, 0)],0])
-      #  self.spawnlist.append([14525, vulture, 1500, 50, -4, 0, [(0, straightLine), (200, changeDirection, 0, 1)], [(100, aimedShot, 0)],2])
-      #  self.spawnlist.append([14525, fighter, -100, 1000, 8, -8, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
-      #  self.spawnlist.append([14525, fighter, -150, 1100, 8, -8, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
-      #  self.spawnlist.append([14540, fighter, -130, 1050, 8, -8, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
-      #  self.spawnlist.append([14600, fighter, -50, 200, 5, 0, [(0, straightLine), (90, changeDirection, 0, 1)], [(100, forwardShot, 0)], 0])
-      #  self.spawnlist.append([14700, fighter, 1500, 150, -8, 0, [(0, straightLine), (90, changeDirection, 0, 1)], [(100, forwardShot, 0)],0])
-      #  self.spawnlist.append([14750, vulture, -130, 1050, 6, -6, [(0, 0), (0, 0)], [(100, aimedShot, 0)], 2])
-      #  self.spawnlist.append([14850, fighter, 1200, 1050, 0, -8, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
-      #  self.spawnlist.append([14900, vulture, 200, 0, 0, 2, [(100, strafe), (0, 0)], [(100, aimedShot, 0)], 2])
-      #  self.spawnlist.append([14925, fighter, -50, 100, 5, 0, [(0, straightLine), (80, changeDirection, 0, 1)], [(100, forwardShot, 0)], 0])
-      #  self.spawnlist.append([14950, fighter, -50, 200, 5, 0, [(0, straightLine), (100, changeDirection, 0, 1)], [(100, forwardShot, 0)], 0])
-      #  self.spawnlist.append([15000, fighter, -50, 100, 5, 0, [(0, straightLine), (160, changeDirection, 0, 1)], [(100, forwardShot, 0)],0])
-      #  self.spawnlist.append([15150, vulture, 1000, 0, 0, 1, [(0, straightLine), (200, strafe)], [(100, aimedShot, 0)], 2])
-      #  self.spawnlist.append([15350, cruiser, -150, 1100, 2, -2, [(0, 0), (0, 0)], [(50, machineGun, 0)], 6])
-      #  self.spawnlist.append([15600, fighter, -50, 250, 6, 0, [(0, straightLine), (160, changeDirection, 0, 1)], [(100, forwardShot, 0)],0])
-      #  self.spawnlist.append([15625, fighter, -50, 200, 6, 0, [(0, straightLine), (130, changeDirection, 0, 1)], [(100, forwardShot, 0)],0])
-      #  self.spawnlist.append([15650, fighter, -50, 180, 6, 0, [(0, straightLine), (90, changeDirection, 0, 1)], [(100, forwardShot, 0)],0])
-
-        # verzameling schepen die je proberen te stoppen bij het Command Schip te komen
-      #  self.spawnlist.append([16000, destroyer, -100, 200, 7, 0, [(0, straightLine), (80, changeDirection, 0, 1)],  [(100, 4, 0, 4, 20)], 4])
-      #  self.spawnlist.append([16100, destroyer, -100, 300, 7, 0, [(0, straightLine), (110, changeDirection, 0, 1)], [(100, 4, 0, 4, 20)],4])
-      #  self.spawnlist.append([16125, fighter, 100, 1180, 0, -8, [(0, straightLine), (80, changeDirection, 3, 0)], [(100, forwardShot, 0)],0])
-      #  self.spawnlist.append([16150, fighter, 100, 1180, 0, -8, [(0, straightLine), (75, changeDirection, 3, 0)],[(100, forwardShot, 0)], 0])
-      #  self.spawnlist.append([16175, fighter, 100, 1180, 0, -8, [(0, straightLine), (60, changeDirection, 3, 0)], [(100, forwardShot, 0)],0])
-      #  self.spawnlist.append([16220, fighter, 100, 1180, 0, -8, [(0, straightLine), (85, changeDirection, 3, 0)], [(100, forwardShot, 0)],0])
-      #  self.spawnlist.append([16280, fighter, 100, 1180, 0, -8, [(0, straightLine), (70, changeDirection, 3, 0)], [(100, forwardShot, 0)],0])
-      #  self.spawnlist.append([16350, destroyer, -100, 350, 7, 0, [(0, straightLine), (150, changeDirection, 0, 1)], [(100, 4, 0, 4, 20)],4])
-      #  self.spawnlist.append([16360, fighter, 100, 1180, 0, -8, [(0, straightLine), (80, changeDirection, 3, 0)], [(100, forwardShot, 0)],0])
-      #  self.spawnlist.append([16660, lancer, 1000, 1300, 0, -1, [(0, straightLine), (300, zigzag)],[((25, aimedShot, 100), 3, 1), ((60, 100, 99999), 4, 1, 4, 15)], 9])
-      #  self.spawnlist.append([16800, destroyer, 150, 1200, 0, -7, [(0, straightLine), (100, changeDirection, 2, 0)], [(100, 4, 0, 4, 20)],4])
-      #  self.spawnlist.append([16700, fighter, warscreenwidth+50, 400, -3, -1, [(0, straightLine), (0,  0)], [(100, forwardShot, 0)],1])
-      #  self.spawnlist.append([16750, fighter, warscreenwidth + 50, 425, -3, -1, [(0, straightLine), (0, 0)], [(100, forwardShot, 0)], 1])
-      #  self.spawnlist.append([16800, fighter, warscreenwidth + 50, 460, -3, -1, [(0, straightLine), (0, 0)], [(100, forwardShot, 0)], 1])
-      #  self.spawnlist.append([16850, fighter, warscreenwidth + 50, 500, -3, -1, [(0, straightLine), (0, 0)], [(100, forwardShot, 0)], 1])
-
-        # dominators die de lancer te hulp schieten
-     #   self.spawnlist.append([17200, dominator, -100, 0, 2, 2, [(0, 0), (0, 0)], [(80, machineGun, 0), (100, aimedShot, 1)], 5])
-     #   self.spawnlist.append([17200, dominator, warscreenwidth+100, 0, -2, 2, [(0, 0), (0, 0)], [(80, machineGun, 0), (100, aimedShot, 1)], 5])
-
-        # last line of defence voor de hoofdbaas: marauders
-     #   self.spawnlist.append([17700, marauder, warscreenwidth/2-300, 0, 0, 4, [(0, 0), (40, 3, 0, 0), (100, 4), (178, 3, 0, -7)], [(100, 2, 0)], 5])
-     #   self.spawnlist.append([17725, marauder, warscreenwidth/2, 0, 0, 4, [(0, 0), (40, 3, 0, 0), (100, 4), (178, 3, 0, -7)], [(100, 2, 0)], 5])
-     #   self.spawnlist.append([17750, marauder, warscreenwidth/2+300, 0, 0, 4, [(0, 0), (40, 3, 0, 0), (100, 4), (178, 3, 0, -7)], [(100, 2, 0)], 5])
-
         self.textlist.append([12000, "Reaching destination...", 30, (0, 150, 0), (100, 40), (warscreenwidth / 2, 100),(warscreenwidth, 50)])
         self.textlist.append([12200, "SCANNING...", 30, (255, 255, 255), (100, 40), (warscreenwidth / 2, 50), (warscreenwidth, 100)])
         self.textlist.append([12400, "WARNING: LARGE ENEMY SHIP DETECTED", 30, (200, 0, 0), (100, 40), (warscreenwidth / 2, 100),(warscreenwidth, 50)])
@@ -537,11 +453,13 @@ class Level:
         # Command Ship: Chimera
         # hoofdbaas die uit 3 delen bestaat
 
-        self.spawnlist.append([13000, 12, 320, 0, 0, 6,
-                               [(0, 0), (60, 3, 0, 0), (150, 1), (600, 4), (756, 1), (1226, 4), (1382, 1), (1832, 4),
-                                (1988, 1)],
-                               [((50, 50, 620), 4, 0, 6, 15), ((20, 776, 1226), 1, 1), ((50, 1382, 1832), 4, 0, 6, 15),
-                                ((50, 1988, 99999), 2, 0), ((100, 2100, 99999), 4, 0, 6, 20)], 10])
+        self.spawnlist.append([13000, chimera2, warscreenwidth/2-300, 0, 0, 6, [(0, straightLine), (60,changeDirection,0, 0),(200, zigzag)], [(30, machineGun, 0)], 5])
+        self.spawnlist.append([13000, chimera1, warscreenwidth/2, 0, 0, 6, [(0, straightLine), (50,changeDirection,0, 0)], [(100, clusterShot, 1,6,20),((30,1000,99999),aimedShot,0)], 10])
+        self.spawnlist.append([13000, chimera3, warscreenwidth/2+300, 0, 0, 6, [(0, straightLine), (60,changeDirection,0, 0),(200,zigzag)], [(3, flameThrower, 0)], 5])
+
+      #  self.spawnlist.append([13000, 12, 320, 0, 0, 6,[(0, 0), (60, 3, 0, 0), (150, 1), (600, 4), (756, 1), (1226, 4), (1382, 1), (1832, 4),(1988, 1)],
+        # [((50, 50, 620), 4, 0, 6, 15), ((20, 776, 1226), 1, 1), ((50, 1382, 1832), 4, 0, 6, 15),((50, 1988, 99999), 2, 0), ((100, 2100, 99999), 4, 0, 6, 20)], 10])
+
         self.spawnlist.append([13000, -1])
 
     def spawning(self):
