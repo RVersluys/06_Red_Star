@@ -18,6 +18,9 @@ destroyer = 14
 vulture = 15
 lancer = 16
 scorchbase = 17
+scorchbuilding1 = 19
+scorchbuilding2 = 26
+scorchbuilding3 = 27
 dominator = 13
 chimera1 = 20
 chimera2 = 21
@@ -281,6 +284,8 @@ class Level:
         self.textlist.append([200, "Approaching Scorch base, heavy resistance ahead...", 30, (200, 0, 0), (150, 40), (warscreenwidth / 2, 150), (warscreenwidth, 50)])
 
 
+        self.spawnlist.append([0, scorchbuilding1, warscreenwidth/2, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 0])
+
         #Goede oude fighters kapot knallen.
         self.spawnlist.append([350, fighter, 420, 0, 0, 2, [(0, 0), (40, 2)], [(100, 3, 0)], 0])
         self.spawnlist.append([400, fighter, 720, 0, 0, 2, [(0, 0), (40, 2)], [(100, 3, 0)], 0])
@@ -447,15 +452,15 @@ class Level:
 
         self.textlist.append([12000, "Reaching destination...", 30, (0, 150, 0), (100, 40), (warscreenwidth / 2, 100),(warscreenwidth, 50)])
         self.textlist.append([12200, "SCANNING...", 30, (255, 255, 255), (100, 40), (warscreenwidth / 2, 50), (warscreenwidth, 100)])
-        self.textlist.append([12400, "WARNING: LARGE ENEMY SHIP DETECTED", 30, (200, 0, 0), (100, 40), (warscreenwidth / 2, 100),(warscreenwidth, 50)])
-        self.textlist.append([12700, "SCORCH COMMAND SHIP: CHIMERA", 30, (255, 255, 255), (100, 40), (warscreenwidth / 2, 100),(warscreenwidth, 50)])
+        self.textlist.append([12400, "WARNING: LARGE ENEMY OBJECT DETECTED", 30, (200, 0, 0), (100, 40), (warscreenwidth / 2, 100),(warscreenwidth, 50)])
+        self.textlist.append([12700, "SCORCH COMMAND BASE: CHIMERA", 30, (255, 255, 255), (100, 40), (warscreenwidth / 2, 100),(warscreenwidth, 50)])
 
         # Command Ship: Chimera
         # hoofdbaas die uit 3 delen bestaat
 
-        self.spawnlist.append([13000, chimera2, warscreenwidth/2-300, 0, 0, 6, [(0, straightLine), (60,changeDirection,0, 0),(200, zigzag)], [(30, machineGun, 0)], 5])
-        self.spawnlist.append([13000, chimera1, warscreenwidth/2, 0, 0, 6, [(0, straightLine), (50,changeDirection,0, 0)], [(100, clusterShot, 1,6,20),((30,1000,99999),aimedShot,0)], 10])
-        self.spawnlist.append([13000, chimera3, warscreenwidth/2+300, 0, 0, 6, [(0, straightLine), (60,changeDirection,0, 0),(200,zigzag)], [(3, flameThrower, 0)], 5])
+        self.spawnlist.append([13000, chimera2, warscreenwidth/2-300, 0, 0, 6, [(0, straightLine), (60,changeDirection,0, 0),(200, zigzag)], [(60, machineGun, 0)], 5])
+        self.spawnlist.append([13000, chimera1, warscreenwidth/2, 0, 0, 6, [(0, straightLine), (50,changeDirection,0, 0)], [(100, clusterShot, 1,6,20),((60,1000,99999),aimedShot,0)], 10])
+        self.spawnlist.append([13000, chimera3, warscreenwidth/2+300, 0, 0, 6, [(0, straightLine), (60,changeDirection,0, 0),(200,zigzag)], [(4, flameThrower, 0)], 5])
 
       #  self.spawnlist.append([13000, 12, 320, 0, 0, 6,[(0, 0), (60, 3, 0, 0), (150, 1), (600, 4), (756, 1), (1226, 4), (1382, 1), (1832, 4),(1988, 1)],
         # [((50, 50, 620), 4, 0, 6, 15), ((20, 776, 1226), 1, 1), ((50, 1382, 1832), 4, 0, 6, 15),((50, 1988, 99999), 2, 0), ((100, 2100, 99999), 4, 0, 6, 20)], 10])
