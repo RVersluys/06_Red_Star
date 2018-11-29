@@ -21,10 +21,14 @@ scorchbase = 17
 scorchbuilding1 = 19
 scorchbuilding2 = 26
 scorchbuilding3 = 27
+scorchbuilding4 = 28
 dominator = 13
 chimera1 = 20
 chimera2 = 21
 chimera3 = 22
+alfa_drone = 29
+alfa_defender = 30
+alfa_assassin = 31
 
 straightLine = 0
 zigzag = 1
@@ -57,7 +61,8 @@ class Level:
         for x in range(200):
             star = Backgroundprops.Star(True)
             Gamedata.stars.add(star)
-        mobslist = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,17,18,19,20,21,22,23]
+        mobslist = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,17,18,19,20,21,22,23,
+                    24,25,26,27,28,29,30,31]
         Mobs.images.load_level(mobslist)
         if Gamedata.player.levelnumber == 0:
             self.level_1()
@@ -283,9 +288,6 @@ class Level:
         self.textlist.append([100, "Level 2: Scorch base", 30, (0, 150, 0), (160, 40), (warscreenwidth / 2, 100), (800, 50)])
         self.textlist.append([200, "Approaching Scorch base, heavy resistance ahead...", 30, (200, 0, 0), (150, 40), (warscreenwidth / 2, 150), (warscreenwidth, 50)])
 
-
-        self.spawnlist.append([0, scorchbuilding1, warscreenwidth/2, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 0])
-
         #Goede oude fighters kapot knallen.
         self.spawnlist.append([350, fighter, 420, 0, 0, 2, [(0, 0), (40, 2)], [(100, 3, 0)], 0])
         self.spawnlist.append([400, fighter, 720, 0, 0, 2, [(0, 0), (40, 2)], [(100, 3, 0)], 0])
@@ -300,53 +302,75 @@ class Level:
         self.spawnlist.append([850, fighter, 720, 0, 0, 2, [(0, 0), (40, 2)], [(100, 3, 0)], 0])
         self.spawnlist.append([900, fighter, 1020, 0, 0, 2, [(0, 0), (40, 2)], [(100, 3, 0)], 0])
 
-        self.spawnlist.append([950, scorchbase, 200, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 2])
+        self.spawnlist.append([925, scorchbuilding1, 800, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
+        self.spawnlist.append([950, scorchbase, 300, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 2])
+        self.spawnlist.append([975, scorchbuilding1, 1200, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
+        self.spawnlist.append([1000, scorchbuilding2, 400, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
+        self.spawnlist.append([1200, scorchbuilding3, 75, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
+        self.spawnlist.append([1400, scorchbuilding3, 1100, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
+        self.spawnlist.append([1450, scorchbuilding1, 900, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
+        self.spawnlist.append([1650, scorchbuilding4, 1300, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
 
         self.spawnlist.append([1000, fighter, -50, 200, 5, 0, [(0, straightLine), (30, changeDirection, 0, 1)], [(100, forwardShot, 0)], 0])
-        self.spawnlist.append([1025, fighter, 1500, 170, -5, 0, [(0, straightLine), (30, changeDirection, 0, 1)], [(100, forwardShot, 0)],0])
+     #   self.spawnlist.append([1025, fighter, 1500, 170, -5, 0, [(0, straightLine), (30, changeDirection, 0, 1)], [(100, forwardShot, 0)],0])
         self.spawnlist.append([1050, fighter, -50, 200, 5, 0, [(0, straightLine), (60, changeDirection, 0, 1)], [(100, forwardShot, 0)], 0])
         self.spawnlist.append([1075, fighter, 1500, 170, -5, 0, [(0, straightLine), (60, changeDirection, 0, 1)], [(100, forwardShot, 0)],0])
         self.spawnlist.append([1100, fighter, 1500, 200, 5, 0, [(0, straightLine), (60, changeDirection, 0, 1)], [(100, forwardShot, 0)],0])
         self.spawnlist.append([1100, vulture, 1500, 50, -3, 0, [(0, straightLine), (120, changeDirection, 0, 1)], [(100, aimedShot, 0)],2])
-        self.spawnlist.append([1125, fighter, 1500, 170, -5, 0, [(0, straightLine), (90, changeDirection, 0, 1)], [(100, forwardShot, 0)],0])
+     #   self.spawnlist.append([1125, fighter, 1500, 170, -5, 0, [(0, straightLine), (90, changeDirection, 0, 1)], [(100, forwardShot, 0)],0])
         self.spawnlist.append([1125, vulture, 1500, 50, -4, 0, [(0, straightLine), (200, changeDirection, 0, 1)], [(100, aimedShot, 0)],2])
-        self.spawnlist.append([1125, fighter, -100, 1000, 8, -8, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
-        self.spawnlist.append([1125, fighter, -150, 1100, 8, -8, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
-        self.spawnlist.append([1140, fighter, -130, 1050, 8, -8, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
-        self.spawnlist.append([1200, fighter, -50, 200, 5, 0, [(0, straightLine), (90, changeDirection, 0, 1)], [(100, forwardShot, 0)], 0])
+    #    self.spawnlist.append([1125, fighter, -100, 1000, 8, -8, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
+    #    self.spawnlist.append([1125, fighter, -150, 1100, 8, -8, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
+    #    self.spawnlist.append([1140, fighter, -130, 1050, 8, -8, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
+    #    self.spawnlist.append([1200, fighter, -50, 200, 5, 0, [(0, straightLine), (90, changeDirection, 0, 1)], [(100, forwardShot, 0)], 0])
         self.spawnlist.append([1300, fighter, 1500, 150, -8, 0, [(0, straightLine), (90, changeDirection, 0, 1)], [(100, forwardShot, 0)],0])
-        self.spawnlist.append([1350, vulture, -130, 1050, 6, -6, [(0, 0), (0, 0)], [(100, aimedShot, 0)], 2])
-        self.spawnlist.append([1450, fighter, 1200, 1050, 0, -8, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
+      #  self.spawnlist.append([1350, vulture, -130, 1050, 6, -6, [(0, 0), (0, 0)], [(100, aimedShot, 0)], 2])
+        #self.spawnlist.append([1450, fighter, 1200, 1050, 0, -8, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
         self.spawnlist.append([1500, vulture, 200, 0, 0, 2, [(100, strafe), (0, 0)], [(100, aimedShot, 0)], 2])
         self.spawnlist.append([1525, fighter, -50, 100, 5, 0, [(0, straightLine), (80, changeDirection, 0, 1)], [(100, forwardShot, 0)], 0])
-        self.spawnlist.append([1550, fighter, -50, 200, 5, 0, [(0, straightLine), (100, changeDirection, 0, 1)], [(100, forwardShot, 0)], 0])
+      #  self.spawnlist.append([1550, fighter, -50, 200, 5, 0, [(0, straightLine), (100, changeDirection, 0, 1)], [(100, forwardShot, 0)], 0])
         self.spawnlist.append([1600, fighter, -50, 100, 5, 0, [(0, straightLine), (160, changeDirection, 0, 1)], [(100, forwardShot, 0)],0])
         self.spawnlist.append([1650, vulture, 1000, 0, 0, 1, [(0, straightLine), (200, strafe)], [(100, aimedShot, 0)], 2])
-        self.spawnlist.append([1850, cruiser, -150, 1100, 2, -2, [(0, 0), (0, 0)], [(50, machineGun, 0)], 6])
-        self.spawnlist.append([1800, fighter, -50, 250, 6, 0, [(0, straightLine), (160, changeDirection, 0, 1)], [(100, forwardShot, 0)],0])
+        self.spawnlist.append([1850, cruiser, -150, 1100, 1, -1, [(0, 0), (0, 0)], [(50, machineGun, 0)], 6])
+    #    self.spawnlist.append([1800, fighter, -50, 250, 6, 0, [(0, straightLine), (160, changeDirection, 0, 1)], [(100, forwardShot, 0)],0])
         self.spawnlist.append([1825, fighter, -50, 200, 6, 0, [(0, straightLine), (130, changeDirection, 0, 1)], [(100, forwardShot, 0)],0])
         self.spawnlist.append([1850, fighter, -50, 180, 6, 0, [(0, straightLine), (90, changeDirection, 0, 1)], [(100, forwardShot, 0)],0])
+
+        self.spawnlist.append([1800, scorchbuilding4, 100, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
+        self.spawnlist.append([1850, scorchbuilding2, 500, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
+        self.spawnlist.append([1900, scorchbuilding1, 300, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
+        self.spawnlist.append([2000, scorchbuilding1, 1300, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
 
         # Shit get's real met lancers en destroyers.
         self.spawnlist.append([2200, destroyer, 150, 0, 3, 1, [(0, 0), (300, 3, 0, 4)], [(100, 4, 0, 4, 20)], 5])
         self.spawnlist.append([2650, lancer, warscreenwidth, 500, -10, -1, [(0, 0), (90,3,0,-2), (160,2)], [((25,0,100), 3, 1), ((60,100,99999), 4, 1, 4, 15)], 9])
 
+        self.spawnlist.append([2400, scorchbuilding3, 600, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
         self.spawnlist.append([2500, scorchbase, warscreenwidth/2, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 3])
+        self.spawnlist.append([2600, scorchbuilding1, 100, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
+        self.spawnlist.append([2600, scorchbuilding1, 1000, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
 
         # Marauders
         self.spawnlist.append([3000, marauder, 100, 0, 0, 3, [(0, 0), (40, 3, 0, 0), (100, 4), (178, 3, 0, -7)], [(100, 2, 0)], 5])
-        self.spawnlist.append([3200, marauder, 1340, 0, 0, 3, [(0, 0), (40, 3, 0, 0), (100, 4), (178, 3, 0, -7)], [(100, 2, 0)], 6])
+    #    self.spawnlist.append([3200, marauder, 1340, 0, 0, 3, [(0, 0), (40, 3, 0, 0), (100, 4), (178, 3, 0, -7)], [(100, 2, 0)], 6])
 
+        self.spawnlist.append([3050, scorchbuilding2, 600, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
         self.spawnlist.append([3100, scorchbase, 1000, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 4])
+        self.spawnlist.append([3150, scorchbuilding3, 400, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
 
         # Vultures en een cruiser die van de onderkant komt.
-        self.spawnlist.append([3500, vulture, 1440, 300, -5, 0, [(0, 0), (300, 3, 0, 1)], [(100, 1, 0)], 0])
+  #      self.spawnlist.append([3500, vulture, 1440, 300, -5, 0, [(0, 0), (300, 3, 0, 1)], [(100, 1, 0)], 0])
         self.spawnlist.append([3550, vulture, 0, 300, 5, 0, [(0, 0), (250, 3, 0, 1)], [(100, 1, 0)], 0])
         self.spawnlist.append([3600, vulture, 1440, 300, -5, 0, [(0, 0), (200, 3, 0, 1)], [(100, 1, 0)], 0])
         self.spawnlist.append([3600, cruiser, 400, 1355, 0, -6, [(0, 0), (130, 3, 0, 1), (250, 1)], [(150, 2, 0)], 7])
         self.spawnlist.append([3650, vulture, 0, 300, 5, 0, [(0, 0), (150, 3, 0, 1)], [(100, 1, 0)], 0])
         self.spawnlist.append([3700, vulture, 1440, 300, -5, 0, [(0, 0), (100, 3, 0, 1)], [(100, 1, 0)], 0])
-        self.spawnlist.append([3750, vulture, 0, 300, 5, 0, [(0, 0), (50, 3, 0, 1),], [(100, 1, 0)], 0])
+ #       self.spawnlist.append([3750, vulture, 0, 300, 5, 0, [(0, 0), (50, 3, 0, 1),], [(100, 1, 0)], 0])
+
+        self.spawnlist.append([3500, scorchbuilding1, 1200, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
+        self.spawnlist.append([3600, scorchbuilding1, 400, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
+        self.spawnlist.append([3700, scorchbuilding1, 1000, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
+        self.spawnlist.append([3800, scorchbuilding2, 500, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
 
         # zware wave met vultures en lancers
         self.spawnlist.append([4200, lancer, 0, 150, 10, -1, [(0, 0), (10,3,0,1)], [((25,0,100), 3, 1), ((60,100,99999), 4, 1, 4, 15)], 9])
@@ -379,17 +403,33 @@ class Level:
         self.spawnlist.append([5280, fighter, 1020, 0, 0, 2, [(0, 0), (40, 2)], [(100, 3, 0)], 1])
         self.spawnlist.append([5310, fighter, 420, 0, 0, 2, [(0, 0), (40, 2)], [(100, 3, 0)],1])
 
+        self.spawnlist.append([4500, scorchbuilding3, 800, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
+        self.spawnlist.append([4550, scorchbuilding3, 600, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
+        self.spawnlist.append([4600, scorchbuilding1, 400, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
+        self.spawnlist.append([4650, scorchbuilding2, 1000, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
+        self.spawnlist.append([4700, scorchbuilding2, 300, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
+        self.spawnlist.append([4750, scorchbuilding4, 800, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
+
         # cruisers zigzaggend
         self.spawnlist.append([5700, cruiser, 100, 0, 0, 1, [(0, 0), (200, 1)], [(150, 2, 0)], 6])
         self.spawnlist.append([5900, cruiser, 1100, 0, 0, 1, [(0, 0), (200, 1)], [(150, 2, 0)], 6])
         self.spawnlist.append([6100, cruiser, warscreenwidth/2, 0, 0, 1, [(0, 0), (200, 1)], [(40, 2, 0)], 7])
 
+        self.spawnlist.append([6400, scorchbuilding1, 750, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
+        self.spawnlist.append([6450, scorchbuilding1, 450, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
         self.spawnlist.append([6500, scorchbase, 1200, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 5])
+        self.spawnlist.append([6550, scorchbuilding4, 800, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
+        self.spawnlist.append([6600, scorchbuilding2, 800, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
 
         # destroyers (naar rechts)
         self.spawnlist.append([6800, destroyer, -50, 200, 2, 0, [(0, 0),], [(100, 4, 0, 4, 20)], 4])
         self.spawnlist.append([6950, destroyer, -50, 200, 2, 0, [(0, 0), ], [(100, 4, 0, 4, 20)], 5])
         self.spawnlist.append([7100, destroyer, -50, 200, 2, 0, [(0, 0), ], [(100, 4, 0, 4, 20)], 6])
+
+        self.spawnlist.append([7350, scorchbuilding3, 850, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
+        self.spawnlist.append([7400, scorchbuilding2, 650, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
+        self.spawnlist.append([7500, scorchbuilding1, 200, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
+        self.spawnlist.append([7600, scorchbuilding1, 500, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
 
         # legertje fighters en vultures
         self.spawnlist.append([7700, fighter, 200, 0, 0, 2, [(0, 0), (40, strafe)], [(100, 3, 0)], 0])
@@ -412,8 +452,6 @@ class Level:
         self.spawnlist.append([8800, lancer, warscreenwidth, 100, -15, 0, [ (100, changeDirection, 0,10), (50, changeDirection,10,0 ) ],[((25, aimedShot, 100), 3, 1), ((60, 100, 99999), 4, 1, 4, 15)], 9])
         self.spawnlist.append([9100, lancer, 0, 150, 15, 0, [(100, changeDirection, 0, 10), (50, changeDirection, -10, 0)],[((25, aimedShot, 100), 3, 1), ((60, 100, 99999), 4, 1, 4, 15)], 9])
 
-        self.spawnlist.append([9900, scorchbase, 300, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 6])
-
         # dominator
         # en fighters
         self.spawnlist.append([9500, dominator, 150, 0, 0, 2, [(0, 0), (100, zigzag)], [(100, machineGun, 0),(150,aimedShot,1)], 5])
@@ -429,6 +467,12 @@ class Level:
         self.spawnlist.append([10250, fighter, 1150, 0, 0, 2, [(0, 0), (100, strafe)], [(100, forwardShot, 0)], 1])
         self.spawnlist.append([10300, fighter, 1200, 0, 0, 2, [(0, 0), (90, strafe)], [(100, forwardShot, 0)], 1])
         self.spawnlist.append([10350, fighter, 1250, 0, 0, 2, [(0, 0), (80, strafe)], [(100, forwardShot, 0)], 1])
+
+        self.spawnlist.append([9800, scorchbuilding4, 50, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
+        self.spawnlist.append([9900, scorchbase, 300, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 6])
+        self.spawnlist.append([10000, scorchbuilding2, 50, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
+        self.spawnlist.append([10000, scorchbuilding3, 400, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
+        self.spawnlist.append([10100, scorchbuilding1, 200, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
 
         # zware wave met dominators
         self.spawnlist.append([10600, dominator, 1100, 0, 0, 1, [(0, 0), (50, zigzag)], [(100, machineGun, 0),(150,aimedShot,1)], 4])
@@ -447,8 +491,20 @@ class Level:
         self.spawnlist.append([11500, fighter, 800, 0, 0, 2, [(0, 0), (150, strafe)], [(150, forwardShot, 0)], 1])
 
         # destroyers die van onder komen en dan gaan zigzaggen
-        self.spawnlist.append([11800, destroyer, 200, 1355, 0, -7, [(0, 0), (120, 3, 0, 2), (250, zigzag)], [(100, 4,0,4, 20)], 5])
+ #       self.spawnlist.append([11800, destroyer, 200, 1355, 0, -7, [(0, 0), (120, 3, 0, 2), (250, zigzag)], [(100, 4,0,4, 20)], 5])
         self.spawnlist.append([11800, destroyer, 1200, 1355, 0, -7, [(0, 0), (120, 3, 0, 2), (250, zigzag)], [(100, 4, 0, 4, 20)], 5])
+
+        self.spawnlist.append([11600, scorchbuilding1, 750, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
+        self.spawnlist.append([11650, scorchbuilding1, 1150, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
+        self.spawnlist.append([11700, scorchbuilding1, 100, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
+        self.spawnlist.append([11750, scorchbuilding2, 500, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
+        self.spawnlist.append([11800, scorchbuilding2, 300, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
+        self.spawnlist.append([11850, scorchbuilding2, 800, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
+        self.spawnlist.append([12000, scorchbuilding1, 50, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
+        self.spawnlist.append([12050, scorchbuilding3, 900, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
+        self.spawnlist.append([12100, scorchbuilding3, 400, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
+        self.spawnlist.append([12150, scorchbuilding3, 700, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
+        self.spawnlist.append([12200, scorchbuilding4, 250, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
 
         self.textlist.append([12000, "Reaching destination...", 30, (0, 150, 0), (100, 40), (warscreenwidth / 2, 100),(warscreenwidth, 50)])
         self.textlist.append([12200, "SCANNING...", 30, (255, 255, 255), (100, 40), (warscreenwidth / 2, 50), (warscreenwidth, 100)])
