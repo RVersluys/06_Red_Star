@@ -489,7 +489,7 @@ class Level:
         self.spawnlist.append([11500, fighter, 600, 0, 0, 2, [(0, 0), (150, strafe)], [(150, forwardShot, 0)], 1])
         self.spawnlist.append([11500, fighter, 700, 0, 0, 2, [(0, 0), (150, strafe)], [(150, forwardShot, 0)], 1])
         self.spawnlist.append([11500, fighter, 800, 0, 0, 2, [(0, 0), (150, strafe)], [(150, forwardShot, 0)], 1])
-
+#
         # destroyers die van onder komen en dan gaan zigzaggen
  #       self.spawnlist.append([11800, destroyer, 200, 1355, 0, -7, [(0, 0), (120, 3, 0, 2), (250, zigzag)], [(100, 4,0,4, 20)], 5])
         self.spawnlist.append([11800, destroyer, 1200, 1355, 0, -7, [(0, 0), (120, 3, 0, 2), (250, zigzag)], [(100, 4, 0, 4, 20)], 5])
