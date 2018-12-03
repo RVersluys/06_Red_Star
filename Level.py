@@ -27,8 +27,10 @@ chimera1 = 20
 chimera2 = 21
 chimera3 = 22
 alfa_drone = 29
-alfa_defender = 30
-alfa_assassin = 31
+alfa_disruptor = 30
+alfa_transmutator = 31
+alfa_assimilator = 32
+alfa_guardian = 33
 
 straightLine = 0
 zigzag = 1
@@ -62,7 +64,7 @@ class Level:
             star = Backgroundprops.Star(True)
             Gamedata.stars.add(star)
         mobslist = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,17,18,19,20,21,22,23,
-                    24,25,26,27,28,29,30,31]
+                    24,25,26,27,28,29,30,31,32,33]
         Mobs.images.load_level(mobslist)
         if Gamedata.player.levelnumber == 0:
             self.level_1()
@@ -287,6 +289,13 @@ class Level:
         # 7 grote van het plaatje (hoe meer en hoe groter de text, hoe groter het plaatje moet zijn. Anders wordt de text afgeknipt.
         self.textlist.append([100, "Level 2: Scorch base", 30, (0, 150, 0), (160, 40), (warscreenwidth / 2, 100), (800, 50)])
         self.textlist.append([200, "Approaching Scorch base, heavy resistance ahead...", 30, (200, 0, 0), (150, 40), (warscreenwidth / 2, 150), (warscreenwidth, 50)])
+
+
+        self.spawnlist.append([0, alfa_drone, 250, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
+        self.spawnlist.append([0, alfa_disruptor, 400, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
+        self.spawnlist.append([0, alfa_transmutator, 600, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
+        self.spawnlist.append([0, alfa_assimilator, 800, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
+        self.spawnlist.append([0, alfa_guardian, 1000, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
 
         #Goede oude fighters kapot knallen.
         self.spawnlist.append([350, fighter, 420, 0, 0, 2, [(0, 0), (40, 2)], [(100, 3, 0)], 0])
