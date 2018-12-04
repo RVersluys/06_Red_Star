@@ -31,6 +31,8 @@ alfa_disruptor = 30
 alfa_transmutator = 31
 alfa_assimilator = 32
 alfa_guardian = 33
+alfa_forcefield = 34
+alfa_mine = 35
 
 straightLine = 0
 zigzag = 1
@@ -64,7 +66,7 @@ class Level:
             star = Backgroundprops.Star(True)
             Gamedata.stars.add(star)
         mobslist = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,17,18,19,20,21,22,23,
-                    24,25,26,27,28,29,30,31,32,33]
+                    24,25,26,27,28,29,30,31,32,33,34,35]
         Mobs.images.load_level(mobslist)
         if Gamedata.player.levelnumber == 0:
             self.level_1()
@@ -291,25 +293,28 @@ class Level:
         self.textlist.append([200, "Approaching Scorch base, heavy resistance ahead...", 30, (200, 0, 0), (150, 40), (warscreenwidth / 2, 150), (warscreenwidth, 50)])
 
 
-        self.spawnlist.append([0, alfa_drone, 250, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
+        self.spawnlist.append([100, alfa_drone, 250, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
         self.spawnlist.append([0, alfa_disruptor, 400, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
         self.spawnlist.append([0, alfa_transmutator, 600, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
         self.spawnlist.append([0, alfa_assimilator, 800, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
         self.spawnlist.append([0, alfa_guardian, 1000, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
+        self.spawnlist.append([0, alfa_forcefield, 250, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
+        self.spawnlist.append([0, alfa_mine, 1200, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
+
 
         #Goede oude fighters kapot knallen.
-        self.spawnlist.append([350, fighter, 420, 0, 0, 2, [(0, 0), (40, 2)], [(100, 3, 0)], 0])
-        self.spawnlist.append([400, fighter, 720, 0, 0, 2, [(0, 0), (40, 2)], [(100, 3, 0)], 0])
-        self.spawnlist.append([450, fighter, 1020, 0, 0, 2, [(0, 0), (40, 2)], [(100, 3, 0)], 0])
-        self.spawnlist.append([500, fighter, 420, 0, 0, 2, [(0, 0), (40, 2)], [(100, 3, 0)], 0])
-        self.spawnlist.append([550, fighter, 720, 0, 0, 2, [(0, 0), (40, 2)], [(100, 3, 0)], 0])
-        self.spawnlist.append([600, fighter, 1020, 0, 0, 2, [(0, 0), (40, 2)], [(100, 3, 0)], 0])
-        self.spawnlist.append([650, fighter, 420, 0, 0, 2, [(0, 0), (40, 2)], [(100, 3, 0)],0])
-        self.spawnlist.append([700, fighter, 720, 0, 0, 2, [(0, 0), (40, 2)], [(100, 3, 0)], 0])
-        self.spawnlist.append([750, fighter, 1020, 0, 0, 2, [(0, 0), (40, 2)], [(100, 3, 0)], 0])
-        self.spawnlist.append([800, fighter, 420, 0, 0, 2, [(0, 0), (40, 2)], [(100, 3, 0)], 0])
-        self.spawnlist.append([850, fighter, 720, 0, 0, 2, [(0, 0), (40, 2)], [(100, 3, 0)], 0])
-        self.spawnlist.append([900, fighter, 1020, 0, 0, 2, [(0, 0), (40, 2)], [(100, 3, 0)], 0])
+  #      self.spawnlist.append([350, fighter, 420, 0, 0, 2, [(0, 0), (40, 2)], [(100, 3, 0)], 0])
+  #      self.spawnlist.append([400, fighter, 720, 0, 0, 2, [(0, 0), (40, 2)], [(100, 3, 0)], 0])
+  #      self.spawnlist.append([450, fighter, 1020, 0, 0, 2, [(0, 0), (40, 2)], [(100, 3, 0)], 0])
+  #      self.spawnlist.append([500, fighter, 420, 0, 0, 2, [(0, 0), (40, 2)], [(100, 3, 0)], 0])
+  #      self.spawnlist.append([550, fighter, 720, 0, 0, 2, [(0, 0), (40, 2)], [(100, 3, 0)], 0])
+  #      self.spawnlist.append([600, fighter, 1020, 0, 0, 2, [(0, 0), (40, 2)], [(100, 3, 0)], 0])
+  #      self.spawnlist.append([650, fighter, 420, 0, 0, 2, [(0, 0), (40, 2)], [(100, 3, 0)],0])
+  #      self.spawnlist.append([700, fighter, 720, 0, 0, 2, [(0, 0), (40, 2)], [(100, 3, 0)], 0])
+  #      self.spawnlist.append([750, fighter, 1020, 0, 0, 2, [(0, 0), (40, 2)], [(100, 3, 0)], 0])
+  #      self.spawnlist.append([800, fighter, 420, 0, 0, 2, [(0, 0), (40, 2)], [(100, 3, 0)], 0])
+  #      self.spawnlist.append([850, fighter, 720, 0, 0, 2, [(0, 0), (40, 2)], [(100, 3, 0)], 0])
+  #      self.spawnlist.append([900, fighter, 1020, 0, 0, 2, [(0, 0), (40, 2)], [(100, 3, 0)], 0])
 
         self.spawnlist.append([925, scorchbuilding1, 800, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
         self.spawnlist.append([950, scorchbase, 300, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 2])
