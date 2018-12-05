@@ -33,6 +33,7 @@ alfa_assimilator = 32
 alfa_guardian = 33
 alfa_forcefield = 34
 alfa_mine = 35
+alfa_commandship_administrator = 36
 
 straightLine = 0
 zigzag = 1
@@ -66,7 +67,7 @@ class Level:
             star = Backgroundprops.Star(True)
             Gamedata.stars.add(star)
         mobslist = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,17,18,19,20,21,22,23,
-                    24,25,26,27,28,29,30,31,32,33,34,35]
+                    24,25,26,27,28,29,30,31,32,33,34,35,36]
         Mobs.images.load_level(mobslist)
         if Gamedata.player.levelnumber == 0:
             self.level_1()
@@ -300,6 +301,7 @@ class Level:
         self.spawnlist.append([0, alfa_guardian, 1000, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
         self.spawnlist.append([0, alfa_forcefield, 250, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
         self.spawnlist.append([0, alfa_mine, 1200, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
+        self.spawnlist.append([500, alfa_commandship_administrator, 700, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
 
 
         #Goede oude fighters kapot knallen.
@@ -316,14 +318,14 @@ class Level:
   #      self.spawnlist.append([850, fighter, 720, 0, 0, 2, [(0, 0), (40, 2)], [(100, 3, 0)], 0])
   #      self.spawnlist.append([900, fighter, 1020, 0, 0, 2, [(0, 0), (40, 2)], [(100, 3, 0)], 0])
 
-        self.spawnlist.append([925, scorchbuilding1, 800, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
-        self.spawnlist.append([950, scorchbase, 300, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 2])
-        self.spawnlist.append([975, scorchbuilding1, 1200, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
-        self.spawnlist.append([1000, scorchbuilding2, 400, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
-        self.spawnlist.append([1200, scorchbuilding3, 75, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
-        self.spawnlist.append([1400, scorchbuilding3, 1100, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
-        self.spawnlist.append([1450, scorchbuilding1, 900, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
-        self.spawnlist.append([1650, scorchbuilding4, 1300, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
+  #      self.spawnlist.append([925, scorchbuilding1, 800, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
+  #      self.spawnlist.append([950, scorchbase, 300, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 2])
+  #      self.spawnlist.append([975, scorchbuilding1, 1200, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
+  #      self.spawnlist.append([1000, scorchbuilding2, 400, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
+  #      self.spawnlist.append([1200, scorchbuilding3, 75, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
+  #      self.spawnlist.append([1400, scorchbuilding3, 1100, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
+  #      self.spawnlist.append([1450, scorchbuilding1, 900, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
+  #      self.spawnlist.append([1650, scorchbuilding4, 1300, 0, 0, 1, [(0, 0), (0, 0)], [(0, 0, 0)], 1])
 
         self.spawnlist.append([1000, fighter, -50, 200, 5, 0, [(0, straightLine), (30, changeDirection, 0, 1)], [(100, forwardShot, 0)], 0])
      #   self.spawnlist.append([1025, fighter, 1500, 170, -5, 0, [(0, straightLine), (30, changeDirection, 0, 1)], [(100, forwardShot, 0)],0])
