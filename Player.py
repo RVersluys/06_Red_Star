@@ -14,21 +14,28 @@ clock = pygame.time.Clock()
 
 class Player:
     def __init__(self):
-        self.speed = 20
-        self.weapons = []
-        self.shipparts = []
+        #player data
         self.score = 0
         self.gold = 15000
+
+        #shipdata
         self.maxarmor = 50
         self.maxshield = 10
         self.maxenergy = 100
+        self.speed = 20
+        self.weapons = []
+        self.shipparts = []
         self.energyuse = 0 # standaard energieverlies per seconde vanwege energiegebruik schipsonderdelen
         self.energyregen = 20 # basis energieproductie per seconde
         self.shippartsused = []  # list met alle geimplementeerde scheepsonderdelen
         self.missiles = []
         self.shipfill = deepcopy(GameplayConstants.shipdesign)
+        self.ship = 0 # Type of ship
+
+        #level specific information
         self.levelnumber = 0 # huidige level van het spel
-        self.ship = 0
+        self.betrayAlfa = None
+        self.uridium241 = 0
 
     def changeship(self, shipnr):
         Sounds.sounds.soundimplement.play()

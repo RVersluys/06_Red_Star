@@ -39,7 +39,7 @@ imgfolder = os.path.join(os.path.dirname(__file__), 'img')
 class Images:
     def __init__(self, propslist):
         self.powerup = []
-        for picture in range(12):
+        for picture in range(13):
             name = "0{}.png".format(picture)
             self.powerup.append(pygame.image.load(os.path.join(imgfolder, "Powerup", name)).convert_alpha())
 
@@ -48,7 +48,7 @@ class Images:
             name = "bgprop_{}.png".format(picture)
             self.bgprops.append(pygame.image.load(os.path.join(imgfolder, "bgprops", name)).convert_alpha())
 
-gemprofit = [0,50,100,200,300,400,500,650,800,1000,1200,1400,1600]
+gemprofit = [0,50,100,200,300,400,500,650,800,1000,1200,1400,1600, 0]
 
 class Powerup(pygame.sprite.Sprite):
     def __init__(self, x, y, speed, type):
@@ -59,6 +59,7 @@ class Powerup(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
+        self.type = type
 
     def update(self):
         self.rect.y = self.rect.y + self.speed
@@ -66,7 +67,11 @@ class Powerup(pygame.sprite.Sprite):
             self.kill()
 
     def collect(self):
-        text = Gametext.Text(str(self.gold), int(10 + self.gold**.5), (255, 205, 0), (0,50),self.rect.center)
+        if self.type == 13:
+            Gamedata.player.uridium241 += 1
+            text = Gametext.Text("Uridium 241", 20, (100, 100, 255), (0, 50), self.rect.center)
+        else:
+            text = Gametext.Text(str(self.gold), int(10 + self.gold**.5), (255, 205, 0), (0,50),self.rect.center)
         Gamedata.all_sprites.add(text)
 
         return self.gold

@@ -101,9 +101,13 @@ class Gameloop:
                 if endlevelbool == False:
                     endlevelbool = True
                     endleveltime = pygame.time.get_ticks()  # starter tick
+
+                    # If no 5 Iridium is collected, level 2 failed
+                    if Gamedata.player.uridium241 < 5 and Gamedata.player.levelnumber == 1:
+                        self.level.succes = False
+
                     if self.level.succes:
                         text = Gametext.Text("Mission Accomplished", 35, (100,255,100), (120,30), (warscreenwidth/2, windowheight/2), (800,100))
-                        Gamedata.player.levelnumber += 1
                     else:
                         text = Gametext.Text("Mission Failed", 35, (200, 0, 0), (120,30), (warscreenwidth/2, windowheight/2), (800, 100))
                     Gamedata.background.add(text)
@@ -129,6 +133,12 @@ class Gameloop:
         pygame.draw.rect(screen, Colors.lightgray, pygame.Rect(1458, 123, 444, 54))
         Tools.draw_text(screen, "Score:", 38, 1475, 60, "Xolonium")
         Tools.draw_text(screen, "Gold:", 38, 1475, 150, "Xolonium")
+
+        if Gamedata.player.levelnumber == 1:
+            pygame.draw.rect(screen, Colors.black, pygame.Rect(1455, 210, 450, 60))
+            pygame.draw.rect(screen, Colors.lightgray, pygame.Rect(1458, 213, 444, 54))
+            Tools.draw_text(screen, "Uridium 241:", 38, 1475, 240, "Xolonium")
+            Tools.draw_text(screen, str(Gamedata.player.uridium241) + " of 5", 38, 1760, 240, "Xolonium")
 
         Tools.draw_text(screen, "Energy", 35, 1482, 803, "Xolonium")
         Tools.draw_text(screen, "Shield", 35, 1482, 883, "Xolonium")

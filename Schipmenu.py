@@ -13,6 +13,7 @@ import Gameloop
 import Colors
 import Button
 import Missioninformation
+import IngamePrompt
 
 game_folder = os.path.dirname(__file__)
 clock = pygame.time.Clock()
@@ -146,8 +147,14 @@ class Schipmenu:
                                         return
                                     elif button.function == "Launch":
                                         Sounds.sounds.soundclick.play()
+
                                         succes = Gameloop.Gameloop()
+
                                         if succes:
+                                            Gamedata.player.levelnumber += 1
+                                            if Gamedata.player.levelnumber == 2:
+                                                IngamePrompt.IngamePrompt("brokenship.jpg", Missioninformation.prompt2Options, Missioninformation.prompt2)
+
                                             filepath = os.path.join(game_folder, 'savegames', 'auto_save.pickle')
                                             pickle_out = open(filepath, "wb")
                                             pickle.dump(Gamedata.player, pickle_out)
