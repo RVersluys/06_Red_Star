@@ -1,18 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ac9ec352-f456-4d6a-a2a9-d4a496f04ce6" name="Default Changelist" comment="alles is weg">
-      <change afterPath="$PROJECT_DIR$/IngamePrompt.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backgroundprops.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backgroundprops.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gameloop.py" beforeDir="false" afterPath="$PROJECT_DIR$/Gameloop.py" afterDir="false" />
+    <list default="true" id="ac9ec352-f456-4d6a-a2a9-d4a496f04ce6" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/img/mob/hit_28_0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/mob/hit_28_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/mob/hit_28_2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/mob/hit_29_0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/mob/hit_29_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/mob/hit_29_2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/mob/hit_30_0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/mob/hit_30_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/mob/hit_30_2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/mob/hit_31_0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/mob/hit_31_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/mob/hit_31_2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/mob/hit_32_0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/mob/hit_32_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/mob/hit_32_2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/mob/hit_33_0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/mob/hit_33_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/mob/hit_33_2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/mob/hit_34_0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/mob/hit_34_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/mob/hit_34_2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/mob/hit_35_0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/mob/hit_35_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/mob/hit_35_2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/mob/hit_36_0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/mob/hit_36_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/mob/hit_36_2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/mob/normal_28_0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/mob/normal_28_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/mob/normal_28_2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/mob/normal_29_0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/mob/normal_29_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/mob/normal_29_2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/mob/normal_30_0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/mob/normal_30_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/mob/normal_30_2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/mob/normal_31_0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/mob/normal_31_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/mob/normal_31_2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/mob/normal_32_0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/mob/normal_32_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/mob/normal_32_2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/mob/normal_33_0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/mob/normal_33_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/mob/normal_33_2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/mob/normal_34_0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/mob/normal_34_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/mob/normal_34_2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/mob/normal_35_0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/mob/normal_35_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/mob/normal_35_2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/mob/normal_36_0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/mob/normal_36_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/mob/normal_36_2.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Level.py" beforeDir="false" afterPath="$PROJECT_DIR$/Level.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Missioninformation.py" beforeDir="false" afterPath="$PROJECT_DIR$/Missioninformation.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Mobs.py" beforeDir="false" afterPath="$PROJECT_DIR$/Mobs.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Player.py" beforeDir="false" afterPath="$PROJECT_DIR$/Player.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Schipmenu.py" beforeDir="false" afterPath="$PROJECT_DIR$/Schipmenu.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/savegames/1.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/savegames/1.pickle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/savegames/2.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/savegames/2.pickle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/savegames/8.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/savegames/8.pickle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/savegames/auto_save.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/savegames/auto_save.pickle" afterDir="false" />
     </list>
     <ignored path="C:\Users\Rob\PycharmProjects\06_Red_Star\.idea\shelf/" />
@@ -55,14 +101,14 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="49439" />
+          <entry key="py" value="49455" />
           <entry key="txt" value="3006" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="3006" />
-          <entry key="Python" value="49439" />
+          <entry key="Python" value="49455" />
         </counts>
       </usages-collector>
     </session>
@@ -72,22 +118,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Gameloop.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="350">
-              <caret line="113" column="65" selection-start-line="113" selection-start-column="65" selection-end-line="113" selection-end-column="65" />
-              <folding>
-                <element signature="e#0#13#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Backgroundprops.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="503">
+            <state relative-caret-position="1173">
               <caret line="71" column="55" selection-start-line="71" selection-start-column="55" selection-end-line="71" selection-end-column="55" />
             </state>
           </provider>
@@ -96,7 +130,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Schipmenu.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="282">
+            <state relative-caret-position="2346">
               <caret line="153" column="76" selection-start-line="153" selection-start-column="76" selection-end-line="153" selection-end-column="76" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
@@ -117,7 +151,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/IngamePrompt.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="95">
+            <state relative-caret-position="170">
               <caret line="18" column="81" selection-start-line="18" selection-start-column="81" selection-end-line="18" selection-end-column="81" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
@@ -129,7 +163,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="534">
+            <state relative-caret-position="2856">
               <caret line="170" selection-start-line="170" selection-end-line="170" />
             </state>
           </provider>
@@ -138,8 +172,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Missioninformation.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="21" column="53" lean-forward="true" selection-start-line="21" selection-start-column="53" selection-end-line="21" selection-end-column="53" />
+            <state relative-caret-position="289">
+              <caret line="21" column="53" selection-start-line="21" selection-start-column="53" selection-end-line="21" selection-end-column="53" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
                 <marker date="1552746715042" expanded="true" signature="101:106" ph="..." />
@@ -148,14 +182,13 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Level.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1173">
-              <caret lean-forward="true" />
+            <state relative-caret-position="7633">
+              <caret line="563" column="45" selection-start-line="563" selection-start-column="45" selection-end-line="563" selection-end-column="45" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
-                <marker date="1552746715030" expanded="true" signature="551:552" ph="..." />
               </folding>
             </state>
           </provider>
@@ -164,8 +197,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Mobs.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="20" column="113" lean-forward="true" selection-start-line="20" selection-start-column="113" selection-end-line="20" selection-end-column="113" />
+            <state relative-caret-position="-187">
+              <caret line="25" column="28" lean-forward="true" selection-start-line="25" selection-start-column="28" selection-end-line="25" selection-end-column="28" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -252,9 +285,9 @@
         <option value="$PROJECT_DIR$/Player.py" />
         <option value="$PROJECT_DIR$/Schipmenu.py" />
         <option value="$PROJECT_DIR$/Missioninformation.py" />
-        <option value="$PROJECT_DIR$/Level.py" />
-        <option value="$PROJECT_DIR$/Mobs.py" />
         <option value="$PROJECT_DIR$/Gameloop.py" />
+        <option value="$PROJECT_DIR$/Mobs.py" />
+        <option value="$PROJECT_DIR$/Level.py" />
       </list>
     </option>
   </component>
@@ -277,17 +310,6 @@
               <item name="06_Red_Star" type="b2602c69:ProjectViewProjectNode" />
               <item name="06_Red_Star" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="06_Red_Star" type="b2602c69:ProjectViewProjectNode" />
-              <item name="06_Red_Star" type="462c0819:PsiDirectoryNode" />
-              <item name="venv" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="06_Red_Star" type="b2602c69:ProjectViewProjectNode" />
-              <item name="06_Red_Star" type="462c0819:PsiDirectoryNode" />
-              <item name="venv" type="462c0819:PsiDirectoryNode" />
-              <item name="Lib" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -297,6 +319,173 @@
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
+  </component>
+  <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
+    <UpdatedFiles>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Updated from server" />
+        <option name="myStatusName" value="Changed on server" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="CHANGED_ON_SERVER" />
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Updated" />
+          <option name="myStatusName" value="Changed" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="UPDATED" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/savegames/8.pickle</PATH>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Created" />
+          <option name="myStatusName" value="Created" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="CREATED" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/img/mob/hit_28_0.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/img/mob/hit_28_1.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/img/mob/hit_28_2.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/img/mob/hit_29_0.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/img/mob/hit_29_1.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/img/mob/hit_29_2.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/img/mob/hit_30_0.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/img/mob/hit_30_1.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/img/mob/hit_30_2.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/img/mob/hit_31_0.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/img/mob/hit_31_1.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/img/mob/hit_31_2.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/img/mob/hit_32_0.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/img/mob/hit_32_1.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/img/mob/hit_32_2.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/img/mob/hit_33_0.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/img/mob/hit_33_1.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/img/mob/hit_33_2.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/img/mob/hit_34_0.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/img/mob/hit_34_1.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/img/mob/hit_34_2.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/img/mob/hit_35_0.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/img/mob/hit_35_1.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/img/mob/hit_35_2.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/img/mob/hit_36_0.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/img/mob/hit_36_1.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/img/mob/hit_36_2.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/img/mob/normal_28_0.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/img/mob/normal_28_1.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/img/mob/normal_28_2.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/img/mob/normal_29_0.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/img/mob/normal_29_1.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/img/mob/normal_29_2.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/img/mob/normal_30_0.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/img/mob/normal_30_1.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/img/mob/normal_30_2.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/img/mob/normal_31_0.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/img/mob/normal_31_1.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/img/mob/normal_31_2.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/img/mob/normal_32_0.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/img/mob/normal_32_1.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/img/mob/normal_32_2.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/img/mob/normal_33_0.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/img/mob/normal_33_1.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/img/mob/normal_33_2.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/img/mob/normal_34_0.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/img/mob/normal_34_1.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/img/mob/normal_34_2.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/img/mob/normal_35_0.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/img/mob/normal_35_1.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/img/mob/normal_35_2.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/img/mob/normal_36_0.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/img/mob/normal_36_1.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/img/mob/normal_36_2.png</PATH>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Deleted" />
+          <option name="myStatusName" value="Deleted" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="true" />
+          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Restored" />
+          <option name="myStatusName" value="Will be restored" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="RESTORED" />
+        </FILE-GROUP>
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Modified" />
+        <option name="myStatusName" value="Modified" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MODIFIED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Skipped" />
+        <option name="myStatusName" value="Skipped" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SKIPPED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with conflicts" />
+        <option name="myStatusName" value="Will be merged with conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_CONFLICTS" />
+        <PATH vcs="Git" revision="">$PROJECT_DIR$/savegames/auto_save.pickle</PATH>
+        <PATH vcs="Git" revision="">$PROJECT_DIR$/Mobs.py</PATH>
+        <PATH vcs="Git" revision="">$PROJECT_DIR$/Level.py</PATH>
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with tree conflicts" />
+        <option name="myStatusName" value="Merged with tree conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with property conflicts" />
+        <option name="myStatusName" value="Will be merged with property conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged" />
+        <option name="myStatusName" value="Will be merged" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Not in repository" />
+        <option name="myStatusName" value="Not in repository" />
+        <option name="mySupportsDeletion" value="true" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="UNKNOWN" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally added" />
+        <option name="myStatusName" value="Locally added" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_ADDED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally removed" />
+        <option name="myStatusName" value="Locally removed" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_REMOVED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Switched" />
+        <option name="myStatusName" value="Switched" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SWITCHED" />
+      </FILE-GROUP>
+    </UpdatedFiles>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -757,6 +946,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49838188" visible="true" weight="0.14752372" />
       <window_info id="Structure" order="1" sideWeight="0.50161815" side_tool="true" weight="0.16965227" />
@@ -943,24 +1133,15 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
           <caret line="24" column="28" selection-start-line="24" selection-start-column="28" selection-end-line="24" selection-end-column="28" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Button.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/Main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="534">
+        <state relative-caret-position="2856">
           <caret line="170" selection-start-line="170" selection-end-line="170" />
         </state>
       </provider>
@@ -974,7 +1155,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/IngamePrompt.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
+        <state relative-caret-position="170">
           <caret line="18" column="81" selection-start-line="18" selection-start-column="81" selection-end-line="18" selection-end-column="81" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
@@ -991,8 +1172,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Missioninformation.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="21" column="53" lean-forward="true" selection-start-line="21" selection-start-column="53" selection-end-line="21" selection-end-column="53" />
+        <state relative-caret-position="289">
+          <caret line="21" column="53" selection-start-line="21" selection-start-column="53" selection-end-line="21" selection-end-column="53" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
             <marker date="1552746715042" expanded="true" signature="101:106" ph="..." />
@@ -1000,40 +1181,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Mobs.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="20" column="113" lean-forward="true" selection-start-line="20" selection-start-column="113" selection-end-line="20" selection-end-column="113" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Backgroundprops.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="503">
+        <state relative-caret-position="1173">
           <caret line="71" column="55" selection-start-line="71" selection-start-column="55" selection-end-line="71" selection-end-column="55" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Schipmenu.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="282">
+        <state relative-caret-position="2346">
           <caret line="153" column="76" selection-start-line="153" selection-start-column="76" selection-end-line="153" selection-end-column="76" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Level.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1173">
-          <caret lean-forward="true" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-            <marker date="1552746715030" expanded="true" signature="551:552" ph="..." />
           </folding>
         </state>
       </provider>
@@ -1042,6 +1202,23 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="350">
           <caret line="113" column="65" selection-start-line="113" selection-start-column="65" selection-end-line="113" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Mobs.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-187">
+          <caret line="25" column="28" lean-forward="true" selection-start-line="25" selection-start-column="28" selection-end-line="25" selection-end-column="28" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Level.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7633">
+          <caret line="563" column="45" selection-start-line="563" selection-start-column="45" selection-end-line="563" selection-end-column="45" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
           </folding>
